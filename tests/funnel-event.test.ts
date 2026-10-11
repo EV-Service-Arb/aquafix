@@ -16,7 +16,7 @@ import {
 import { leadWebhook, parseServerEnv, type LeadWebhookContext, type ServerEnv } from "@evinvest/kitstart/server";
 import { afterEach, describe, expect, it } from "vitest";
 import { site } from "@/shared/config/site";
-import { needLabel, PANEL_ANALYTICS_ID, PANEL_FLOW, PANEL_MESSENGER, PANEL_SUSPECT, webhookOptions, type PanelSwitches } from "@/features/quote-form/server";
+import { needLabel, PANEL_ANALYTICS_ID, PANEL_FLOW, PANEL_LOCALE, PANEL_MESSENGER, PANEL_SUSPECT, webhookOptions, type PanelSwitches } from "@/features/quote-form/server";
 import { isOpaqueId, leadCreatedBody, panelLeadId, uuidV7, type BodyOptions } from "@/shared/lib/funnel-event";
 
 const lead: Lead = {
@@ -430,6 +430,52 @@ describe("the lead webhook, wired as the site wires it", () => {
 
   it("sends a WhatsApp lead as a `form`, without its reference, with the messenger switch off", async () => {
     expect(await messengerProperties({ panelMessenger: false })).toEqual({ channel: "form" });
+  });
+
+  /** One lead posted from the `locale` page through the webhook as the site builds it; the body's properties. */
+  async function localeProperties(locale: string, switches?: Partial<PanelSwitches>): Promise<Record<string, unknown>> {
+    dir = mkdtempSync(join(tmpdir(), "aquafix-hook-"));
+    const env = parseServerEnv(site, {
+      LEADS_DB_PATH: join(dir, "leads.db"),
+      LEAD_WEBHOOK_URL: "http://127.0.0.1:59120/api/ingest/v1/events",
+      LEAD_WEBHOOK_KEY_ID: "aquafix-site",
+      LEAD_WEBHOOK_SECRET: "test-secret",
+    });
+    const bodies: string[] = [];
+    const hook = leadWebhook(site, env, {
+      ...webhookOptions("aquafix-site", switches),
+      fetch: async (_input, init) => {
+        bodies.push(String(init?.body));
+        return new Response(JSON.stringify({ results: [{ index: 0, status: "accepted" }] }), { status: 207 });
+      },
+      log: { info: () => {}, warn: () => {}, error: () => {} },
+    });
+    if (!hook) throw new Error("the webhook should be on");
+    try {
+      hook.enqueue(lead, 11, { locale, formId: "quote" });
+      expect(await hook.tick()).toMatchObject({ delivered: 1 });
+    } finally {
+      hook.close();
+    }
+    const parsed = JSON.parse(bodies[0] ?? "null") as { events: { properties: Record<string, unknown> }[] }; // our own body, just built by the code under test
+    return parsed.events[0]?.properties ?? {};
+  }
+
+  // Off until the panel release that knows `locale` is live: it refuses an unknown property and the lead would go dead.
+  it("leaves the locale out of the body as the site ships it", async () => {
+    expect(PANEL_LOCALE).toBe(false);
+    expect(await localeProperties("fr")).toEqual({ channel: "form" });
+    expect(await localeProperties("en")).toEqual({ channel: "form" });
+  });
+
+  it("sends the page's language as properties.locale with the locale switch on", async () => {
+    expect(await localeProperties("fr", { panelLocale: true })).toEqual({ channel: "form", locale: "fr" });
+    expect(await localeProperties("en", { panelLocale: true })).toEqual({ channel: "form", locale: "en" });
+  });
+
+  it("writes the locale only from a context the kit gave one", () => {
+    expect(leadCreatedBody(lead, { ...ctx, panelLocale: "en" }, OPTS).events[0].properties).toEqual({ channel: "form", locale: "en" });
+    expect(leadCreatedBody(lead, ctx, OPTS).events[0].properties).toEqual({ channel: "form" });
   });
 
   /**

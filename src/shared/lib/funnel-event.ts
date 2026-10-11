@@ -4,9 +4,11 @@ import { channelOf, type Lead, type LeadSuspect } from "@evinvest/kitstart";
 import {
   panelChannel,
   panelFlowProperties,
+  panelLocaleProperties,
   type LeadWebhookContext,
   type PanelChannel,
   type PanelFlowProperties,
+  type PanelLocale,
   type WebhookSigning,
 } from "@evinvest/kitstart/server";
 
@@ -40,6 +42,8 @@ export interface LeadCreatedEvent {
      * kitstart's `panelMessenger`, and only for a lead that posted one. Not PII.
      */
     message_ref?: string;
+    /** The page's language; only under kitstart's `panelLocale`, and only when the kit set `ctx.panelLocale`. */
+    locale?: PanelLocale;
     /** Only under kitstart's `panelSuspect`, and only for a lead it marks. */
     suspect?: LeadSuspect;
     /**
@@ -157,7 +161,8 @@ export function panelLeadId(ctx: Pick<LeadWebhookContext, "leadId" | "leadRef" |
  * there only when kitstart set `ctx.suspect`, i.e. under `panelSuspect`; the
  * flow (`flow`, and a priced one's `quoted_cents`, `pricing_valid_from`,
  * `estimate_inputs`) only when it set `ctx.flow`, under `panelFlow`;
- * `properties.analytics_id` only under the site's `PANEL_ANALYTICS_ID` and
+ * `properties.locale` only when the kit set `ctx.panelLocale`, under the
+ * site's `PANEL_LOCALE`; `properties.analytics_id` only under the site's `PANEL_ANALYTICS_ID` and
  * only when the form's POST carried the visit's id.
  */
 export function leadCreatedBody(lead: Lead, ctx: LeadWebhookContext, { sourceId, needLabel, analyticsId }: BodyOptions): IngestBody {
@@ -175,6 +180,7 @@ export function leadCreatedBody(lead: Lead, ctx: LeadWebhookContext, { sourceId,
       channel: ctx.channel ?? panelChannel(channelOf(lead)),
       ...(ctx.messageRef ? { message_ref: ctx.messageRef } : {}),
       ...panelFlowProperties(ctx.flow),
+      ...panelLocaleProperties(ctx.panelLocale),
     },
   };
   if (ctx.suspect) event.properties.suspect = ctx.suspect;
