@@ -424,12 +424,12 @@ describe("the lead webhook, wired as the site wires it", () => {
   it("sends a WhatsApp lead as the site wires it: its own channel and its reference", async () => {
     expect(PANEL_MESSENGER).toBe(true);
     const properties = await messengerProperties();
-    expect(properties).toEqual({ channel: "whatsapp", message_ref: "AQ-7K3F" });
+    expect(properties).toEqual({ channel: "whatsapp", message_ref: "AQ-7K3F", locale: "fr" });
     keysWithin(properties as object, "LeadCreatedV1");
   });
 
   it("sends a WhatsApp lead as a `form`, without its reference, with the messenger switch off", async () => {
-    expect(await messengerProperties({ panelMessenger: false })).toEqual({ channel: "form" });
+    expect(await messengerProperties({ panelMessenger: false })).toEqual({ channel: "form", locale: "fr" });
   });
 
   /** One lead posted from the `locale` page through the webhook as the site builds it; the body's properties. */
@@ -461,11 +461,11 @@ describe("the lead webhook, wired as the site wires it", () => {
     return parsed.events[0]?.properties ?? {};
   }
 
-  // Off until the panel release that knows `locale` is live: it refuses an unknown property and the lead would go dead.
-  it("leaves the locale out of the body as the site ships it", async () => {
-    expect(PANEL_LOCALE).toBe(false);
-    expect(await localeProperties("fr")).toEqual({ channel: "form" });
-    expect(await localeProperties("en")).toEqual({ channel: "form" });
+  // On since panel v0.9.0, which accepts `locale`; an older panel refuses an unknown property and the lead would go dead.
+  it("sends the page's language as properties.locale as the site ships it", async () => {
+    expect(PANEL_LOCALE).toBe(true);
+    expect(await localeProperties("fr")).toEqual({ channel: "form", locale: "fr" });
+    expect(await localeProperties("en")).toEqual({ channel: "form", locale: "en" });
   });
 
   it("sends the page's language as properties.locale with the locale switch on", async () => {
