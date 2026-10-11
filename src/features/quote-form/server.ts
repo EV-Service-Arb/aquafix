@@ -49,12 +49,24 @@ export const PANEL_ANALYTICS_ID = true;
  */
 export const PANEL_MESSENGER = true;
 
+/**
+ * kitstart's `panelLocale`: `lead.created` carries `properties.locale` (`fr` or
+ * `en`, the language of the page the visitor posted from).
+ *
+ * OFF, and to stay off until the panel release that knows `locale` is in
+ * production: the panel refuses an unknown property, so a real lead would go
+ * `dead` in the outbox. Enabling is this one constant; merge that change only
+ * after the panel is rolled out (Service-Arb/panel#38).
+ */
+export const PANEL_LOCALE = false;
+
 /** The switches over what `lead.created` carries: kitstart's three, and the site's own. */
 export interface PanelSwitches {
   panelSuspect: boolean;
   panelFlow: boolean;
   panelAnalyticsId: boolean;
   panelMessenger: boolean;
+  panelLocale: boolean;
 }
 
 const SWITCHES: PanelSwitches = {
@@ -62,6 +74,7 @@ const SWITCHES: PanelSwitches = {
   panelFlow: PANEL_FLOW,
   panelAnalyticsId: PANEL_ANALYTICS_ID,
   panelMessenger: PANEL_MESSENGER,
+  panelLocale: PANEL_LOCALE,
 };
 
 /** The job as the mail names it; a job the form no longer offers stays as posted. */
@@ -72,12 +85,13 @@ export const needLabel = (subject: string): string => jobLabelFr(subject) ?? sub
  * parameter for the tests that flip them, each one left out the site's own.
  */
 export function webhookOptions(keyId: string, switches: Partial<PanelSwitches> = {}): LeadWebhookOptions {
-  const { panelSuspect, panelFlow, panelAnalyticsId, panelMessenger } = { ...SWITCHES, ...switches };
+  const { panelSuspect, panelFlow, panelAnalyticsId, panelMessenger, panelLocale } = { ...SWITCHES, ...switches };
   return {
     signing: SA_INGEST_SIGNING,
     panelSuspect,
     panelFlow,
     panelMessenger,
+    panelLocale,
     buildBody: (lead, ctx) => leadCreatedBody(lead, ctx, { sourceId: keyId, needLabel, analyticsId: panelAnalyticsId }),
   };
 }

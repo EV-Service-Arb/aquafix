@@ -6,6 +6,8 @@ import { site } from "@/shared/config/site";
 
 const ROOT = join(import.meta.dirname, "..");
 const PRICED_ONLY: readonly string[] = ["/quote/booking", "/quote/confirm"];
+// kitstart 0.20 types the list as a tuple of literals; the checks below compare it with plain strings.
+const NON_PAGE: readonly string[] = NON_PAGE_ROUTES;
 
 describe("the site composition root", () => {
   it("lists the pages in declaration order, home first", () => {
@@ -21,7 +23,7 @@ describe("the site composition root", () => {
     const routes = readdirSync(join(ROOT, "app"), { withFileTypes: true })
       .filter(e => (e.isDirectory() && !e.name.startsWith("[")) || special[e.name])
       .map(e => special[e.name] ?? `/${e.name}`);
-    const mounted = NON_PAGE_ROUTES.filter(r => !PRICED_ONLY.includes(r));
+    const mounted = NON_PAGE.filter(r => !PRICED_ONLY.includes(r));
     expect([...routes].sort()).toEqual([...mounted].sort());
     expect(existsSync(join(ROOT, "public")) ? readdirSync(join(ROOT, "public")) : []).toEqual([]);
   });
@@ -30,7 +32,7 @@ describe("the site composition root", () => {
   // every aquafix job is a quote: nothing posts to them. Mounting them belongs
   // with the first estimate or fixed price, and then this list shrinks.
   it("mounts none of kitstart's priced-lead routes", () => {
-    expect(PRICED_ONLY.every(r => NON_PAGE_ROUTES.includes(r))).toBe(true);
+    expect(PRICED_ONLY.every(r => NON_PAGE.includes(r))).toBe(true);
     expect(PRICED_ONLY.filter(r => existsSync(join(ROOT, "app", r)))).toEqual([]);
     expect(site.lead.flows).toBeUndefined();
   });
