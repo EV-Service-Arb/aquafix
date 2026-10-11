@@ -53,12 +53,12 @@ export const PANEL_MESSENGER = true;
  * kitstart's `panelLocale`: `lead.created` carries `properties.locale` (`fr` or
  * `en`, the language of the page the visitor posted from).
  *
- * OFF, and to stay off until the panel release that knows `locale` is in
- * production: the panel refuses an unknown property, so a real lead would go
- * `dead` in the outbox. Enabling is this one constant; merge that change only
- * after the panel is rolled out (Service-Arb/panel#38).
+ * ON: panel v0.9.0, the release that knows `locale`, is in production
+ * (Service-Arb/panel#38). Before it the panel refused an unknown property and a
+ * real lead would have gone `dead` in the outbox; setting this to `false` is
+ * the way back if a panel without v0.9.0 ever receives this site's leads.
  */
-export const PANEL_LOCALE = false;
+export const PANEL_LOCALE = true;
 
 /** The switches over what `lead.created` carries: kitstart's three, and the site's own. */
 export interface PanelSwitches {
