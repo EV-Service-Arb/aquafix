@@ -84,8 +84,10 @@ export default defineConfig({
   // traced files only — a font `/og` needs and the trace missed fails here.
   // `npm run build` first; `nix run .#test` does.
   webServer: [
+    // Each server starts on an empty page cache: Next keeps it on disk, in the
+    // build it runs from, so the messenger server gets a build of its own.
     {
-      command: `rm -rf "${dirname(LEADS_DB)}" && node .next/standalone/server.js`,
+      command: `rm -rf "${dirname(LEADS_DB)}" .next/standalone/.next/server/route-cache && node .next/standalone/server.js`,
       cwd: "../..",
       url: `http://localhost:${PORT}/health`,
       // Never someone else's server: a dev server has no test key and no
@@ -104,7 +106,7 @@ export default defineConfig({
       timeout: 10_000,
     },
     {
-      command: `rm -rf "${dirname(MESSENGER_LEADS_DB)}" && node .next/standalone/server.js`,
+      command: `rm -rf "${dirname(MESSENGER_LEADS_DB)}" .next/messenger && cp -r .next/standalone .next/messenger && rm -rf .next/messenger/.next/server/route-cache && node .next/messenger/server.js`,
       cwd: "../..",
       url: `http://localhost:${MESSENGER_PORT}/health`,
       reuseExistingServer: false,
