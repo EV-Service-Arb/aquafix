@@ -87,7 +87,7 @@ test("the menu offers every lead_channel board and forces the one picked", async
   await expect(group.getByRole("button")).toHaveText(["Control", "AQ-1 select", "AQ-2 segment", "AQ-3 thanks", "AQ-4 swap", "AQ-5 saga", "AQ-6 urgency"]);
   await group.getByRole("button", { name: "AQ-4 swap" }).click();
   await expect(page).toHaveURL(/[?&]ab_lead_channel=e(&|$)/);
-  // This server's Royat offers no messenger: the arm is assigned but inert, the card lead_form's.
+  // This server's Clermont-Ferrand offers no messenger: the arm is assigned but inert, the card lead_form's.
   await expect(page.locator("#quote")).toHaveAttribute("data-experiment", "lead_form");
   await page.getByRole("button", CHIP).click();
   await expect(group.getByRole("button", { name: "AQ-4 swap" })).toHaveAttribute("aria-pressed", "true");
@@ -111,7 +111,7 @@ const names = (header: string) => header.split(";").map(pair => pair.split("=")[
 
 /** A browser's own draw, as the proxy would have left it: set before the first forced visit. */
 const own = (variants: { hero_call_first: string; lead_form: string; lead_channel: string }) =>
-  Object.entries(variants).map(([id, value]) => ({ name: `ab_${id}`, value, url: "http://royat.localhost" }));
+  Object.entries(variants).map(([id, value]) => ({ name: `ab_${id}`, value, url: "http://clermont-ferrand.localhost" }));
 
 // Reset drops the assignments and the force parameters but keeps `ab__qa`, so
 // the reload is the home without a force and without a running test's cookie,
@@ -159,7 +159,7 @@ test("the logo and the language switch keep a forced visit in QA", async ({ page
   await page.goto("/fr?ab_lead_form=c");
   await expect(page.locator("#quote")).toHaveAttribute("data-variant", "c");
 
-  const logo = await nextLoad(page, () => page.getByRole("link", { name: "Aquafix Royat" }).click());
+  const logo = await nextLoad(page, () => page.getByRole("link", { name: "Aquafix Clermont-Ferrand" }).click());
   expect(logo.from).toBe("same-origin");
   await expect(page).toHaveURL(/\/fr$/);
   await expect(page.locator("#quote")).toHaveAttribute("data-variant", "c");
@@ -223,7 +223,7 @@ test("Leave test drops the QA mark and the chip", async ({ page, context }) => {
 // the proxy drops it on the first request and no longer moves it to `ab__qa` —
 // it holds no snapshot, and a visit without a force leaves QA anyway.
 test("a browser with the legacy QA mark loses it and is not marked anew", async ({ page, context }) => {
-  await context.addCookies([{ name: "ab_forced", value: "1", url: "http://royat.localhost" }]);
+  await context.addCookies([{ name: "ab_forced", value: "1", url: "http://clermont-ferrand.localhost" }]);
   const ready = await hydration(page);
   await page.goto("/fr");
   await ready();

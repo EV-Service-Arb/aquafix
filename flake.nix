@@ -77,9 +77,9 @@
           # A point on its own host, its OG card, and a person's quote landing in /data.
           smoke = {
             page = "/fr";
-            host = "royat.aquafix.top";
-            og = "/og?l=royat";
-            quote = { location = "royat"; job = "blocked_drain"; zip = "63130"; mobile = "0612345678"; };
+            host = "clermont-ferrand.aquafix.top";
+            og = "/og?l=clermont-ferrand";
+            quote = { location = "clermont-ferrand"; job = "blocked_drain"; zip = "63000"; mobile = "0612345678"; };
           };
         };
 
@@ -206,7 +206,7 @@
           name = "help";
           text = ''
             cat <<'EOF'
-              nix run .#dev              next dev on ${sitePort}, or $PORT (royat.localhost:${sitePort}/fr for a point)
+              nix run .#dev              next dev on ${sitePort}, or $PORT (clermont-ferrand.localhost:${sitePort}/fr for a point)
               nix run .#test             tsc, eslint, vitest, build, size, playwright   [pre-push hook]
               nix run .#accept-test      accept screenshot baselines (Linux only); `-- <name>` for a subset
               nix run .#size             build, then the first-load JS budget          [the one hard gate]

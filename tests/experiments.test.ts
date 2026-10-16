@@ -22,7 +22,7 @@ import {
   leadChannelRuns,
 } from "@/shared/lib/experiments";
 
-const ROYAT = "royat.aquafix.top";
+const CLERMONT_FERRAND = "clermont-ferrand.aquafix.top";
 const PHONE_UA = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148 Safari/604.1";
 
 /** The code's config under `overrides`, as the panel's answer would make it. */
@@ -100,84 +100,84 @@ describe("bots", () => {
   });
 
   it("get the control page and no cookie, whatever they send", async () => {
-    const res = await visit(`https://${ROYAT}/fr`, { "user-agent": "Googlebot/2.1", cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e" });
-    expect(res).toEqual({ rewrite: "/fr/_royat", cookies: [] });
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr`, { "user-agent": "Googlebot/2.1", cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e" });
+    expect(res).toEqual({ rewrite: "/fr/_clermont-ferrand", cookies: [] });
   });
 });
 
 describe("the proxy's assignment", () => {
   it("gives a new visitor a sticky cookie per experiment", async () => {
-    const { cookies } = await visit(`https://${ROYAT}/fr`);
+    const { cookies } = await visit(`https://${CLERMONT_FERRAND}/fr`);
     expect(cookies.map(c => c.split("=")[0] ?? "").sort()).toEqual(["ab_hero_call_first", "ab_lead_channel", "ab_lead_form"]);
   });
 
   it("rewrites a point's home to its visitor's bucket, and leaves the control on the plain path", async () => {
-    expect(await visit(`https://${ROYAT}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=a; ab_lead_channel=a" })).toEqual({ rewrite: "/fr/_royat/ab/baa", cookies: [] });
-    expect(await visit(`https://${ROYAT}/fr`, { cookie: "ab_hero_call_first=a; ab_lead_form=b; ab_lead_channel=a" })).toEqual({ rewrite: "/fr/_royat/ab/aba", cookies: [] });
-    expect(await visit(`https://${ROYAT}/fr`, { cookie: "ab_hero_call_first=a; ab_lead_form=c; ab_lead_channel=a" })).toEqual({ rewrite: "/fr/_royat/ab/aca", cookies: [] });
-    expect(await visit(`https://${ROYAT}/fr`, { cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=g" })).toEqual({ rewrite: "/fr/_royat/ab/aag", cookies: [] });
-    expect(await visit(`https://${ROYAT}/en`, { cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=a" })).toEqual({ rewrite: "/en/_royat", cookies: [] });
-    expect((await visit("https://aquafix.top/fr/royat", { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=d" })).rewrite).toBe("/fr/royat/ab/bcd");
+    expect(await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=a; ab_lead_channel=a" })).toEqual({ rewrite: "/fr/_clermont-ferrand/ab/baa", cookies: [] });
+    expect(await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: "ab_hero_call_first=a; ab_lead_form=b; ab_lead_channel=a" })).toEqual({ rewrite: "/fr/_clermont-ferrand/ab/aba", cookies: [] });
+    expect(await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: "ab_hero_call_first=a; ab_lead_form=c; ab_lead_channel=a" })).toEqual({ rewrite: "/fr/_clermont-ferrand/ab/aca", cookies: [] });
+    expect(await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=g" })).toEqual({ rewrite: "/fr/_clermont-ferrand/ab/aag", cookies: [] });
+    expect(await visit(`https://${CLERMONT_FERRAND}/en`, { cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=a" })).toEqual({ rewrite: "/en/_clermont-ferrand", cookies: [] });
+    expect((await visit("https://aquafix.top/fr/clermont-ferrand", { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=d" })).rewrite).toBe("/fr/clermont-ferrand/ab/bcd");
   });
 
   it("assigns on a point's other pages without rewriting them: nothing there differs", async () => {
-    const res = await visit(`https://${ROYAT}/fr/prices`);
-    expect(res.rewrite).toBe("/fr/_royat/prices");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr/prices`);
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand/prices");
     expect(res.cookies).toHaveLength(3);
   });
 
   it("forces a variant from the query, and marks the browser as QA's", async () => {
-    const res = await visit(`https://${ROYAT}/fr?ab_lead_form=b`, { cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=a" });
-    expect(res.rewrite).toBe("/fr/_royat/ab/aba");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_form=b`, { cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=a" });
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand/ab/aba");
     // The mark holds the visitor's own variants, from before the force.
     expect(res.cookies.sort()).toEqual(["ab__qa=hero_call_first.a~lead_form.a~lead_channel.a", "ab_lead_form=b"]);
-    expect((await visit(`https://${ROYAT}/fr?ab_lead_form=c`, { cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=a" })).rewrite).toBe("/fr/_royat/ab/aca");
+    expect((await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_form=c`, { cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=a" })).rewrite).toBe("/fr/_clermont-ferrand/ab/aca");
     // A variant the test does not declare forces nothing.
-    expect((await visit(`https://${ROYAT}/fr?ab_lead_form=z`, { cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=a" })).cookies).toEqual([]);
+    expect((await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_form=z`, { cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=a" })).cookies).toEqual([]);
   });
 
   it("forces every lead_channel arm from the query, the AbSwitcher's way in", async () => {
     const cookie = "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=a";
-    const forced = await visit(`https://${ROYAT}/fr?ab_lead_channel=e`, { cookie });
-    expect(forced.rewrite).toBe("/fr/_royat/ab/aae");
+    const forced = await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_channel=e`, { cookie });
+    expect(forced.rewrite).toBe("/fr/_clermont-ferrand/ab/aae");
     expect(forced.cookies.sort()).toEqual(["ab__qa=hero_call_first.a~lead_form.a~lead_channel.a", "ab_lead_channel=e"]);
-    expect((await visit(`https://${ROYAT}/fr?ab_lead_channel=b`, { cookie })).rewrite).toBe("/fr/_royat/ab/aab");
-    expect((await visit(`https://${ROYAT}/fr?ab_lead_channel=g`, { cookie })).rewrite).toBe("/fr/_royat/ab/aag");
+    expect((await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_channel=b`, { cookie })).rewrite).toBe("/fr/_clermont-ferrand/ab/aab");
+    expect((await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_channel=g`, { cookie })).rewrite).toBe("/fr/_clermont-ferrand/ab/aag");
     // `h` is no arm: nothing is forced, the page stays the control's.
-    expect(await visit(`https://${ROYAT}/fr?ab_lead_channel=h`, { cookie })).toEqual({ rewrite: "/fr/_royat", cookies: [] });
+    expect(await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_channel=h`, { cookie })).toEqual({ rewrite: "/fr/_clermont-ferrand", cookies: [] });
   });
 
   it("keeps QA's mark as long as the forced variant, so a closed browser stays a test", async () => {
     const proxy = createExperimentProxy(live());
-    const headers = { host: ROYAT, "user-agent": PHONE_UA, cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=a" };
-    const setCookies = (await proxy(new NextRequest(new URL(`https://${ROYAT}/fr?ab_lead_form=b`), { headers }))).headers.getSetCookie();
+    const headers = { host: CLERMONT_FERRAND, "user-agent": PHONE_UA, cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=a" };
+    const setCookies = (await proxy(new NextRequest(new URL(`https://${CLERMONT_FERRAND}/fr?ab_lead_form=b`), { headers }))).headers.getSetCookie();
     const maxAge = (name: string) => /max-age=(\d+)/i.exec(setCookies.find(c => c.startsWith(`${name}=`)) ?? "")?.[1];
     expect(maxAge("ab__qa")).toBeDefined();
     expect(maxAge("ab__qa")).toBe(maxAge("ab_lead_form"));
   });
 
   it("the legacy mark without a snapshot draws every running test anew and goes: what it marked may be forced", async () => {
-    const res = await visit(`https://${ROYAT}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e; ab_forced=1" }, DRAW_ALL_A);
-    expect(res.rewrite).toBe("/fr/_royat");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e; ab_forced=1" }, DRAW_ALL_A);
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand");
     expect(res.cookies.sort()).toEqual(["ab_forced=", "ab_hero_call_first=a", "ab_lead_channel=a", "ab_lead_form=a"]);
   });
 
   it("forcing a legacy-marked browser from outside saves the snapshot of a new draw, not of the old cookies", async () => {
-    const res = await visit(`https://${ROYAT}/fr?ab_lead_form=b`, { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e; ab_forced=1", "sec-fetch-site": "none" }, DRAW_ALL_A);
-    expect(res.rewrite).toBe("/fr/_royat/ab/aba");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_form=b`, { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e; ab_forced=1", "sec-fetch-site": "none" }, DRAW_ALL_A);
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand/ab/aba");
     expect(res.cookies.sort()).toEqual(["ab__qa=hero_call_first.a~lead_form.a~lead_channel.a", "ab_forced=", "ab_hero_call_first=a", "ab_lead_channel=a", "ab_lead_form=b"]);
   });
 
   it("does not assign again on Next's second pass over the rewritten path", async () => {
-    expect(await visit("http://localhost:3000/fr/_royat/ab/bcd", { cookie: "" })).toEqual({ rewrite: null, cookies: [] });
-    expect(await visit("http://localhost:3000/fr/_royat", { cookie: "" })).toEqual({ rewrite: null, cookies: [] });
+    expect(await visit("http://localhost:3000/fr/_clermont-ferrand/ab/bcd", { cookie: "" })).toEqual({ rewrite: null, cookies: [] });
+    expect(await visit("http://localhost:3000/fr/_clermont-ferrand", { cookie: "" })).toEqual({ rewrite: null, cookies: [] });
   });
 
   it("leaves the brand's pages, /quote and dead paths to kitstart", async () => {
     expect((await visit("https://aquafix.top/fr")).cookies).toEqual([]);
-    expect((await visit(`https://${ROYAT}/quote`)).cookies).toEqual([]);
-    expect((await visit(`https://${ROYAT}/fr/_royat/ab/zz`)).rewrite).toBe("/fr/404/404");
-    expect((await visit(`https://${ROYAT}/fr/_royat/ab/bc`)).rewrite).toBe("/fr/404/404");
+    expect((await visit(`https://${CLERMONT_FERRAND}/quote`)).cookies).toEqual([]);
+    expect((await visit(`https://${CLERMONT_FERRAND}/fr/_clermont-ferrand/ab/zz`)).rewrite).toBe("/fr/404/404");
+    expect((await visit(`https://${CLERMONT_FERRAND}/fr/_clermont-ferrand/ab/bc`)).rewrite).toBe("/fr/404/404");
   });
 });
 
@@ -186,19 +186,19 @@ describe("QA's snapshot of the visitor's own variants", () => {
   const OWN = "hero_call_first.b~lead_form.a~lead_channel.d";
 
   it("forcing a second test gives the first one back its own variant: the URL is the whole QA state", async () => {
-    const first = await visit(`https://${ROYAT}/fr?ab_lead_channel=c`, { cookie: "ab_hero_call_first=b; ab_lead_form=a; ab_lead_channel=d" });
-    expect(first.rewrite).toBe("/fr/_royat/ab/bac");
+    const first = await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_channel=c`, { cookie: "ab_hero_call_first=b; ab_lead_form=a; ab_lead_channel=d" });
+    expect(first.rewrite).toBe("/fr/_clermont-ferrand/ab/bac");
     expect(first.cookies.sort()).toEqual([`ab__qa=${OWN}`, "ab_lead_channel=c"]);
 
-    const second = await visit(`https://${ROYAT}/fr?ab_lead_form=c`, { cookie: `ab_hero_call_first=b; ab_lead_form=a; ab_lead_channel=c; ab__qa=${OWN}` });
-    expect(second.rewrite).toBe("/fr/_royat/ab/bcd");
+    const second = await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_form=c`, { cookie: `ab_hero_call_first=b; ab_lead_form=a; ab_lead_channel=c; ab__qa=${OWN}` });
+    expect(second.rewrite).toBe("/fr/_clermont-ferrand/ab/bcd");
     expect(second.cookies.sort()).toEqual([`ab__qa=${OWN}`, "ab_lead_channel=d", "ab_lead_form=c"]);
   });
 
   it("opening the point's home without a force gives back every own variant and drops the mark", async () => {
     const cookie = `ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=a; ab__qa=${OWN}`;
-    expect((await visit(`https://${ROYAT}/fr`, { cookie })).rewrite).toBe("/fr/_royat/ab/bad");
-    expect((await setCookies(`https://${ROYAT}/fr`, cookie)).sort()).toEqual([
+    expect((await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie })).rewrite).toBe("/fr/_clermont-ferrand/ab/bad");
+    expect((await setCookies(`https://${CLERMONT_FERRAND}/fr`, cookie)).sort()).toEqual([
       "ab__qa=; Path=/; Max-Age=0; SameSite=Lax",
       `ab_lead_channel=d; Path=/; Max-Age=${FORCED_MAX_AGE}; SameSite=Lax`,
       `ab_lead_form=a; Path=/; Max-Age=${FORCED_MAX_AGE}; SameSite=Lax`,
@@ -206,50 +206,50 @@ describe("QA's snapshot of the visitor's own variants", () => {
   });
 
   it("an invalid force at the home is no force: the visit leaves QA", async () => {
-    const res = await visit(`https://${ROYAT}/fr?ab_lead_form=z`, { cookie: `ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=d; ab__qa=${OWN}` });
-    expect(res.rewrite).toBe("/fr/_royat/ab/bad");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_form=z`, { cookie: `ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=d; ab__qa=${OWN}` });
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand/ab/bad");
     expect(res.cookies.sort()).toEqual(["ab__qa=", "ab_lead_form=a"]);
   });
 
   it("a newcomer arriving with a force saves the draw they would have had, and gets one cookie for the forced test", async () => {
     // Weights pin the newcomer's draw to hero b, lead_form b, lead_channel f.
     const DRAW_BBF = { hero_call_first: { weights: [0, 1] }, lead_form: { weights: [0, 1, 0] }, lead_channel: { weights: [0, 0, 0, 0, 0, 1, 0] } };
-    const res = await visit(`https://${ROYAT}/fr?ab_lead_form=c`, {}, DRAW_BBF);
-    expect(res.rewrite).toBe("/fr/_royat/ab/bcf");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_form=c`, {}, DRAW_BBF);
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand/ab/bcf");
     expect(res.cookies.sort()).toEqual(["ab__qa=hero_call_first.b~lead_form.b~lead_channel.f", "ab_hero_call_first=b", "ab_lead_channel=f", "ab_lead_form=c"]);
   });
 
   it("a newcomer whose draw is the forced variant still gets one cookie for that test", async () => {
     const DRAW_ACA = { hero_call_first: { weights: [1, 0] }, lead_form: { weights: [0, 0, 1] }, lead_channel: { weights: [1, 0, 0, 0, 0, 0, 0] } };
-    const res = await visit(`https://${ROYAT}/fr?ab_lead_form=c`, {}, DRAW_ACA);
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_form=c`, {}, DRAW_ACA);
     expect(res.cookies.sort()).toEqual(["ab__qa=hero_call_first.a~lead_form.c~lead_channel.a", "ab_hero_call_first=a", "ab_lead_channel=a", "ab_lead_form=c"]);
   });
 
   it("a newcomer's random draw gives the forced test a single cookie", async () => {
-    const { cookies } = await visit(`https://${ROYAT}/fr?ab_lead_form=c`);
+    const { cookies } = await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_form=c`);
     expect(cookies.filter(c => c.startsWith("ab_lead_form="))).toEqual(["ab_lead_form=c"]);
   });
 
   it("a later force keeps the snapshot of the first, whatever the cookies hold by then", async () => {
-    const res = await visit(`https://${ROYAT}/fr?ab_lead_form=b`, { cookie: `ab_hero_call_first=a; ab_lead_form=c; ab_lead_channel=g; ab__qa=${OWN}` });
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_form=b`, { cookie: `ab_hero_call_first=a; ab_lead_form=c; ab_lead_channel=g; ab__qa=${OWN}` });
     expect(res.cookies.find(c => c.startsWith("ab__qa="))).toBe(`ab__qa=${OWN}`);
   });
 
   it("a force on a page further in sets QA as the home's would", async () => {
-    const res = await visit(`https://${ROYAT}/fr/prices?ab_lead_form=b`, { cookie: "ab_hero_call_first=b; ab_lead_form=a; ab_lead_channel=d" });
-    expect(res.rewrite).toBe("/fr/_royat/prices");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr/prices?ab_lead_form=b`, { cookie: "ab_hero_call_first=b; ab_lead_form=a; ab_lead_channel=d" });
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand/prices");
     expect(res.cookies.sort()).toEqual([`ab__qa=${OWN}`, "ab_lead_form=b"]);
   });
 
   it("a page further in without a force neither leaves QA nor gives the variants back", async () => {
-    const res = await visit(`https://${ROYAT}/fr/prices`, { cookie: `ab_hero_call_first=a; ab_lead_form=c; ab_lead_channel=g; ab__qa=${OWN}` });
-    expect(res).toEqual({ rewrite: "/fr/_royat/prices", cookies: [] });
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr/prices`, { cookie: `ab_hero_call_first=a; ab_lead_form=c; ab_lead_channel=g; ab__qa=${OWN}` });
+    expect(res).toEqual({ rewrite: "/fr/_clermont-ferrand/prices", cookies: [] });
   });
 
   it("a test paused while in QA is dropped on leaving, not given back", async () => {
     const HERO_OFF = { hero_call_first: { enabled: false } };
-    const res = await visit(`https://${ROYAT}/fr`, { cookie: `ab_hero_call_first=a; ab_lead_form=c; ab_lead_channel=d; ab__qa=${OWN}` }, HERO_OFF);
-    expect(res.rewrite).toBe("/fr/_royat/ab/aad");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: `ab_hero_call_first=a; ab_lead_form=c; ab_lead_channel=d; ab__qa=${OWN}` }, HERO_OFF);
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand/ab/aad");
     expect(res.cookies.sort()).toEqual(["ab__qa=", "ab_hero_call_first=", "ab_lead_form=a"]);
   });
 
@@ -258,23 +258,23 @@ describe("QA's snapshot of the visitor's own variants", () => {
     const STUCK = "ab_hero_call_first=a; ab_lead_form=b; ab_lead_channel=e; ab__qa=1";
 
     it("a force draws the running tests afresh for the snapshot: the stuck forced b is never saved as the visitor's own", async () => {
-      const res = await visit(`https://${ROYAT}/fr?ab_lead_channel=c`, { cookie: STUCK }, DRAW_ALL_A);
-      expect(res.rewrite).toBe("/fr/_royat/ab/aac");
+      const res = await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_channel=c`, { cookie: STUCK }, DRAW_ALL_A);
+      expect(res.rewrite).toBe("/fr/_clermont-ferrand/ab/aac");
       expect(res.cookies).toContain("ab__qa=hero_call_first.a~lead_form.a~lead_channel.a");
       expect(res.cookies).toContain("ab_lead_form=a");
       expect(res.cookies).toContain("ab_lead_channel=c");
     });
 
     it("leaving QA draws every running test anew: nothing gives them back, and a forced one must not count as real", async () => {
-      const res = await visit(`https://${ROYAT}/fr`, { cookie: STUCK }, DRAW_ALL_A);
-      expect(res.rewrite).toBe("/fr/_royat");
+      const res = await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: STUCK }, DRAW_ALL_A);
+      expect(res.rewrite).toBe("/fr/_clermont-ferrand");
       expect(res.cookies.sort()).toEqual(["ab__qa=", "ab_hero_call_first=a", "ab_lead_channel=a", "ab_lead_form=a"]);
     });
   });
 
   it("an empty mark is no mark: an outside visit keeps the visitor's arms, nothing drawn anew", async () => {
-    const res = await visit(`https://${ROYAT}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e; ab__qa=", "sec-fetch-site": "none" }, DRAW_ALL_A);
-    expect(res).toEqual({ rewrite: "/fr/_royat/ab/bce", cookies: [] });
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e; ab__qa=", "sec-fetch-site": "none" }, DRAW_ALL_A);
+    expect(res).toEqual({ rewrite: "/fr/_clermont-ferrand/ab/bce", cookies: [] });
   });
 });
 
@@ -284,64 +284,64 @@ describe("where a QA visit to the home comes from", () => {
   const Q = `ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=a; ab__qa=${SNAPSHOT}`;
 
   it("a move inside the point's site (same-origin), such as the language switch, keeps QA as it stands", async () => {
-    expect(await visit(`https://${ROYAT}/en`, { cookie: Q, "sec-fetch-site": "same-origin" })).toEqual({ rewrite: "/en/_royat/ab/bca", cookies: [] });
+    expect(await visit(`https://${CLERMONT_FERRAND}/en`, { cookie: Q, "sec-fetch-site": "same-origin" })).toEqual({ rewrite: "/en/_clermont-ferrand/ab/bca", cookies: [] });
   });
 
   it("a move from a sibling host (same-site) keeps QA as it stands", async () => {
-    expect(await visit(`https://${ROYAT}/en`, { cookie: Q, "sec-fetch-site": "same-site" })).toEqual({ rewrite: "/en/_royat/ab/bca", cookies: [] });
+    expect(await visit(`https://${CLERMONT_FERRAND}/en`, { cookie: Q, "sec-fetch-site": "same-site" })).toEqual({ rewrite: "/en/_clermont-ferrand/ab/bca", cookies: [] });
   });
 
   it("a move to the point's page on the apex (same-site) keeps QA as it stands", async () => {
-    expect(await visit("https://aquafix.top/fr/royat", { cookie: Q, "sec-fetch-site": "same-site" })).toEqual({ rewrite: "/fr/royat/ab/bca", cookies: [] });
+    expect(await visit("https://aquafix.top/fr/clermont-ferrand", { cookie: Q, "sec-fetch-site": "same-site" })).toEqual({ rewrite: "/fr/clermont-ferrand/ab/bca", cookies: [] });
   });
 
   it.each([["none"], ["cross-site"]])("a visit from outside the site (%s) leaves QA with the own variants", async from => {
-    const res = await visit(`https://${ROYAT}/en`, { cookie: Q, "sec-fetch-site": from });
-    expect(res.rewrite).toBe("/en/_royat/ab/baa");
+    const res = await visit(`https://${CLERMONT_FERRAND}/en`, { cookie: Q, "sec-fetch-site": from });
+    expect(res.rewrite).toBe("/en/_clermont-ferrand/ab/baa");
     expect(res.cookies.sort()).toEqual(["ab__qa=", "ab_lead_form=a"]);
   });
 
   it("a browser that sends no Sec-Fetch-Site leaves QA with the own variants", async () => {
-    const res = await visit(`https://${ROYAT}/en`, { cookie: Q });
-    expect(res.rewrite).toBe("/en/_royat/ab/baa");
+    const res = await visit(`https://${CLERMONT_FERRAND}/en`, { cookie: Q });
+    expect(res.rewrite).toBe("/en/_clermont-ferrand/ab/baa");
     expect(res.cookies.sort()).toEqual(["ab__qa=", "ab_lead_form=a"]);
   });
 
   it("Reset (the mark alive, no running test's cookie) leaves QA from inside the site, the snapshot given back", async () => {
-    const res = await visit(`https://${ROYAT}/fr`, { cookie: `ab__qa=${SNAPSHOT}`, "sec-fetch-site": "same-origin" });
-    expect(res.rewrite).toBe("/fr/_royat/ab/baa");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: `ab__qa=${SNAPSHOT}`, "sec-fetch-site": "same-origin" });
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand/ab/baa");
     expect(res.cookies.sort()).toEqual(["ab__qa=", "ab_hero_call_first=b", "ab_lead_channel=a", "ab_lead_form=a"]);
   });
 
   it("Reset on a browser marked `1` leaves QA with a new draw: there is nothing to give back", async () => {
     // Weights pin the new draw to hero b, lead_form b, lead_channel f.
     const DRAW_BBF = { hero_call_first: { weights: [0, 1] }, lead_form: { weights: [0, 1, 0] }, lead_channel: { weights: [0, 0, 0, 0, 0, 1, 0] } };
-    const res = await visit(`https://${ROYAT}/fr`, { cookie: "ab__qa=1", "sec-fetch-site": "same-origin" }, DRAW_BBF);
-    expect(res.rewrite).toBe("/fr/_royat/ab/bbf");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: "ab__qa=1", "sec-fetch-site": "same-origin" }, DRAW_BBF);
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand/ab/bbf");
     expect(res.cookies.sort()).toEqual(["ab__qa=", "ab_hero_call_first=b", "ab_lead_channel=f", "ab_lead_form=b"]);
   });
 
   it("Reset is told by the running tests' cookies alone: a paused test's leftover does not hide it", async () => {
     const CHANNEL_OFF = { lead_channel: { enabled: false } };
-    const res = await visit(`https://${ROYAT}/fr`, { cookie: `ab_lead_channel=e; ab__qa=${SNAPSHOT}`, "sec-fetch-site": "same-origin" }, CHANNEL_OFF);
-    expect(res.rewrite).toBe("/fr/_royat/ab/baa");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: `ab_lead_channel=e; ab__qa=${SNAPSHOT}`, "sec-fetch-site": "same-origin" }, CHANNEL_OFF);
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand/ab/baa");
     expect(res.cookies.sort()).toEqual(["ab__qa=", "ab_hero_call_first=b", "ab_lead_channel=", "ab_lead_form=a"]);
   });
 
   it("a force from inside the site applies and keeps the snapshot", async () => {
-    const res = await visit(`https://${ROYAT}/fr?ab_lead_form=b`, { cookie: Q, "sec-fetch-site": "same-origin" });
-    expect(res.rewrite).toBe("/fr/_royat/ab/bba");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr?ab_lead_form=b`, { cookie: Q, "sec-fetch-site": "same-origin" });
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand/ab/bba");
     expect(res.cookies.sort()).toEqual([`ab__qa=${SNAPSHOT}`, "ab_lead_form=b"]);
   });
 
   it.each([["/fr"], ["/fr/prices"]])("the legacy mark without a snapshot draws every running test anew on %s, from inside the site too", async path => {
-    const res = await visit(`https://${ROYAT}${path}`, { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e; ab_forced=1", "sec-fetch-site": "same-origin" }, DRAW_ALL_A);
+    const res = await visit(`https://${CLERMONT_FERRAND}${path}`, { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e; ab_forced=1", "sec-fetch-site": "same-origin" }, DRAW_ALL_A);
     expect(res.cookies.sort()).toEqual(["ab_forced=", "ab_hero_call_first=a", "ab_lead_channel=a", "ab_lead_form=a"]);
   });
 
   it("the legacy mark beside a snapshot is only dropped: the snapshot speaks for the cookies", async () => {
-    const res = await visit(`https://${ROYAT}/fr`, { cookie: `ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e; ab__qa=${SNAPSHOT}; ab_forced=1`, "sec-fetch-site": "same-origin" });
-    expect(res).toEqual({ rewrite: "/fr/_royat/ab/bce", cookies: ["ab_forced="] });
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: `ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e; ab__qa=${SNAPSHOT}; ab_forced=1`, "sec-fetch-site": "same-origin" });
+    expect(res).toEqual({ rewrite: "/fr/_clermont-ferrand/ab/bce", cookies: ["ab_forced="] });
   });
 
   describe("a force from inside the site changes only the tests it names", () => {
@@ -349,20 +349,20 @@ describe("where a QA visit to the home comes from", () => {
     const QA = "ab_hero_call_first=a; ab_lead_form=c; ab_lead_channel=a; ab__qa=hero_call_first.a~lead_form.a~lead_channel.a";
 
     it.each([["same-origin"], ["same-site"]])("%s: an unnamed test keeps its current cookie, the snapshot unchanged", async from => {
-      const res = await visit(`https://${ROYAT}/en?ab_lead_channel=e`, { cookie: QA, "sec-fetch-site": from });
-      expect(res.rewrite).toBe("/en/_royat/ab/ace");
+      const res = await visit(`https://${CLERMONT_FERRAND}/en?ab_lead_channel=e`, { cookie: QA, "sec-fetch-site": from });
+      expect(res.rewrite).toBe("/en/_clermont-ferrand/ab/ace");
       expect(res.cookies.sort()).toEqual(["ab__qa=hero_call_first.a~lead_form.a~lead_channel.a", "ab_lead_channel=e"]);
     });
 
     it("none: a pasted link is the whole QA state, an unnamed test back at the snapshot", async () => {
-      const res = await visit(`https://${ROYAT}/en?ab_lead_channel=e`, { cookie: QA, "sec-fetch-site": "none" });
-      expect(res.rewrite).toBe("/en/_royat/ab/aae");
+      const res = await visit(`https://${CLERMONT_FERRAND}/en?ab_lead_channel=e`, { cookie: QA, "sec-fetch-site": "none" });
+      expect(res.rewrite).toBe("/en/_clermont-ferrand/ab/aae");
       expect(res.cookies.sort()).toEqual(["ab__qa=hero_call_first.a~lead_form.a~lead_channel.a", "ab_lead_channel=e", "ab_lead_form=a"]);
     });
 
     it("no Sec-Fetch-Site: counted as from outside, an unnamed test back at the snapshot", async () => {
-      const res = await visit(`https://${ROYAT}/en?ab_lead_channel=e`, { cookie: QA });
-      expect(res.rewrite).toBe("/en/_royat/ab/aae");
+      const res = await visit(`https://${CLERMONT_FERRAND}/en?ab_lead_channel=e`, { cookie: QA });
+      expect(res.rewrite).toBe("/en/_clermont-ferrand/ab/aae");
       expect(res.cookies.sort()).toEqual(["ab__qa=hero_call_first.a~lead_form.a~lead_channel.a", "ab_lead_channel=e", "ab_lead_form=a"]);
     });
   });
@@ -372,7 +372,7 @@ describe("where a QA visit to the home comes from", () => {
     const valueOf = (cookies: string[], name: string) => cookies.find(c => c.startsWith(`${name}=`))?.slice(name.length + 1);
 
     it("a mark of `1` from outside: every running test drawn anew, each to one of its declared arms", async () => {
-      const { cookies } = await visit(`https://${ROYAT}/fr`, { cookie: OLD_MARK, "sec-fetch-site": "none" });
+      const { cookies } = await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: OLD_MARK, "sec-fetch-site": "none" });
       expect(cookies.map(c => c.split("=")[0]).sort()).toEqual(["ab__qa", "ab_hero_call_first", "ab_lead_channel", "ab_lead_form"]);
       expect(valueOf(cookies, "ab__qa")).toBe("");
       expect(EXPERIMENTS.hero_call_first.variants).toContain(valueOf(cookies, "ab_hero_call_first"));
@@ -381,13 +381,13 @@ describe("where a QA visit to the home comes from", () => {
     });
 
     it("a mark of `1` from inside the site stays in QA, cookies untouched", async () => {
-      expect(await visit(`https://${ROYAT}/fr`, { cookie: OLD_MARK, "sec-fetch-site": "same-origin" })).toEqual({ rewrite: "/fr/_royat/ab/bce", cookies: [] });
+      expect(await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: OLD_MARK, "sec-fetch-site": "same-origin" })).toEqual({ rewrite: "/fr/_clermont-ferrand/ab/bce", cookies: [] });
     });
 
     it("a mark of `1` with lead_channel paused: its cookie dropped, the others drawn anew", async () => {
       const PAUSED_AND_PINNED = { lead_channel: { enabled: false }, hero_call_first: { weights: [1, 0] }, lead_form: { weights: [1, 0, 0] } };
-      const res = await visit(`https://${ROYAT}/fr`, { cookie: OLD_MARK, "sec-fetch-site": "none" }, PAUSED_AND_PINNED);
-      expect(res.rewrite).toBe("/fr/_royat");
+      const res = await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: OLD_MARK, "sec-fetch-site": "none" }, PAUSED_AND_PINNED);
+      expect(res.rewrite).toBe("/fr/_clermont-ferrand");
       expect(res.cookies.sort()).toEqual(["ab__qa=", "ab_hero_call_first=a", "ab_lead_channel=", "ab_lead_form=a"]);
     });
 
@@ -395,19 +395,19 @@ describe("where a QA visit to the home comes from", () => {
       // Pinned so a redraw shows: lead_form and lead_channel land on b, never what the cookie had.
       const DRAW_HERO_B_FORM_B_CHANNEL_B = { hero_call_first: { weights: [0, 1] }, lead_form: { weights: [0, 1, 0] }, lead_channel: { weights: [0, 1, 0, 0, 0, 0, 0] } };
       const res = await visit(
-        `https://${ROYAT}/fr`,
+        `https://${CLERMONT_FERRAND}/fr`,
         { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=e; ab__qa=hero_call_first.a~lead_form.z~quote_price_anchor.b", "sec-fetch-site": "none" },
         DRAW_HERO_B_FORM_B_CHANNEL_B,
       );
-      expect(res.rewrite).toBe("/fr/_royat/ab/abb");
+      expect(res.rewrite).toBe("/fr/_clermont-ferrand/ab/abb");
       expect(res.cookies.sort()).toEqual(["ab__qa=", "ab_hero_call_first=a", "ab_lead_channel=b", "ab_lead_form=b"]);
     });
   });
 
   it("leaving from outside drops a paused lead_channel's cookie and the mark, not giving it back", async () => {
     const CHANNEL_OFF = { lead_channel: { enabled: false } };
-    const res = await visit(`https://${ROYAT}/fr`, { cookie: Q, "sec-fetch-site": "cross-site" }, CHANNEL_OFF);
-    expect(res.rewrite).toBe("/fr/_royat/ab/baa");
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: Q, "sec-fetch-site": "cross-site" }, CHANNEL_OFF);
+    expect(res.rewrite).toBe("/fr/_clermont-ferrand/ab/baa");
     expect(res.cookies.sort()).toEqual(["ab__qa=", "ab_lead_channel=", "ab_lead_form=a"]);
   });
 });
@@ -416,27 +416,27 @@ describe("the panel's overrides", () => {
   const HERO_OFF = { hero_call_first: { enabled: false } };
 
   it("give a test the panel switched off its control letter, even with a cookie for b, and drop that cookie", async () => {
-    const res = await visit(`https://${ROYAT}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=b; ab_lead_channel=a" }, HERO_OFF);
-    expect(res).toEqual({ rewrite: "/fr/_royat/ab/aba", cookies: ["ab_hero_call_first="] });
+    const res = await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=b; ab_lead_channel=a" }, HERO_OFF);
+    expect(res).toEqual({ rewrite: "/fr/_clermont-ferrand/ab/aba", cookies: ["ab_hero_call_first="] });
     // All control once the switched-off test is: the plain, shared cache entry.
-    expect(await visit(`https://${ROYAT}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=a; ab_lead_channel=a" }, HERO_OFF)).toEqual({
-      rewrite: "/fr/_royat",
+    expect(await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=a; ab_lead_channel=a" }, HERO_OFF)).toEqual({
+      rewrite: "/fr/_clermont-ferrand",
       cookies: ["ab_hero_call_first="],
     });
   });
 
   it("neither assign nor force a switched-off test, nor pass a bucket with its b", async () => {
-    const fresh = await visit(`https://${ROYAT}/fr?ab_hero_call_first=b`, {}, HERO_OFF);
+    const fresh = await visit(`https://${CLERMONT_FERRAND}/fr?ab_hero_call_first=b`, {}, HERO_OFF);
     expect(fresh.cookies.map(c => c.split("=")[0]).sort()).toEqual(["ab_lead_channel", "ab_lead_form"]);
     expect(fresh.rewrite ?? "").not.toMatch(/\/ab\/b/);
     expect(decodeBucket(applyOverrides(EXPERIMENTS, HERO_OFF), "baa")).toBeNull();
-    expect((await visit(`https://${ROYAT}/fr/_royat/ab/baa`, {}, HERO_OFF)).rewrite).toBe("/fr/404/404");
+    expect((await visit(`https://${CLERMONT_FERRAND}/fr/_clermont-ferrand/ab/baa`, {}, HERO_OFF)).rewrite).toBe("/fr/404/404");
   });
 
   it("switching lead_channel off draws the control card for a visitor it had in an arm", async () => {
     const CHANNEL_OFF = { lead_channel: { enabled: false } };
-    expect(await visit(`https://${ROYAT}/fr`, { cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=e" }, CHANNEL_OFF)).toEqual({
-      rewrite: "/fr/_royat",
+    expect(await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: "ab_hero_call_first=a; ab_lead_form=a; ab_lead_channel=e" }, CHANNEL_OFF)).toEqual({
+      rewrite: "/fr/_clermont-ferrand",
       cookies: ["ab_lead_channel="],
     });
     expect(decodeBucket(applyOverrides(EXPERIMENTS, CHANNEL_OFF), "aae")).toBeNull();
@@ -444,8 +444,8 @@ describe("the panel's overrides", () => {
 
   it("re-weight new visitors only: an arm already carried is kept", async () => {
     const ALL_A = { hero_call_first: { weights: [1, 0] }, lead_form: { weights: [1, 0, 0] }, lead_channel: { weights: [1, 0, 0, 0, 0, 0, 0] } };
-    expect((await visit(`https://${ROYAT}/fr`, {}, ALL_A)).rewrite).toBe("/fr/_royat");
-    expect((await visit(`https://${ROYAT}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=f" }, ALL_A)).rewrite).toBe("/fr/_royat/ab/bcf");
+    expect((await visit(`https://${CLERMONT_FERRAND}/fr`, {}, ALL_A)).rewrite).toBe("/fr/_clermont-ferrand");
+    expect((await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=f" }, ALL_A)).rewrite).toBe("/fr/_clermont-ferrand/ab/bcf");
   });
 
   it("declare one summary per experiment, within the panel's 200 characters", () => {
@@ -535,19 +535,19 @@ describe("the QA menu's tests at one point", () => {
 });
 
 describe("whether lead_channel runs at a point", () => {
-  const royat = site.places.find(p => p.slug === "royat");
-  if (royat === undefined) throw new Error("no Royat in the site's places");
+  const clermontFerrand = site.places.find(p => p.slug === "clermont-ferrand");
+  if (clermontFerrand === undefined) throw new Error("no Clermont-Ferrand in the site's places");
 
-  it("does not at the baked Royat, which has no WhatsApp of its own", () => {
-    expect(leadChannelRunsAt(royat)).toBe(false);
+  it("does not at the baked Clermont-Ferrand, which has no WhatsApp of its own", () => {
+    expect(leadChannelRunsAt(clermontFerrand)).toBe(false);
   });
 
   it("does at a point with its own WhatsApp", () => {
-    expect(leadChannelRunsAt({ ...royat, channels: { ...royat.channels, whatsapp: "+33612345678" } })).toBe(true);
+    expect(leadChannelRunsAt({ ...clermontFerrand, channels: { ...clermontFerrand.channels, whatsapp: "+33612345678" } })).toBe(true);
   });
 
   it("does not where the point's WhatsApp is switched off", () => {
-    expect(leadChannelRunsAt({ ...royat, channels: { ...royat.channels, whatsapp: "+33612345678" }, messengers: { whatsapp: false } })).toBe(false);
+    expect(leadChannelRunsAt({ ...clermontFerrand, channels: { ...clermontFerrand.channels, whatsapp: "+33612345678" }, messengers: { whatsapp: false } })).toBe(false);
   });
 });
 
@@ -619,10 +619,10 @@ describe("experiment_lead", () => {
   }
 
   const submit = (cookie: string, extra: Record<string, string> = {}) =>
-    new Request("https://royat.aquafix.top/quote", {
+    new Request("https://clermont-ferrand.aquafix.top/quote", {
       method: "POST",
       headers: { cookie, "content-type": "application/x-www-form-urlencoded", "x-forwarded-for": "203.0.113.9" },
-      body: new URLSearchParams({ location: "royat", locale: "fr", job: "blocked_drain", zip: "63130", mobile: "0612345678", [RENDERED_AT_FIELD]: "900000", ...extra }),
+      body: new URLSearchParams({ location: "clermont-ferrand", locale: "fr", job: "blocked_drain", zip: "63000", mobile: "0612345678", [RENDERED_AT_FIELD]: "900000", ...extra }),
     });
 
   it("goes out once per experiment for an accepted lead, with the variant and the point", async () => {
@@ -632,9 +632,9 @@ describe("experiment_lead", () => {
     await run();
     const events = captured.mock.calls.map(([body]) => JSON.parse(body) as { event: string; properties: Record<string, unknown> });
     expect(events.map(e => [e.event, e.properties["experiment"], e.properties["variant"], e.properties["forced"], e.properties["location_id"]])).toEqual([
-      ["experiment_lead", "hero_call_first", "b", false, "royat"],
-      ["experiment_lead", "lead_form", "c", false, "royat"],
-      ["experiment_lead", "lead_channel", "a", false, "royat"],
+      ["experiment_lead", "hero_call_first", "b", false, "clermont-ferrand"],
+      ["experiment_lead", "lead_form", "c", false, "clermont-ferrand"],
+      ["experiment_lead", "lead_channel", "a", false, "clermont-ferrand"],
     ]);
   });
 

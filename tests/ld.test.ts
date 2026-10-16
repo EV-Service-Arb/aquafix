@@ -3,7 +3,7 @@ import { PRICE_LIST } from "@/entities/content";
 import { PLACES } from "@/entities/place";
 import { locationGraph } from "@/features/seo";
 import { PAGE_KEYS } from "@/shared/config/site";
-import { context, royat } from "./support/fixtures";
+import { context, clermontFerrand } from "./support/fixtures";
 
 type Node = Record<string, unknown>;
 const NOW = new Date("2026-09-23T12:00:00Z");
@@ -20,7 +20,7 @@ const ofType = (nodes: Node[], type: string) => nodes.filter(n => n["@type"] ===
 
 describe("schema.org", () => {
   it("emits one Offer per price row, from the same integer, in euros with TVA", () => {
-    const { point, copy } = context(royat());
+    const { point, copy } = context(clermontFerrand());
     const services = ofType(graph(point, copy, "home", NOW), "Service");
     expect(services).toHaveLength(PRICE_LIST.length);
     services.forEach((service, i) => {
@@ -43,11 +43,11 @@ describe("schema.org", () => {
   });
 
   it("carries Google's rating only while the mirrored copy is fresh", () => {
-    const fresh = context(royat({ rating: { value: 4.7, count: 31, fetchedAt: "2026-09-20T00:00:00Z" } }));
+    const fresh = context(clermontFerrand({ rating: { value: 4.7, count: 31, fetchedAt: "2026-09-20T00:00:00Z" } }));
     const [business] = ofType(graph(fresh.point, fresh.copy, "home", NOW), "Plumber");
     expect(business?.aggregateRating).toMatchObject({ ratingValue: 4.7, reviewCount: 31 });
 
-    const stale = context(royat({ rating: { value: 4.7, count: 31, fetchedAt: "2026-08-01T00:00:00Z" } }));
+    const stale = context(clermontFerrand({ rating: { value: 4.7, count: 31, fetchedAt: "2026-08-01T00:00:00Z" } }));
     expect(JSON.stringify(graph(stale.point, stale.copy, "home", NOW))).not.toContain("aggregateRating");
   });
 
@@ -62,20 +62,20 @@ describe("schema.org", () => {
   });
 
   it("puts the FAQ only on /prices and the offers only where prices are shown", () => {
-    const { point, copy } = context(royat());
+    const { point, copy } = context(clermontFerrand());
     expect(ofType(graph(point, copy, "prices", NOW), "FAQPage")).toHaveLength(1);
     expect(ofType(graph(point, copy, "home", NOW), "FAQPage")).toHaveLength(0);
     expect(ofType(graph(point, copy, "about", NOW), "Service")).toHaveLength(0);
   });
 
   it("describes one business across languages and the canonical subdomain", () => {
-    const fr = context(royat(), "fr");
-    const en = context(royat(), "en");
+    const fr = context(clermontFerrand(), "fr");
+    const en = context(clermontFerrand(), "en");
     const id = (c: typeof fr) => ofType(graph(c.point, c.copy, "home", NOW), "Plumber")[0]?.["@id"];
-    expect(id(fr)).toBe("https://royat.aquafix.top/#business");
+    expect(id(fr)).toBe("https://clermont-ferrand.aquafix.top/#business");
     expect(id(en)).toBe(id(fr));
     const page = ofType(graph(en.point, en.copy, "prices", NOW), "WebPage")[0];
-    expect(page?.url).toBe("https://royat.aquafix.top/en/prices");
+    expect(page?.url).toBe("https://clermont-ferrand.aquafix.top/en/prices");
     expect(page?.inLanguage).toBe("en");
   });
 });

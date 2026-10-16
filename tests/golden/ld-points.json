@@ -1,290 +1,4 @@
 {
-  "royat": {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://aquafix.top/#organization",
-        "name": "Aquafix",
-        "legalName": "Aquafix SAS",
-        "url": "https://aquafix.top",
-        "email": "val@aquafix.top"
-      },
-      {
-        "@type": "Plumber",
-        "@id": "https://royat.aquafix.top/#business",
-        "name": "Aquafix Plombier Chauffagiste - Clermont-Ferrand, Royat",
-        "url": "https://royat.aquafix.top/fr",
-        "telephone": "+33 4 23 50 06 40",
-        "email": "val@aquafix.top",
-        "parentOrganization": {
-          "@id": "https://aquafix.top/#organization"
-        },
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "2 Av. Abbé Védrine",
-          "postalCode": "63130",
-          "addressLocality": "Royat",
-          "addressRegion": "Auvergne-Rhône-Alpes",
-          "addressCountry": "FR"
-        },
-        "priceRange": "€€",
-        "areaServed": [
-          {
-            "@type": "Place",
-            "name": "Royat"
-          }
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://royat.aquafix.top/#website",
-        "url": "https://royat.aquafix.top",
-        "name": "Aquafix Royat"
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://royat.aquafix.top/fr#page",
-        "url": "https://royat.aquafix.top/fr",
-        "name": "Plombier à Royat — prix fixe, réparé aujourd’hui",
-        "description": "Plombiers à Royat. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
-        "inLanguage": "fr-FR",
-        "isPartOf": {
-          "@id": "https://royat.aquafix.top/#website"
-        },
-        "about": {
-          "@id": "https://royat.aquafix.top/#business"
-        }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Aquafix Royat",
-            "item": "https://royat.aquafix.top/fr"
-          }
-        ]
-      },
-      {
-        "@type": "Service",
-        "name": "Canalisation bouchée — débouchage mécanique",
-        "serviceType": "Canalisation bouchée — débouchage mécanique",
-        "provider": {
-          "@id": "https://royat.aquafix.top/#business"
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": "Royat"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": 149,
-          "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "minPrice": 149,
-            "priceCurrency": "EUR",
-            "valueAddedTaxIncluded": true
-          }
-        }
-      },
-      {
-        "@type": "Service",
-        "name": "Robinet, mitigeur ou chasse d’eau qui fuit",
-        "serviceType": "Robinet, mitigeur ou chasse d’eau qui fuit",
-        "provider": {
-          "@id": "https://royat.aquafix.top/#business"
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": "Royat"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": 129,
-          "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "minPrice": 129,
-            "priceCurrency": "EUR",
-            "valueAddedTaxIncluded": true
-          }
-        }
-      },
-      {
-        "@type": "Service",
-        "name": "Réparation ou remplacement complet de WC",
-        "serviceType": "Réparation ou remplacement complet de WC",
-        "provider": {
-          "@id": "https://royat.aquafix.top/#business"
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": "Royat"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": 189,
-          "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "minPrice": 189,
-            "priceCurrency": "EUR",
-            "valueAddedTaxIncluded": true
-          }
-        }
-      },
-      {
-        "@type": "Service",
-        "name": "Chauffe-eau — réparation",
-        "serviceType": "Chauffe-eau — réparation",
-        "provider": {
-          "@id": "https://royat.aquafix.top/#business"
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": "Royat"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": 215,
-          "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "minPrice": 215,
-            "priceCurrency": "EUR",
-            "valueAddedTaxIncluded": true
-          }
-        }
-      },
-      {
-        "@type": "Service",
-        "name": "Chauffe-eau — remplacement complet",
-        "serviceType": "Chauffe-eau — remplacement complet",
-        "provider": {
-          "@id": "https://royat.aquafix.top/#business"
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": "Royat"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": 1290,
-          "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "minPrice": 1290,
-            "priceCurrency": "EUR",
-            "valueAddedTaxIncluded": true
-          }
-        }
-      },
-      {
-        "@type": "Service",
-        "name": "Réparation de tuyau éclaté ou qui fuit",
-        "serviceType": "Réparation de tuyau éclaté ou qui fuit",
-        "provider": {
-          "@id": "https://royat.aquafix.top/#business"
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": "Royat"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": 265,
-          "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "minPrice": 265,
-            "priceCurrency": "EUR",
-            "valueAddedTaxIncluded": true
-          }
-        }
-      },
-      {
-        "@type": "Service",
-        "name": "Inspection caméra de canalisation",
-        "serviceType": "Inspection caméra de canalisation",
-        "provider": {
-          "@id": "https://royat.aquafix.top/#business"
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": "Royat"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": 199,
-          "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "minPrice": 199,
-            "priceCurrency": "EUR",
-            "valueAddedTaxIncluded": true
-          }
-        }
-      },
-      {
-        "@type": "Service",
-        "name": "Débouchage d’égout et rapport",
-        "serviceType": "Débouchage d’égout et rapport",
-        "provider": {
-          "@id": "https://royat.aquafix.top/#business"
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": "Royat"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": 390,
-          "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "minPrice": 390,
-            "priceCurrency": "EUR",
-            "valueAddedTaxIncluded": true
-          }
-        }
-      },
-      {
-        "@type": "Service",
-        "name": "Réfection de la tuyauterie — maison T4",
-        "serviceType": "Réfection de la tuyauterie — maison T4",
-        "provider": {
-          "@id": "https://royat.aquafix.top/#business"
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": "Royat"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": 4800,
-          "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "minPrice": 4800,
-            "priceCurrency": "EUR",
-            "valueAddedTaxIncluded": true
-          }
-        }
-      }
-    ]
-  },
   "clermont-ferrand": {
     "@context": "https://schema.org",
     "@graph": [
@@ -299,7 +13,7 @@
       {
         "@type": "Plumber",
         "@id": "https://clermont-ferrand.aquafix.top/#business",
-        "name": "Aquafix — Plombier Chauffagiste Clermont-Ferrand",
+        "name": "Aquafix Plombier Chauffagiste - Clermont-Ferrand",
         "url": "https://clermont-ferrand.aquafix.top/fr",
         "telephone": "+33 4 23 50 06 40",
         "email": "val@aquafix.top",
@@ -308,8 +22,8 @@
         },
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "36 Rue des Chanelles",
-          "postalCode": "63100",
+          "streetAddress": "64 Rue Saint-Alyre",
+          "postalCode": "63000",
           "addressLocality": "Clermont-Ferrand",
           "addressRegion": "Auvergne-Rhône-Alpes",
           "addressCountry": "FR"
@@ -594,7 +308,7 @@
         },
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "9 Rue Professeur Florence",
+          "streetAddress": "48 Rue Professeur Florence",
           "postalCode": "69003",
           "addressLocality": "Lyon",
           "addressRegion": "Auvergne-Rhône-Alpes",
@@ -880,7 +594,7 @@
         },
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "9 Rue Philippe Fabia",
+          "streetAddress": "24 Rue Stéphane Coignet",
           "postalCode": "69008",
           "addressLocality": "Lyon",
           "addressRegion": "Auvergne-Rhône-Alpes",
@@ -1452,7 +1166,7 @@
         },
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "21 Rue Neyret",
+          "streetAddress": "26 Rue des Chartreux",
           "postalCode": "69001",
           "addressLocality": "Lyon",
           "addressRegion": "Auvergne-Rhône-Alpes",

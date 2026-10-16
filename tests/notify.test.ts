@@ -8,10 +8,10 @@ import { jobLabelFr, NOTIFIER_OPTIONS } from "@/features/quote-form/server";
 
 const lead: Lead = {
   subject: "hot_water",
-  locality: "63130",
+  locality: "63000",
   mobile: "+33612345678",
   extras: {},
-  placeSlug: "royat",
+  placeSlug: "clermont-ferrand",
   spamVerdict: null,
 };
 
@@ -81,7 +81,7 @@ describe("the lead mail", () => {
     await mail.notify({ ...lead, subject: "gas_leak" }, 8);
 
     expect(sink.bodies).toHaveLength(2);
-    expect(sink.bodies[0]).toContain("Demande #7 — point royat");
+    expect(sink.bodies[0]).toContain("Demande #7 — point clermont-ferrand");
     expect(sink.bodies[0]).toContain("Intervention : Eau chaude");
     expect(sink.bodies[0]).not.toContain("hot_water");
     expect(sink.bodies[1]).toContain("Intervention : gas_leak");
@@ -136,19 +136,19 @@ describe("a messenger lead's mail", () => {
 
   it("says WhatsApp in the subject", () => {
     expect(NOTIFIER_OPTIONS.format({ ...lead, channel: "whatsapp", messageRef: "AQ-7K3F" }, 12, shown).subject).toBe(
-      "Aquafix — nouvelle demande WhatsApp (royat)",
+      "Aquafix — nouvelle demande WhatsApp (clermont-ferrand)",
     );
   });
 
   it("says Telegram in the subject", () => {
     expect(NOTIFIER_OPTIONS.format({ ...lead, channel: "telegram", messageRef: "AQ-M4X9" }, 13, shown).subject).toBe(
-      "Aquafix — nouvelle demande Telegram (royat)",
+      "Aquafix — nouvelle demande Telegram (clermont-ferrand)",
     );
   });
 
   it("keeps a form lead's and a callback's subject as it was", () => {
-    expect(NOTIFIER_OPTIONS.format(lead, 14, shown).subject).toBe("Aquafix — nouvelle demande (royat)");
-    expect(NOTIFIER_OPTIONS.format({ ...lead, channel: "callback" }, 15, shown).subject).toBe("Aquafix — nouvelle demande (royat)");
+    expect(NOTIFIER_OPTIONS.format(lead, 14, shown).subject).toBe("Aquafix — nouvelle demande (clermont-ferrand)");
+    expect(NOTIFIER_OPTIONS.format({ ...lead, channel: "callback" }, 15, shown).subject).toBe("Aquafix — nouvelle demande (clermont-ferrand)");
   });
 
   it("prints the channel and the reference the operator matches the chat by, through the kit's mailer", async () => {

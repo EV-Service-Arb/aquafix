@@ -21,10 +21,10 @@ import { isOpaqueId, leadCreatedBody, panelLeadId, uuidV7, type BodyOptions } fr
 
 const lead: Lead = {
   subject: "blocked_drain",
-  locality: "63130",
+  locality: "63000",
   mobile: "06 12 34 56 78",
   extras: {},
-  placeSlug: "royat",
+  placeSlug: "clermont-ferrand",
   spamVerdict: null,
 };
 
@@ -90,9 +90,9 @@ describe("lead.created for the panel", () => {
           typeVersion: 1,
           occurredAt: "2026-10-01T09:30:00.123Z",
           source: { kind: "site", id: "aquafix-site" },
-          subject: { brandId: "aquafix", locationId: "royat", leadId: LEAD_ID },
+          subject: { brandId: "aquafix", locationId: "clermont-ferrand", leadId: LEAD_ID },
           properties: { channel: "form" },
-          pii: { phone: "06 12 34 56 78", need: "Canalisation bouchée", locality: "63130" },
+          pii: { phone: "06 12 34 56 78", need: "Canalisation bouchée", locality: "63000" },
         },
       ],
     });
@@ -226,13 +226,13 @@ describe("lead.created for the panel", () => {
       quoted_cents: 9_000,
       pricing_valid_from: "2026-10-01",
     });
-    const estimate = props({ flow: "estimate", quotedCents: 12_500, pricingValidFrom: "2026-10-01", estimateInputs: { zone: "royat" } });
+    const estimate = props({ flow: "estimate", quotedCents: 12_500, pricingValidFrom: "2026-10-01", estimateInputs: { zone: "clermont-ferrand" } });
     expect(estimate).toEqual({
       channel: "form",
       flow: "estimate",
       quoted_cents: 12_500,
       pricing_valid_from: "2026-10-01",
-      estimate_inputs: { zone: "royat" },
+      estimate_inputs: { zone: "clermont-ferrand" },
     });
     // The panel checks registered properties strictly: an unknown field rejects the event.
     keysWithin(estimate, "LeadCreatedV1");
@@ -323,7 +323,7 @@ describe("the lead webhook, wired as the site wires it", () => {
       events: [
         {
           source: { kind: "site", id: "aquafix-site" },
-          subject: { brandId: "aquafix", locationId: "royat", leadId: expect.stringMatching(/^lead-7-[0-9a-f]{8}$/) },
+          subject: { brandId: "aquafix", locationId: "clermont-ferrand", leadId: expect.stringMatching(/^lead-7-[0-9a-f]{8}$/) },
         },
       ],
     });
@@ -353,9 +353,9 @@ describe("the lead webhook, wired as the site wires it", () => {
     const form = new FormData();
     for (const [name, value] of Object.entries({
       job: "blocked_drain",
-      zip: "63130",
+      zip: "63000",
       mobile: "06 12 34 56 78",
-      [LOCATION_FIELD]: "royat",
+      [LOCATION_FIELD]: "clermont-ferrand",
       [LOCALE_FIELD]: "fr",
       [FORM_ID_FIELD]: "quote",
       [RENDERED_AT_FIELD]: String(now - 60_000),

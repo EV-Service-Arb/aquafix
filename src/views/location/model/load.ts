@@ -9,7 +9,7 @@ export type LocationParams = PlaceParams;
 
 /**
  * The point and how its links are written, from the route params alone: the
- * link mode rides in the `[location]` param (`_royat` on the point's own
+ * link mode rides in the `[location]` param (`_clermont-ferrand` on the point's own
  * host), so the page reads nothing from the request and is cached (ISR).
  * `notFound()` for an unknown language or point; the baked point when the
  * live source fails. Memoised per render.

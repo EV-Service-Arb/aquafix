@@ -32,7 +32,7 @@ import { liveExperiments, type LiveConfig } from "../api/live";
  *
  * The pages stay cached (ISR) because the variant rides in the path, the same
  * way kitstart carries the link mode: a point's home is rewritten to
- * `/fr/_royat/ab/ba`, one cache entry per combination, and no page reads a
+ * `/fr/_clermont-ferrand/ab/ba`, one cache entry per combination, and no page reads a
  * cookie. The all-control combination keeps the plain path, so bots and the
  * control arm share the entry that existed before any test.
  *
@@ -40,7 +40,7 @@ import { liveExperiments, type LiveConfig } from "../api/live";
  * request — a cache hit included (measured on 16.3: host `localhost`, the
  * visitor's cookies). Assigning again there would draw a second variant, so
  * only the visitor's own URL is assigned: a bucket path passes as it is, and
- * so does a host-mode path (`/fr/_royat…`), which no visitor types.
+ * so does a host-mode path (`/fr/_clermont-ferrand…`), which no visitor types.
  *
  * Every decision goes by the config with the panel's overrides applied, read
  * once per request: an experiment switched off there gets its control letter
@@ -51,7 +51,7 @@ import { liveExperiments, type LiveConfig } from "../api/live";
 const kit = createProxy(site);
 const routing = createRouting(site);
 
-/** `/fr/_royat/ab/ba` — the second pass over a rewrite this proxy made. */
+/** `/fr/_clermont-ferrand/ab/ba` — the second pass over a rewrite this proxy made. */
 const BUCKET_PATH = new RegExp(`^/([^/]+)/([^/]+)/${BUCKET_SEGMENT}/([^/]+)/?$`);
 
 function onward(request: NextRequest, rewrite: URL | null): NextResponse {

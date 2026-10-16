@@ -4,7 +4,7 @@ import { PLACES } from "@/entities/place";
 import { brandMetadata, locationGraph, locationMetadata, statusMetadata } from "@/features/seo";
 import { CARD, site, PAGE_KEYS } from "@/shared/config/site";
 import { LOCALES } from "@/shared/config/i18n";
-import { context, publishedRoyat, royat } from "./support/fixtures";
+import { context, publishedClermontFerrand, clermontFerrand } from "./support/fixtures";
 
 /**
  * What a crawler reads, pinned byte for byte. The refactors that move these
@@ -19,7 +19,7 @@ const GOLDEN = (name: string) => `./golden/${name}.json`;
 /** Through JSON, as a crawler reads it; stable key order is the builders'. */
 const json = (value: unknown): string => `${JSON.stringify(value, null, 2)}\n`;
 
-const PUBLISHED = publishedRoyat(
+const PUBLISHED = publishedClermontFerrand(
   { rating: { value: 4.7, count: 31, fetchedAt: "2026-09-20T00:00:00Z" } },
   { geo: { lat: 45.7667, lng: 3.0514 } },
 );
@@ -27,13 +27,13 @@ const PUBLISHED = publishedRoyat(
 describe("golden: JSON-LD", () => {
   it("every page of an unpublished and a published point, in both languages", async () => {
     const out: Record<string, unknown> = {};
-    for (const [name, location] of [["royat", royat()], ["royat-published", PUBLISHED]] as const) {
+    for (const [name, location] of [["clermont-ferrand", clermontFerrand()], ["clermont-ferrand-published", PUBLISHED]] as const) {
       for (const locale of LOCALES) {
         const { point, copy } = context(location, locale);
         for (const page of PAGE_KEYS) out[`${name}/${locale}/${page}`] = locationGraph(point, copy, page, NOW);
       }
     }
-    await expect(json(out)).toMatchFileSnapshot(GOLDEN("ld-royat"));
+    await expect(json(out)).toMatchFileSnapshot(GOLDEN("ld-clermont-ferrand"));
   });
 
   it("the home page of every baked point", async () => {
@@ -49,7 +49,7 @@ describe("golden: JSON-LD", () => {
 describe("golden: <head> metadata", () => {
   it("every page of a point, the brand page and a status page", async () => {
     const out: Record<string, unknown> = {};
-    for (const [name, location] of [["royat", royat()], ["royat-published", PUBLISHED]] as const) {
+    for (const [name, location] of [["clermont-ferrand", clermontFerrand()], ["clermont-ferrand-published", PUBLISHED]] as const) {
       for (const locale of LOCALES) {
         const { point, copy } = context(location, locale);
         for (const page of PAGE_KEYS) out[`${name}/${locale}/${page}`] = locationMetadata(point, copy, page);
@@ -61,8 +61,8 @@ describe("golden: <head> metadata", () => {
       out[`status/${locale}`] = statusMetadata(copy.t.thanks.title);
     }
     // A point reached through the apex path still names its subdomain.
-    const apex = context(royat(), "fr");
-    out["royat/fr/home (path mode)"] = locationMetadata({ ...apex.point, mode: "path" }, apex.copy, "home");
+    const apex = context(clermontFerrand(), "fr");
+    out["clermont-ferrand/fr/home (path mode)"] = locationMetadata({ ...apex.point, mode: "path" }, apex.copy, "home");
     await expect(json(out)).toMatchFileSnapshot(GOLDEN("metadata"));
   });
 });
@@ -88,25 +88,25 @@ describe("golden: sitemap and robots", () => {
 
   it("per host, baked and with a live source that publishes one point", async () => {
     const out: Record<string, unknown> = {};
-    for (const h of ["aquafix.top", "royat.aquafix.top", "evil.aquafix.top", "royat.localhost:3000"]) {
+    for (const h of ["aquafix.top", "clermont-ferrand.aquafix.top", "evil.aquafix.top", "clermont-ferrand.localhost:3000"]) {
       out[`baked ${h}`] = await render(h);
     }
     vi.stubEnv("LOCATIONS_API_URL", "https://live.example");
     // The source's wire shape: communes as a list of names.
     const live = {
-      storefrontPhoto: "https://cdn.example/royat.jpg",
-      landmark: { fr: "En face des thermes", en: "Opposite the spa" },
-      serviceArea: ["Royat", "Chamalières", "Ceyrat"],
+      storefrontPhoto: "https://cdn.example/clermont-ferrand.jpg",
+      landmark: { fr: "Près des fontaines pétrifiantes", en: "Near the petrifying fountains" },
+      serviceArea: ["Clermont-Ferrand", "Chamalières", "Aubière"],
       hours: PUBLISHED.hours,
     };
     vi.stubGlobal(
       "fetch",
       vi.fn(async (input: string | URL | Request) =>
-        /\/locations\/royat\?/.test(String(input)) ? Response.json(live) : Response.json({}),
+        /\/locations\/clermont-ferrand\?/.test(String(input)) ? Response.json(live) : Response.json({}),
       ),
     );
     vi.resetModules();
-    for (const h of ["royat.aquafix.top", "lyon-nord.aquafix.top"]) out[`live ${h}`] = await render(h);
+    for (const h of ["clermont-ferrand.aquafix.top", "lyon-nord.aquafix.top"]) out[`live ${h}`] = await render(h);
     await expect(json(out)).toMatchFileSnapshot(GOLDEN("sitemap-robots"));
   });
 });

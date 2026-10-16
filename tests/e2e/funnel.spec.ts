@@ -15,7 +15,7 @@ test.describe("without JavaScript", () => {
   test("the quote form posts, gets a 303 and the lead is stored", async ({ page }, testInfo) => {
     // A number no other test (or project) submits, so the row found is this one.
     const mobile = freshMobile("06");
-    const zip = `63130-${testInfo.project.name}`;
+    const zip = `63000-${testInfo.project.name}`;
 
     // `#quote` is the link every CTA points at, so the form is on screen on
     // arrival and the click needs no scroll of its own.
@@ -39,7 +39,7 @@ test.describe("without JavaScript", () => {
     try {
       // Stored as E.164 (`LEAD.mobileFormat`), not as typed.
       const row = db.prepare("SELECT zip, location_id, spam_verdict FROM leads WHERE mobile = ?").get(normalizePhone(mobile));
-      expect(row).toEqual({ zip, location_id: "royat", spam_verdict: null });
+      expect(row).toEqual({ zip, location_id: "clermont-ferrand", spam_verdict: null });
     } finally {
       db.close();
     }
@@ -51,7 +51,7 @@ test.describe("without JavaScript", () => {
 // a combobox too, so the trigger is found as the button it becomes.
 test("with JavaScript the job is the kit's listbox and the pick is stored", async ({ page }, testInfo) => {
   const mobile = freshMobile("07");
-  const zip = `63130-js-${testInfo.project.name}`;
+  const zip = `63000-js-${testInfo.project.name}`;
 
   await page.goto("/fr#quote");
   const form = page.locator("form#quote-form");
@@ -115,7 +115,7 @@ test("contact_intent_click reaches PostHog when the visitor leaves for tel:", as
 
   await expect.poll(() => events.find(e => e.event === "contact_intent_click")?.properties).toMatchObject({
     channel: "phone",
-    location_id: "royat",
+    location_id: "clermont-ferrand",
     brand_id: "aquafix",
   });
   // The allow-list at work: nothing about the visitor rides along.
@@ -147,7 +147,7 @@ test("a tapped work tile is the job the form sends", async ({ page }, testInfo) 
   await expect(form.locator("input[type=hidden][name=job]")).toHaveValue("hot_water");
   await expect(form.locator("button[role=combobox]")).toHaveCount(0);
 
-  await form.locator("input[name=zip]").fill(`63130-need-${testInfo.project.name}`);
+  await form.locator("input[name=zip]").fill(`63000-need-${testInfo.project.name}`);
   await form.locator("input[name=mobile]").fill(mobile);
   await page.waitForTimeout(MIN_FILL_MS + 250);
   const posted = page.waitForResponse(r => r.request().method() === "POST" && new URL(r.url()).pathname === "/quote");
@@ -234,7 +234,7 @@ test("rejected_submission_lands_on_the_card_with_an_error", async ({ browser, pa
     await plain.goto("/fr#quote");
     const form = plain.locator("form#quote-form");
     await form.locator("select[name=job]").selectOption("hot_water");
-    await form.locator("input[name=zip]").fill("63130");
+    await form.locator("input[name=zip]").fill("63000");
     // Nine digits: the browser has no rule for it, the server does.
     await form.locator("input[name=mobile]").fill("06 12 34 56 7");
     await plain.waitForTimeout(MIN_FILL_MS + 250);
@@ -275,14 +275,14 @@ test("a refusal with the script keeps what was typed", async ({ page }, testInfo
     await route.continue({ postData: body.toString() });
   });
   await page.goto("/fr");
-  const form = await fillQuote(page, "63130-refused", "06 12 34 56 78");
+  const form = await fillQuote(page, "63000-refused", "06 12 34 56 78");
   const posted = page.waitForResponse(isQuotePost);
   await form.locator("button[type=submit]").click();
   expect((await posted).status()).toBe(422);
   await expect(form.getByRole("alert")).toHaveText(FR.phoneInvalid);
   await expect(form.locator("input[name=mobile]")).toHaveAttribute("aria-invalid", "true");
   await expect(form.locator("input[name=mobile]")).toBeFocused();
-  await expect(form.locator("input[name=zip]")).toHaveValue("63130-refused");
+  await expect(form.locator("input[name=zip]")).toHaveValue("63000-refused");
   expect(new URL(page.url()).pathname).toBe("/fr");
 });
 
@@ -314,12 +314,12 @@ test("offline, the card says so, keeps the form, and a retry sends one lead", as
   const mobile = freshMobile("06");
   await ownClient(page, testInfo, 5);
   await page.goto("/fr");
-  const form = await fillQuote(page, "63130-offline", mobile);
+  const form = await fillQuote(page, "63000-offline", mobile);
   await context.setOffline(true);
   await form.locator("button[type=submit]").click();
   await expect(form.getByText(FR.networkError)).toBeVisible();
   await expect(form.locator("input[name=mobile]")).toHaveValue(mobile);
-  await expect(form.locator("input[name=zip]")).toHaveValue("63130-offline");
+  await expect(form.locator("input[name=zip]")).toHaveValue("63000-offline");
   expect(new URL(page.url()).pathname).toBe("/fr");
 
   await context.setOffline(false);
@@ -337,7 +337,7 @@ test("a server that never answers: busy, then a timeout with a retry", async ({ 
     // Held: no answer, ever.
   });
   await page.goto("/fr");
-  const form = await fillQuote(page, "63130-timeout", "06 12 34 56 78");
+  const form = await fillQuote(page, "63000-timeout", "06 12 34 56 78");
   const submit = form.locator("button[type=submit]");
   await submit.click();
   await expect(submit).toHaveAttribute("aria-busy", "true");
@@ -347,7 +347,7 @@ test("a server that never answers: busy, then a timeout with a retry", async ({ 
   await expect(form.getByText(FR.timeoutError)).toBeVisible();
   await expect(form.getByRole("button", { name: FR.retry })).toBeVisible();
   await expect(submit).toBeEnabled();
-  await expect(form.locator("input[name=zip]")).toHaveValue("63130-timeout");
+  await expect(form.locator("input[name=zip]")).toHaveValue("63000-timeout");
   expect(new URL(page.url()).pathname).toBe("/fr");
 });
 

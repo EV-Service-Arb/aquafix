@@ -7,7 +7,7 @@ import { LOCALES, type Locale } from "@/shared/config/i18n";
 // `Text` with `satisfies`, so a missing field does not build. What the type
 // cannot see is an empty string, or a sentence that quotes a fact by hand.
 
-const facts = (locale: Locale): Facts => factsFor({ locale, place: "Royat", phone: CARD.phone });
+const facts = (locale: Locale): Facts => factsFor({ locale, place: "Clermont-Ferrand", phone: CARD.phone });
 
 /** Every leaf string, with functions called on the facts, and its path. */
 function leaves(value: unknown, f: Facts, path = ""): [string, string][] {

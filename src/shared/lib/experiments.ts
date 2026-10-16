@@ -190,7 +190,7 @@ export function abSwitcherExperiments(leadChannelRuns: boolean): typeof AB_SWITC
 
 /**
  * The static segment before an assignment in a rewritten path:
- * `/fr/_royat/ab/ba`. Static, so `/fr/404/404` — kitstart's path no route may
+ * `/fr/_clermont-ferrand/ab/ba`. Static, so `/fr/404/404` — kitstart's path no route may
  * match — still matches none.
  */
 export const BUCKET_SEGMENT = "ab";

@@ -126,7 +126,7 @@ test("exposure and contact events carry the experiment and the variant", async (
     { experiment: "lead_form", variant: "c", forced: true, channel: undefined },
   ]);
   const exposed = events.find(e => e.event === "experiment_exposed")?.properties;
-  expect(exposed).toMatchObject({ brand_id: "aquafix", location_id: "royat" });
+  expect(exposed).toMatchObject({ brand_id: "aquafix", location_id: "clermont-ferrand" });
 
   await page.locator('main a[href^="tel:"]:visible').first().click({ noWaitAfter: true });
   await expect.poll(() => of(events, "experiment_contact")).toEqual([
@@ -138,10 +138,10 @@ test("exposure and contact events carry the experiment and the variant", async (
   for (const e of events.filter(e => e.event.startsWith("experiment_"))) expect(e.properties, e.event).not.toHaveProperty("superseded");
 });
 
-// Royat here has neither its own WhatsApp nor a bot: a lead_channel arm is
+// Clermont-Ferrand here has neither its own WhatsApp nor a bot: a lead_channel arm is
 // inert (docs/EXPERIMENTS.md, as vifnet's) — the card is lead_form's, its
 // events name lead_form, and nothing is marked superseded. The arm's drawn
-// case is messenger.spec.ts's, on a Royat with both.
+// case is messenger.spec.ts's, on a Clermont-Ferrand with both.
 test("a lead_channel arm at a point without messengers is inert: lead_form's events are not superseded", async ({ page }) => {
   const events = await capture(page);
   await page.goto("/fr?ab_hero_call_first=b&ab_lead_form=c&ab_lead_channel=e");
@@ -169,9 +169,9 @@ test("a lead_channel arm at a point without messengers draws lead_form's arm, an
 
 test("an assigned (not forced) visit says forced: false", async ({ page, context }) => {
   await context.addCookies([
-    { name: "ab_hero_call_first", value: "b", url: "http://royat.localhost" },
-    { name: "ab_lead_form", value: "b", url: "http://royat.localhost" },
-    { name: "ab_lead_channel", value: "a", url: "http://royat.localhost" },
+    { name: "ab_hero_call_first", value: "b", url: "http://clermont-ferrand.localhost" },
+    { name: "ab_lead_form", value: "b", url: "http://clermont-ferrand.localhost" },
+    { name: "ab_lead_channel", value: "a", url: "http://clermont-ferrand.localhost" },
   ]);
   const events = await capture(page);
   await page.goto("/fr");
@@ -193,7 +193,7 @@ test("a crawler gets the control and no cookie, even when it asks for b or c", a
   }
 });
 
-// lead_form b: kitstart's `steps` — the job, then (Royat's one postcode known,
+// lead_form b: kitstart's `steps` — the job, then (Clermont-Ferrand's one postcode known,
 // so not asked) the mobile — and the form's events carry the arm.
 test("lead_form b asks one question per screen, and its events carry the arm", async ({ page }, testInfo) => {
   const events = await capture(page);
@@ -219,7 +219,7 @@ test("lead_form b asks one question per screen, and its events carry the arm", a
 
   // "Retour" opens the screen it skipped, the postcode, filled; "Suivant" comes back.
   await form.getByRole("button", { name: /Retour/ }).click();
-  await expect(form.locator("input[name=zip]")).toHaveValue("63130");
+  await expect(form.locator("input[name=zip]")).toHaveValue("63000");
   await expect(phone).toBeHidden();
   await form.getByRole("button", { name: /Suivant/ }).click();
 
@@ -302,11 +302,11 @@ async function pageView(page: Page, url: string): Promise<Record<string, unknown
 // The QA cookie marks the page view too, so a tester's reloads stay out of a
 // place's traffic; an ordinary visit's page view carries no `forced` at all.
 test("a forced visit's page view says forced: true", async ({ page }) => {
-  expect(await pageView(page, "/fr?ab_lead_form=b")).toMatchObject({ forced: true, location_id: "royat" });
+  expect(await pageView(page, "/fr?ab_lead_form=b")).toMatchObject({ forced: true, location_id: "clermont-ferrand" });
 });
 
 test("a new visitor's page view has no forced key", async ({ page }) => {
   const properties = await pageView(page, "/fr");
-  expect(properties).toMatchObject({ location_id: "royat" });
+  expect(properties).toMatchObject({ location_id: "clermont-ferrand" });
   expect(properties).not.toHaveProperty("forced");
 });

@@ -12,7 +12,7 @@ import { proxy } from "../proxy";
 const { decide, hostSlug } = createRouting(site);
 
 const APEX = "aquafix.top";
-const ROYAT = "royat.aquafix.top";
+const CLERMONT_FERRAND = "clermont-ferrand.aquafix.top";
 
 function req(pathname: string, over: Partial<RequestFacts> = {}): RequestFacts {
   const [path = "/", qs = ""] = pathname.split("?");
@@ -39,7 +39,7 @@ describe("language negotiation", () => {
     for (const path of ["/quote", "/sitemap.xml", "/robots.txt", "/og", "/health", "/_next/static/x.js"]) {
       expect(decide(req(path)), path).toEqual({ kind: "pass" });
     }
-    expect(decide(req("/health", { host: ROYAT }))).toEqual({ kind: "pass" });
+    expect(decide(req("/health", { host: CLERMONT_FERRAND }))).toEqual({ kind: "pass" });
   });
 
   // Let through, each of these reached `[locale]` and Next cached its
@@ -48,25 +48,25 @@ describe("language negotiation", () => {
     ["/nope", APEX, {}, { locale: "fr", location: null }],
     ["/nope/nope", APEX, {}, { locale: "fr", location: null }],
     ["/xx/prices", APEX, {}, { locale: "fr", location: null }],
-    ["/royat/nope", APEX, {}, { locale: "fr", location: null }],
-    ["/nope", ROYAT, {}, { locale: "fr", location: "_royat" }],
-    ["/fr/royat/prices/deeper", APEX, {}, { locale: "fr", location: "royat" }],
-    ["/en/_royat/prices/deeper", APEX, {}, { locale: "en", location: "_royat" }],
-    ["/fr/a/b/c/d", ROYAT, {}, { locale: "fr", location: "_royat" }],
+    ["/clermont-ferrand/nope", APEX, {}, { locale: "fr", location: null }],
+    ["/nope", CLERMONT_FERRAND, {}, { locale: "fr", location: "_clermont-ferrand" }],
+    ["/fr/clermont-ferrand/prices/deeper", APEX, {}, { locale: "fr", location: "clermont-ferrand" }],
+    ["/en/_clermont-ferrand/prices/deeper", APEX, {}, { locale: "en", location: "_clermont-ferrand" }],
+    ["/fr/a/b/c/d", CLERMONT_FERRAND, {}, { locale: "fr", location: "_clermont-ferrand" }],
   ] as const)("sends %s on %s to the 404, in its language", (path, host, over, gone) => {
     expect(decide(req(path, { host, ...over }))).toEqual({ kind: "gone", ...gone });
   });
 
   it("negotiates a point's pages on its subdomain and through the apex", () => {
-    expect(decide(req("/prices", { host: ROYAT }))).toEqual({ kind: "negotiate", location: "/fr/prices" });
-    expect(decide(req("/royat/prices", { acceptLanguage: "en" }))).toEqual({ kind: "negotiate", location: "/en/royat/prices" });
+    expect(decide(req("/prices", { host: CLERMONT_FERRAND }))).toEqual({ kind: "negotiate", location: "/fr/prices" });
+    expect(decide(req("/clermont-ferrand/prices", { acceptLanguage: "en" }))).toEqual({ kind: "negotiate", location: "/en/clermont-ferrand/prices" });
   });
 
   it("turns ?lang= into a choice and takes it out of the URL, keeping the rest", () => {
-    expect(decide(req("/fr/royat/prices?lang=en&utm_source=gbp"))).toEqual({
+    expect(decide(req("/fr/clermont-ferrand/prices?lang=en&utm_source=gbp"))).toEqual({
       kind: "choose",
       locale: "en",
-      location: "/en/royat/prices?utm_source=gbp",
+      location: "/en/clermont-ferrand/prices?utm_source=gbp",
     });
   });
 });
@@ -87,13 +87,13 @@ describe("the Rust site's URLs", () => {
 
   it("keeps the brand's own thank-you page and a point's own sub-pages", () => {
     expect(decide(req("/fr/thanks"))).toEqual({ kind: "serve", pathname: "/fr/thanks" });
-    expect(decide(req("/prices", { host: ROYAT }))).toMatchObject({ kind: "negotiate" });
+    expect(decide(req("/prices", { host: CLERMONT_FERRAND }))).toMatchObject({ kind: "negotiate" });
   });
 });
 
 describe("host routing", () => {
   it("reads the point from the subdomain, locally too", () => {
-    expect(hostSlug("royat.aquafix.top")).toBe("royat");
+    expect(hostSlug("clermont-ferrand.aquafix.top")).toBe("clermont-ferrand");
     expect(hostSlug("lyon-nord.localhost:3000")).toBe("lyon-nord");
     expect(hostSlug("aquafix.top")).toBeNull();
     expect(hostSlug("www.aquafix.top")).toBeNull();
@@ -101,14 +101,14 @@ describe("host routing", () => {
   });
 
   it("serves a subdomain's pages from the point's host-mode route", () => {
-    expect(decide(req("/fr", { host: ROYAT }))).toEqual({ kind: "serve", pathname: "/fr/_royat" });
-    expect(decide(req("/en/prices", { host: ROYAT }))).toEqual({ kind: "serve", pathname: "/en/_royat/prices" });
+    expect(decide(req("/fr", { host: CLERMONT_FERRAND }))).toEqual({ kind: "serve", pathname: "/fr/_clermont-ferrand" });
+    expect(decide(req("/en/prices", { host: CLERMONT_FERRAND }))).toEqual({ kind: "serve", pathname: "/en/_clermont-ferrand/prices" });
   });
 
   it("sends a dead path to the 404, for the point it belongs to", () => {
     // On a point's host, a dead path is that point's 404.
-    expect(decide(req("/fr/nope", { host: ROYAT }))).toEqual({ kind: "gone", locale: "fr", location: "_royat" });
-    expect(decide(req("/en/prices/nope", { host: ROYAT }))).toEqual({ kind: "gone", locale: "en", location: "_royat" });
+    expect(decide(req("/fr/nope", { host: CLERMONT_FERRAND }))).toEqual({ kind: "gone", locale: "fr", location: "_clermont-ferrand" });
+    expect(decide(req("/en/prices/nope", { host: CLERMONT_FERRAND }))).toEqual({ kind: "gone", locale: "en", location: "_clermont-ferrand" });
     // Through the apex: a known point's dead page, and an unknown point — the brand's.
     expect(decide(req("/fr/lyon-nord/nope"))).toEqual({ kind: "gone", locale: "fr", location: "lyon-nord" });
     expect(decide(req("/fr/nowhere"))).toEqual({ kind: "gone", locale: "fr", location: null });
@@ -117,22 +117,22 @@ describe("host routing", () => {
     // Its own target, proxied back in by Next, passes on any host — sent to
     // the 404 again it would loop.
     expect(decide(req("/fr/404/404"))).toEqual({ kind: "serve", pathname: "/fr/404/404" });
-    expect(decide(req("/en/404/404", { host: ROYAT }))).toEqual({ kind: "serve", pathname: "/en/404/404" });
+    expect(decide(req("/en/404/404", { host: CLERMONT_FERRAND }))).toEqual({ kind: "serve", pathname: "/en/404/404" });
   });
 
   it("keeps every real page out of the 404 route", () => {
-    for (const path of ["/fr", "/fr/thanks", "/fr/royat", "/fr/royat/prices", "/fr/royat/thanks", "/fr/_royat/about"]) {
+    for (const path of ["/fr", "/fr/thanks", "/fr/clermont-ferrand", "/fr/clermont-ferrand/prices", "/fr/clermont-ferrand/thanks", "/fr/_clermont-ferrand/about"]) {
       expect(decide(req(path)).kind, path).toBe("serve");
     }
   });
 
   it("serves the apex fallback path as it is, in path link mode", () => {
-    expect(decide(req("/fr/royat/about"))).toEqual({ kind: "serve", pathname: "/fr/royat/about" });
+    expect(decide(req("/fr/clermont-ferrand/about"))).toEqual({ kind: "serve", pathname: "/fr/clermont-ferrand/about" });
     expect(decide(req("/en"))).toEqual({ kind: "serve", pathname: "/en" });
   });
 
   it("passes a host-mode path through untouched — Next re-enters the proxy with it to fill its cache", () => {
-    expect(decide(req("/fr/_royat/prices", { host: "localhost:3000" }))).toEqual({ kind: "serve", pathname: "/fr/_royat/prices" });
+    expect(decide(req("/fr/_clermont-ferrand/prices", { host: "localhost:3000" }))).toEqual({ kind: "serve", pathname: "/fr/_clermont-ferrand/prices" });
   });
 });
 
@@ -151,15 +151,15 @@ describe("the proxy on a path with an extension", () => {
     ["https://aquafix.top/.env", APEX, { cookie: "lang=en" }, { rewrite: "/en/404/404", header: "en" }],
     ["https://aquafix.top/favicon.ico", APEX, {}, { rewrite: "/fr/404/404", header: "fr" }],
     ["https://aquafix.top/fr/x.php", APEX, {}, { rewrite: "/fr/404/404", header: "fr" }],
-    ["https://royat.aquafix.top/fr/x.php", ROYAT, {}, { rewrite: "/fr/404/404", header: "fr/_royat" }],
-    ["https://aquafix.top/fr/royat/x.php", APEX, {}, { rewrite: "/fr/404/404", header: "fr/royat" }],
+    ["https://clermont-ferrand.aquafix.top/fr/x.php", CLERMONT_FERRAND, {}, { rewrite: "/fr/404/404", header: "fr/_clermont-ferrand" }],
+    ["https://aquafix.top/fr/clermont-ferrand/x.php", APEX, {}, { rewrite: "/fr/404/404", header: "fr/clermont-ferrand" }],
   ] as const)("sends %s to the 404, in its language, for its point", async (url, host, headers, want) => {
     expect(gone(await proxy(request(url, { host, ...headers })))).toEqual(want);
   });
 
   it("lets the metadata routes through", async () => {
     for (const path of ["/sitemap.xml", "/robots.txt"]) {
-      const res = await proxy(request(`https://royat.aquafix.top${path}`, { host: ROYAT }));
+      const res = await proxy(request(`https://clermont-ferrand.aquafix.top${path}`, { host: CLERMONT_FERRAND }));
       expect(res.headers.get("x-middleware-rewrite"), path).toBeNull();
       expect(res.headers.get("x-middleware-next"), path).toBe("1");
     }
@@ -171,17 +171,17 @@ describe("the proxy on a path with an extension", () => {
 describe("the proxy on a path without an extension", () => {
   it("passes /og and /quote untouched", async () => {
     for (const path of ["/og", "/quote"]) {
-      const res = await proxy(new NextRequest(new URL(`https://royat.aquafix.top${path}`), { headers: { host: ROYAT } }));
+      const res = await proxy(new NextRequest(new URL(`https://clermont-ferrand.aquafix.top${path}`), { headers: { host: CLERMONT_FERRAND } }));
       expect(res.headers.get("x-middleware-rewrite"), path).toBeNull();
       expect(res.headers.get("x-middleware-next"), path).toBe("1");
     }
   });
 
   it("leaves a POST's body for the route", async () => {
-    const body = "location=royat&locale=fr&job=blocked_drain&zip=63130&mobile=0612345678";
-    const request = new NextRequest(new URL("https://royat.aquafix.top/quote"), {
+    const body = "location=clermont-ferrand&locale=fr&job=blocked_drain&zip=63000&mobile=0612345678";
+    const request = new NextRequest(new URL("https://clermont-ferrand.aquafix.top/quote"), {
       method: "POST",
-      headers: { host: ROYAT, "content-type": "application/x-www-form-urlencoded" },
+      headers: { host: CLERMONT_FERRAND, "content-type": "application/x-www-form-urlencoded" },
       body,
     });
     const res = await proxy(request);

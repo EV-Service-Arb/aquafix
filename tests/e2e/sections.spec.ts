@@ -7,7 +7,7 @@ import { APEX_ORIGIN } from "./env";
 // Every section is reached by its own URL, never by scrolling to it: a scroll
 // is a moving target the runner has to guess is over, and it never agrees with
 // the page about when that is. A `#` the site itself links to is a fixed one.
-// The pages are the Royat point's, on its own host; the brand page is the apex.
+// The pages are the Clermont-Ferrand point's, on its own host; the brand page is the apex.
 const SECTIONS = [
   { name: "header", url: "/fr", selector: "header" },
   { name: "hero", url: "/fr", selector: "main > section >> nth=0" },

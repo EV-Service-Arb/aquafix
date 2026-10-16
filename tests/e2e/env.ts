@@ -10,7 +10,7 @@ import { CONTROL, EXPERIMENT_IDS } from "../../src/shared/config/experiments";
 export const PORT = Number(process.env.E2E_PORT ?? 59089);
 
 /** A point's own host. Chromium resolves every `*.localhost` to loopback. */
-export const POINT_ORIGIN = `http://royat.localhost:${PORT}`;
+export const POINT_ORIGIN = `http://clermont-ferrand.localhost:${PORT}`;
 export const APEX_ORIGIN = `http://localhost:${PORT}`;
 
 /** Emptied when the server starts: an earlier run's rows must not satisfy this one. */
@@ -18,18 +18,18 @@ export const LEADS_DB = join(tmpdir(), `aquafix-e2e-${PORT}`, "leads.db");
 
 /**
  * `messenger.spec.ts`'s own server: the same build, with `LOCATIONS_API_URL`
- * on a stand-in places API (`support/places-api.ts`) that gives Royat its own
+ * on a stand-in places API (`support/places-api.ts`) that gives Clermont-Ferrand its own
  * WhatsApp number and the brand's Telegram bot. A server of its own, so the
- * other specs keep a Royat without either — and the control in every
+ * other specs keep a Clermont-Ferrand without either — and the control in every
  * `lead_channel` arm, which they assume.
  */
 export const MESSENGER_PORT = PORT + 1;
-export const MESSENGER_ORIGIN = `http://royat.localhost:${MESSENGER_PORT}`;
+export const MESSENGER_ORIGIN = `http://clermont-ferrand.localhost:${MESSENGER_PORT}`;
 export const MESSENGER_LEADS_DB = join(tmpdir(), `aquafix-e2e-${MESSENGER_PORT}`, "leads.db");
 export const PLACES_API_PORT = PORT + 2;
-/** What the stand-in places API answers for Royat. */
-export const ROYAT_WHATSAPP = "33612345678";
-export const ROYAT_TELEGRAM_BOT = "aquafix_devis_bot";
+/** What the stand-in places API answers for Clermont-Ferrand. */
+export const CLERMONT_FERRAND_WHATSAPP = "33612345678";
+export const CLERMONT_FERRAND_TELEGRAM_BOT = "aquafix_devis_bot";
 
 /** Never resolves: every request to it is intercepted by the spec, or fails. */
 export const POSTHOG_HOST = "https://posthog.e2e.invalid";
@@ -37,7 +37,7 @@ export const POSTHOG_HOST = "https://posthog.e2e.invalid";
 export const POSTHOG_KEY = "phc_e2e_not_a_real_project";
 
 /** The A/B control, for both hosts the specs visit (a cookie ignores the port). */
-export const CONTROL_COOKIES = ["royat.localhost", "localhost"].flatMap(domain =>
+export const CONTROL_COOKIES = ["clermont-ferrand.localhost", "localhost"].flatMap(domain =>
   EXPERIMENT_IDS.map(id => ({
     name: `ab_${id}`,
     value: CONTROL[id],

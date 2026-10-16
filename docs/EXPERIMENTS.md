@@ -43,7 +43,7 @@ the card and the call bar under it — so the card repeats neither.
   ticked privacy line under the submit are gone.
 - **`b`, step by step.** One question per screen with a thin progress bar,
   "Retour" and the answered screens as chips: the job (a tile each), the
-  postcode, the mobile. A postcode the page knows — Royat serves one — is
+  postcode, the mobile. A postcode the page knows — Clermont-Ferrand serves one — is
   not asked again, so there it is the job, then the mobile.
 - **`c`, urgency first.** "C’est pour quand ?" — "Urgent — aujourd’hui",
   "Cette semaine", "Je compare les prix". Urgent turns the form into a call
@@ -239,9 +239,9 @@ is applied by a person to what PostHog shows.
 Add `?ab_<experiment>=<variant>` to a point's URL:
 
 ```text
-https://royat.aquafix.top/fr?ab_hero_call_first=b
-https://royat.aquafix.top/fr?ab_hero_call_first=b&ab_lead_form=c
-https://royat.aquafix.top/fr?ab_lead_form=b
+https://clermont-ferrand.aquafix.top/fr?ab_hero_call_first=b
+https://clermont-ferrand.aquafix.top/fr?ab_hero_call_first=b&ab_lead_form=c
+https://clermont-ferrand.aquafix.top/fr?ab_lead_form=b
 ```
 
 A forced visit from outside the site — a link pasted in the address bar, a
@@ -277,7 +277,7 @@ proxy tells them by the browser's `Sec-Fetch-Site` (`same-origin`,
 subdomain keep QA apart: a move between them reaches a host with no mark.
 
 **Leaving QA:** come to the point's home from outside, without any valid
-`?ab_*` — type or paste `https://royat.aquafix.top/fr` in the address bar,
+`?ab_*` — type or paste `https://clermont-ferrand.aquafix.top/fr` in the address bar,
 open a bookmark, or follow a link from another site (`Sec-Fetch-Site` `none`
 or `cross-site`; a browser that sends no such header leaves too) — or tap
 **Reset** in the menu. The proxy writes the saved variants back into the
@@ -311,7 +311,7 @@ A forced visit also gets kitstart's A/B menu on a point's home page — the only
 page the experiments run on: a chip in the bottom-right corner (on a phone, above the call bar) showing each test's current letter.
 
 1. Open any point with a force parameter, e.g.
-   `https://royat.aquafix.top/fr?ab_lead_form=a`. The proxy sets `ab__qa`,
+   `https://clermont-ferrand.aquafix.top/fr?ab_lead_form=a`. The proxy sets `ab__qa`,
    and the chip appears.
 2. Tap the chip, then a variant: the page reloads with that variant forced,
    the other tests as they were — whether their force is still in the URL or

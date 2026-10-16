@@ -8,7 +8,7 @@ import type { StatusTarget } from "@/widgets/status-screen";
  * A 404 still answers in the page's language with the right phone. The
  * not-found boundary gets no params from Next, so it passes the route params
  * the client sees (`useParams`); the 404 route passes the proxy's. kitstart's
- * `statusTarget` reads the link mode out of the location param (`_royat` on a
+ * `statusTarget` reads the link mode out of the location param (`_clermont-ferrand` on a
  * point's subdomain); an unknown point answers for the brand, and the language
  * switch goes home — a dead URL has no twin in the other language.
  *

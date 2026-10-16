@@ -20,7 +20,7 @@ import type { JobId, NavId, PriceId, ServiceId, WorkId } from "./catalogue";
  */
 export interface Facts {
   locale: Locale;
-  /** The point's short place name: "Royat", "Lyon Nord". */
+  /** The point's short place name: "Clermont-Ferrand", "Lyon Nord". */
   place: string;
   phone: string;
   /** A formatted row of the price list. */

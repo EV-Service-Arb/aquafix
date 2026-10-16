@@ -4,7 +4,7 @@ Start the site:
 nix run .#dev
 ```
 
-A point is at `http://royat.localhost:59081/fr` (every `*.localhost` resolves
+A point is at `http://clermont-ferrand.localhost:59081/fr` (every `*.localhost` resolves
 to your machine), the brand page at `http://localhost:59081/fr`.
 
 Run the checks:
@@ -67,7 +67,7 @@ nix run .#dev
   `~/.local/share/aquafix/leads.db`.
 - `POSTHOG_KEY` — unset, analytics sends nothing.
 
-A point is then `http://royat.localhost:$PORT/fr`.
+A point is then `http://clermont-ferrand.localhost:$PORT/fr`.
 Each arm of the lead form test is one link away: `/fr?ab_lead_form=a`, `b` or `c`
 (docs/EXPERIMENTS.md).
 

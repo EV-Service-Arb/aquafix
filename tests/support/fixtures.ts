@@ -4,13 +4,13 @@ import type { Locale } from "@/shared/config/i18n";
 
 type Storefront = NonNullable<ReturnType<typeof storefrontOf<Locale>>>;
 
-export function royat(overrides: Partial<Place> = {}): Place {
-  const baked = bakedPlace("royat");
-  if (!baked) throw new Error("fixture: royat is not configured");
+export function clermontFerrand(overrides: Partial<Place> = {}): Place {
+  const baked = bakedPlace("clermont-ferrand");
+  if (!baked) throw new Error("fixture: clermont-ferrand is not configured");
   return { ...baked, ...overrides };
 }
 
-/** Royat with some of its storefront fields replaced. */
+/** Clermont-Ferrand with some of its storefront fields replaced. */
 export function withFront(place: Place, front: Partial<Omit<Storefront, "kind">>): Place {
   const current = storefrontOf(place);
   if (!current) throw new Error("fixture: not a storefront");
@@ -18,15 +18,15 @@ export function withFront(place: Place, front: Partial<Omit<Storefront, "kind">>
 }
 
 /** Every publication field filled — the shape an owner-completed point has. */
-export function publishedRoyat(overrides: Partial<Place> = {}, front: Partial<Omit<Storefront, "kind">> = {}): Place {
-  const place = royat({
-    serviceArea: [{ kind: "localities", names: ["Royat", "Chamalières", "Ceyrat"] }],
+export function publishedClermontFerrand(overrides: Partial<Place> = {}, front: Partial<Omit<Storefront, "kind">> = {}): Place {
+  const place = clermontFerrand({
+    serviceArea: [{ kind: "localities", names: ["Clermont-Ferrand", "Chamalières", "Aubière"] }],
     hours: [{ days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "07:00", closes: "21:00" }],
     ...overrides,
   });
   return withFront(place, {
-    storefrontPhoto: "https://cdn.example/royat.jpg",
-    landmark: { fr: "En face des thermes", en: "Opposite the spa" },
+    storefrontPhoto: "https://cdn.example/clermont-ferrand.jpg",
+    landmark: { fr: "Près des fontaines pétrifiantes", en: "Near the petrifying fountains" },
     ...front,
   });
 }

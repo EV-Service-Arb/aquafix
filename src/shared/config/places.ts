@@ -39,23 +39,23 @@ function storefront(
 }
 
 export const PLACES: readonly Place<Locale>[] = [
-  storefront("royat", "Aquafix Plombier Chauffagiste - Clermont-Ferrand, Royat", "Royat", {
-    street: "2 Av. Abbé Védrine",
-    postalCode: "63130",
-    locality: "Royat",
-  }),
-  storefront("clermont-ferrand", "Aquafix — Plombier Chauffagiste Clermont-Ferrand", "Clermont-Ferrand", {
-    street: "36 Rue des Chanelles",
-    postalCode: "63100",
+  // storefront("royat", "Aquafix Plombier Chauffagiste - Clermont-Ferrand, Royat", "Royat", { // suspended on GBP
+  //   street: "2 Av. Abbé Védrine",
+  //   postalCode: "63130",
+  //   locality: "Royat",
+  // }),
+  storefront("clermont-ferrand", "Aquafix Plombier Chauffagiste - Clermont-Ferrand", "Clermont-Ferrand", {
+    street: "64 Rue Saint-Alyre",
+    postalCode: "63000",
     locality: "Clermont-Ferrand",
   }),
   storefront("desgenettes", "Aquafix Plombier Chauffagiste - Lyon, Desgenettes", "Lyon Desgenettes", {
-    street: "9 Rue Professeur Florence",
+    street: "48 Rue Professeur Florence",
     postalCode: "69003",
     locality: "Lyon",
   }),
   storefront("lyon-est", "Aquafix Plombier Chauffagiste - Lyon, Est", "Lyon Est", {
-    street: "9 Rue Philippe Fabia",
+    street: "24 Rue Stéphane Coignet",
     postalCode: "69008",
     locality: "Lyon",
   }),
@@ -65,7 +65,7 @@ export const PLACES: readonly Place<Locale>[] = [
     locality: "Lyon",
   }),
   storefront("lyon-nord", "Aquafix Plombier Chauffagiste - Lyon, Nord", "Lyon Nord", {
-    street: "21 Rue Neyret",
+    street: "26 Rue des Chartreux",
     postalCode: "69001",
     locality: "Lyon",
   }),

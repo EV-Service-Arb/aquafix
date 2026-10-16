@@ -1,32 +1,32 @@
 {
-  "royat/fr/home": {
-    "title": "Aquafix — Plombier à Royat — prix fixe, réparé aujourd’hui",
-    "description": "Plombiers à Royat. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
+  "clermont-ferrand/fr/home": {
+    "title": "Aquafix — Plombier à Clermont-Ferrand — prix fixe, réparé aujourd’hui",
+    "description": "Plombiers à Clermont-Ferrand. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
     "robots": {
       "index": false,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/fr",
+      "canonical": "https://clermont-ferrand.aquafix.top/fr",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr",
-        "en": "https://royat.aquafix.top/en",
-        "x-default": "https://royat.aquafix.top/fr"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr",
+        "en": "https://clermont-ferrand.aquafix.top/en",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
-      "title": "Aquafix — Plombier à Royat — prix fixe, réparé aujourd’hui",
-      "description": "Plombiers à Royat. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
-      "url": "https://royat.aquafix.top/fr",
+      "title": "Aquafix — Plombier à Clermont-Ferrand — prix fixe, réparé aujourd’hui",
+      "description": "Plombiers à Clermont-Ferrand. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
+      "url": "https://clermont-ferrand.aquafix.top/fr",
       "locale": "fr_FR",
       "alternateLocale": [
         "en_GB"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=fr&l=royat&p=home",
+          "url": "https://aquafix.top/og?lang=fr&l=clermont-ferrand&p=home",
           "width": 1200,
           "height": 630
         }
@@ -36,34 +36,34 @@
       "card": "summary_large_image"
     }
   },
-  "royat/fr/prices": {
+  "clermont-ferrand/fr/prices": {
     "title": "Chaque intervention, chaque chiffre · Aquafix",
-    "description": "La liste complète des prix Aquafix à Royat : neuf interventions, de vrais tarifs fixes TTC, et les questions que tout le monde pose avant de réserver.",
+    "description": "La liste complète des prix Aquafix à Clermont-Ferrand : neuf interventions, de vrais tarifs fixes TTC, et les questions que tout le monde pose avant de réserver.",
     "robots": {
       "index": false,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/fr/prices",
+      "canonical": "https://clermont-ferrand.aquafix.top/fr/prices",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr/prices",
-        "en": "https://royat.aquafix.top/en/prices",
-        "x-default": "https://royat.aquafix.top/fr/prices"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr/prices",
+        "en": "https://clermont-ferrand.aquafix.top/en/prices",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr/prices"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
       "title": "Chaque intervention, chaque chiffre · Aquafix",
-      "description": "La liste complète des prix Aquafix à Royat : neuf interventions, de vrais tarifs fixes TTC, et les questions que tout le monde pose avant de réserver.",
-      "url": "https://royat.aquafix.top/fr/prices",
+      "description": "La liste complète des prix Aquafix à Clermont-Ferrand : neuf interventions, de vrais tarifs fixes TTC, et les questions que tout le monde pose avant de réserver.",
+      "url": "https://clermont-ferrand.aquafix.top/fr/prices",
       "locale": "fr_FR",
       "alternateLocale": [
         "en_GB"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=fr&l=royat&p=prices",
+          "url": "https://aquafix.top/og?lang=fr&l=clermont-ferrand&p=prices",
           "width": 1200,
           "height": 630
         }
@@ -73,7 +73,7 @@
       "card": "summary_large_image"
     }
   },
-  "royat/fr/guarantee": {
+  "clermont-ferrand/fr/guarantee": {
     "title": "Ce que nous promettons vraiment · Aquafix",
     "description": "Les quatre craintes que l’on a en appelant un plombier, les conditions écrites qui suppriment chacune d’elles, et le déroulement d’une intervention Aquafix du début à la fin.",
     "robots": {
@@ -81,11 +81,11 @@
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/fr/guarantee",
+      "canonical": "https://clermont-ferrand.aquafix.top/fr/guarantee",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr/guarantee",
-        "en": "https://royat.aquafix.top/en/guarantee",
-        "x-default": "https://royat.aquafix.top/fr/guarantee"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr/guarantee",
+        "en": "https://clermont-ferrand.aquafix.top/en/guarantee",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr/guarantee"
       }
     },
     "openGraph": {
@@ -93,14 +93,14 @@
       "siteName": "Aquafix",
       "title": "Ce que nous promettons vraiment · Aquafix",
       "description": "Les quatre craintes que l’on a en appelant un plombier, les conditions écrites qui suppriment chacune d’elles, et le déroulement d’une intervention Aquafix du début à la fin.",
-      "url": "https://royat.aquafix.top/fr/guarantee",
+      "url": "https://clermont-ferrand.aquafix.top/fr/guarantee",
       "locale": "fr_FR",
       "alternateLocale": [
         "en_GB"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=fr&l=royat&p=guarantee",
+          "url": "https://aquafix.top/og?lang=fr&l=clermont-ferrand&p=guarantee",
           "width": 1200,
           "height": 630
         }
@@ -110,34 +110,34 @@
       "card": "summary_large_image"
     }
   },
-  "royat/fr/about": {
+  "clermont-ferrand/fr/about": {
     "title": "Quatre plombiers et un rayon de 30 km · Aquafix",
-    "description": "Qui se présente chez vous, comment ils sont assurés, et exactement où autour de Royat nous acceptons — ou refusons — de nous déplacer.",
+    "description": "Qui se présente chez vous, comment ils sont assurés, et exactement où autour de Clermont-Ferrand nous acceptons — ou refusons — de nous déplacer.",
     "robots": {
       "index": false,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/fr/about",
+      "canonical": "https://clermont-ferrand.aquafix.top/fr/about",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr/about",
-        "en": "https://royat.aquafix.top/en/about",
-        "x-default": "https://royat.aquafix.top/fr/about"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr/about",
+        "en": "https://clermont-ferrand.aquafix.top/en/about",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr/about"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
       "title": "Quatre plombiers et un rayon de 30 km · Aquafix",
-      "description": "Qui se présente chez vous, comment ils sont assurés, et exactement où autour de Royat nous acceptons — ou refusons — de nous déplacer.",
-      "url": "https://royat.aquafix.top/fr/about",
+      "description": "Qui se présente chez vous, comment ils sont assurés, et exactement où autour de Clermont-Ferrand nous acceptons — ou refusons — de nous déplacer.",
+      "url": "https://clermont-ferrand.aquafix.top/fr/about",
       "locale": "fr_FR",
       "alternateLocale": [
         "en_GB"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=fr&l=royat&p=about",
+          "url": "https://aquafix.top/og?lang=fr&l=clermont-ferrand&p=about",
           "width": 1200,
           "height": 630
         }
@@ -147,34 +147,34 @@
       "card": "summary_large_image"
     }
   },
-  "royat/en/home": {
-    "title": "Aquafix — Plumber in Royat — fixed price, fixed today",
-    "description": "Plumbers in Royat. A written flat rate before we start, a 2-hour arrival window or the call-out is free, and a 12-month warranty. Published prices for nine jobs.",
+  "clermont-ferrand/en/home": {
+    "title": "Aquafix — Plumber in Clermont-Ferrand — fixed price, fixed today",
+    "description": "Plumbers in Clermont-Ferrand. A written flat rate before we start, a 2-hour arrival window or the call-out is free, and a 12-month warranty. Published prices for nine jobs.",
     "robots": {
       "index": false,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/en",
+      "canonical": "https://clermont-ferrand.aquafix.top/en",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr",
-        "en": "https://royat.aquafix.top/en",
-        "x-default": "https://royat.aquafix.top/fr"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr",
+        "en": "https://clermont-ferrand.aquafix.top/en",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
-      "title": "Aquafix — Plumber in Royat — fixed price, fixed today",
-      "description": "Plumbers in Royat. A written flat rate before we start, a 2-hour arrival window or the call-out is free, and a 12-month warranty. Published prices for nine jobs.",
-      "url": "https://royat.aquafix.top/en",
+      "title": "Aquafix — Plumber in Clermont-Ferrand — fixed price, fixed today",
+      "description": "Plumbers in Clermont-Ferrand. A written flat rate before we start, a 2-hour arrival window or the call-out is free, and a 12-month warranty. Published prices for nine jobs.",
+      "url": "https://clermont-ferrand.aquafix.top/en",
       "locale": "en_GB",
       "alternateLocale": [
         "fr_FR"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=en&l=royat&p=home",
+          "url": "https://aquafix.top/og?lang=en&l=clermont-ferrand&p=home",
           "width": 1200,
           "height": 630
         }
@@ -184,34 +184,34 @@
       "card": "summary_large_image"
     }
   },
-  "royat/en/prices": {
+  "clermont-ferrand/en/prices": {
     "title": "Every job, every number · Aquafix",
-    "description": "The full Aquafix price list in Royat: nine jobs, real flat rates including TVA, and the questions everybody asks before booking.",
+    "description": "The full Aquafix price list in Clermont-Ferrand: nine jobs, real flat rates including TVA, and the questions everybody asks before booking.",
     "robots": {
       "index": false,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/en/prices",
+      "canonical": "https://clermont-ferrand.aquafix.top/en/prices",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr/prices",
-        "en": "https://royat.aquafix.top/en/prices",
-        "x-default": "https://royat.aquafix.top/fr/prices"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr/prices",
+        "en": "https://clermont-ferrand.aquafix.top/en/prices",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr/prices"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
       "title": "Every job, every number · Aquafix",
-      "description": "The full Aquafix price list in Royat: nine jobs, real flat rates including TVA, and the questions everybody asks before booking.",
-      "url": "https://royat.aquafix.top/en/prices",
+      "description": "The full Aquafix price list in Clermont-Ferrand: nine jobs, real flat rates including TVA, and the questions everybody asks before booking.",
+      "url": "https://clermont-ferrand.aquafix.top/en/prices",
       "locale": "en_GB",
       "alternateLocale": [
         "fr_FR"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=en&l=royat&p=prices",
+          "url": "https://aquafix.top/og?lang=en&l=clermont-ferrand&p=prices",
           "width": 1200,
           "height": 630
         }
@@ -221,7 +221,7 @@
       "card": "summary_large_image"
     }
   },
-  "royat/en/guarantee": {
+  "clermont-ferrand/en/guarantee": {
     "title": "What we actually promise · Aquafix",
     "description": "The four things people fear about calling a plumber, the written terms that remove each one, and how an Aquafix job runs start to finish.",
     "robots": {
@@ -229,11 +229,11 @@
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/en/guarantee",
+      "canonical": "https://clermont-ferrand.aquafix.top/en/guarantee",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr/guarantee",
-        "en": "https://royat.aquafix.top/en/guarantee",
-        "x-default": "https://royat.aquafix.top/fr/guarantee"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr/guarantee",
+        "en": "https://clermont-ferrand.aquafix.top/en/guarantee",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr/guarantee"
       }
     },
     "openGraph": {
@@ -241,14 +241,14 @@
       "siteName": "Aquafix",
       "title": "What we actually promise · Aquafix",
       "description": "The four things people fear about calling a plumber, the written terms that remove each one, and how an Aquafix job runs start to finish.",
-      "url": "https://royat.aquafix.top/en/guarantee",
+      "url": "https://clermont-ferrand.aquafix.top/en/guarantee",
       "locale": "en_GB",
       "alternateLocale": [
         "fr_FR"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=en&l=royat&p=guarantee",
+          "url": "https://aquafix.top/og?lang=en&l=clermont-ferrand&p=guarantee",
           "width": 1200,
           "height": 630
         }
@@ -258,34 +258,34 @@
       "card": "summary_large_image"
     }
   },
-  "royat/en/about": {
+  "clermont-ferrand/en/about": {
     "title": "Four plumbers and a 30 km radius · Aquafix",
-    "description": "Who turns up, how they are insured, and exactly where around Royat we will and will not drive.",
+    "description": "Who turns up, how they are insured, and exactly where around Clermont-Ferrand we will and will not drive.",
     "robots": {
       "index": false,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/en/about",
+      "canonical": "https://clermont-ferrand.aquafix.top/en/about",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr/about",
-        "en": "https://royat.aquafix.top/en/about",
-        "x-default": "https://royat.aquafix.top/fr/about"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr/about",
+        "en": "https://clermont-ferrand.aquafix.top/en/about",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr/about"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
       "title": "Four plumbers and a 30 km radius · Aquafix",
-      "description": "Who turns up, how they are insured, and exactly where around Royat we will and will not drive.",
-      "url": "https://royat.aquafix.top/en/about",
+      "description": "Who turns up, how they are insured, and exactly where around Clermont-Ferrand we will and will not drive.",
+      "url": "https://clermont-ferrand.aquafix.top/en/about",
       "locale": "en_GB",
       "alternateLocale": [
         "fr_FR"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=en&l=royat&p=about",
+          "url": "https://aquafix.top/og?lang=en&l=clermont-ferrand&p=about",
           "width": 1200,
           "height": 630
         }
@@ -295,34 +295,34 @@
       "card": "summary_large_image"
     }
   },
-  "royat-published/fr/home": {
-    "title": "Aquafix — Plombier à Royat — prix fixe, réparé aujourd’hui",
-    "description": "Plombiers à Royat. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
+  "clermont-ferrand-published/fr/home": {
+    "title": "Aquafix — Plombier à Clermont-Ferrand — prix fixe, réparé aujourd’hui",
+    "description": "Plombiers à Clermont-Ferrand. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
     "robots": {
       "index": true,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/fr",
+      "canonical": "https://clermont-ferrand.aquafix.top/fr",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr",
-        "en": "https://royat.aquafix.top/en",
-        "x-default": "https://royat.aquafix.top/fr"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr",
+        "en": "https://clermont-ferrand.aquafix.top/en",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
-      "title": "Aquafix — Plombier à Royat — prix fixe, réparé aujourd’hui",
-      "description": "Plombiers à Royat. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
-      "url": "https://royat.aquafix.top/fr",
+      "title": "Aquafix — Plombier à Clermont-Ferrand — prix fixe, réparé aujourd’hui",
+      "description": "Plombiers à Clermont-Ferrand. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
+      "url": "https://clermont-ferrand.aquafix.top/fr",
       "locale": "fr_FR",
       "alternateLocale": [
         "en_GB"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=fr&l=royat&p=home",
+          "url": "https://aquafix.top/og?lang=fr&l=clermont-ferrand&p=home",
           "width": 1200,
           "height": 630
         }
@@ -332,34 +332,34 @@
       "card": "summary_large_image"
     }
   },
-  "royat-published/fr/prices": {
+  "clermont-ferrand-published/fr/prices": {
     "title": "Chaque intervention, chaque chiffre · Aquafix",
-    "description": "La liste complète des prix Aquafix à Royat : neuf interventions, de vrais tarifs fixes TTC, et les questions que tout le monde pose avant de réserver.",
+    "description": "La liste complète des prix Aquafix à Clermont-Ferrand : neuf interventions, de vrais tarifs fixes TTC, et les questions que tout le monde pose avant de réserver.",
     "robots": {
       "index": true,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/fr/prices",
+      "canonical": "https://clermont-ferrand.aquafix.top/fr/prices",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr/prices",
-        "en": "https://royat.aquafix.top/en/prices",
-        "x-default": "https://royat.aquafix.top/fr/prices"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr/prices",
+        "en": "https://clermont-ferrand.aquafix.top/en/prices",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr/prices"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
       "title": "Chaque intervention, chaque chiffre · Aquafix",
-      "description": "La liste complète des prix Aquafix à Royat : neuf interventions, de vrais tarifs fixes TTC, et les questions que tout le monde pose avant de réserver.",
-      "url": "https://royat.aquafix.top/fr/prices",
+      "description": "La liste complète des prix Aquafix à Clermont-Ferrand : neuf interventions, de vrais tarifs fixes TTC, et les questions que tout le monde pose avant de réserver.",
+      "url": "https://clermont-ferrand.aquafix.top/fr/prices",
       "locale": "fr_FR",
       "alternateLocale": [
         "en_GB"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=fr&l=royat&p=prices",
+          "url": "https://aquafix.top/og?lang=fr&l=clermont-ferrand&p=prices",
           "width": 1200,
           "height": 630
         }
@@ -369,7 +369,7 @@
       "card": "summary_large_image"
     }
   },
-  "royat-published/fr/guarantee": {
+  "clermont-ferrand-published/fr/guarantee": {
     "title": "Ce que nous promettons vraiment · Aquafix",
     "description": "Les quatre craintes que l’on a en appelant un plombier, les conditions écrites qui suppriment chacune d’elles, et le déroulement d’une intervention Aquafix du début à la fin.",
     "robots": {
@@ -377,11 +377,11 @@
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/fr/guarantee",
+      "canonical": "https://clermont-ferrand.aquafix.top/fr/guarantee",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr/guarantee",
-        "en": "https://royat.aquafix.top/en/guarantee",
-        "x-default": "https://royat.aquafix.top/fr/guarantee"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr/guarantee",
+        "en": "https://clermont-ferrand.aquafix.top/en/guarantee",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr/guarantee"
       }
     },
     "openGraph": {
@@ -389,14 +389,14 @@
       "siteName": "Aquafix",
       "title": "Ce que nous promettons vraiment · Aquafix",
       "description": "Les quatre craintes que l’on a en appelant un plombier, les conditions écrites qui suppriment chacune d’elles, et le déroulement d’une intervention Aquafix du début à la fin.",
-      "url": "https://royat.aquafix.top/fr/guarantee",
+      "url": "https://clermont-ferrand.aquafix.top/fr/guarantee",
       "locale": "fr_FR",
       "alternateLocale": [
         "en_GB"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=fr&l=royat&p=guarantee",
+          "url": "https://aquafix.top/og?lang=fr&l=clermont-ferrand&p=guarantee",
           "width": 1200,
           "height": 630
         }
@@ -406,34 +406,34 @@
       "card": "summary_large_image"
     }
   },
-  "royat-published/fr/about": {
+  "clermont-ferrand-published/fr/about": {
     "title": "Quatre plombiers et un rayon de 30 km · Aquafix",
-    "description": "Qui se présente chez vous, comment ils sont assurés, et exactement où autour de Royat nous acceptons — ou refusons — de nous déplacer.",
+    "description": "Qui se présente chez vous, comment ils sont assurés, et exactement où autour de Clermont-Ferrand nous acceptons — ou refusons — de nous déplacer.",
     "robots": {
       "index": true,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/fr/about",
+      "canonical": "https://clermont-ferrand.aquafix.top/fr/about",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr/about",
-        "en": "https://royat.aquafix.top/en/about",
-        "x-default": "https://royat.aquafix.top/fr/about"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr/about",
+        "en": "https://clermont-ferrand.aquafix.top/en/about",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr/about"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
       "title": "Quatre plombiers et un rayon de 30 km · Aquafix",
-      "description": "Qui se présente chez vous, comment ils sont assurés, et exactement où autour de Royat nous acceptons — ou refusons — de nous déplacer.",
-      "url": "https://royat.aquafix.top/fr/about",
+      "description": "Qui se présente chez vous, comment ils sont assurés, et exactement où autour de Clermont-Ferrand nous acceptons — ou refusons — de nous déplacer.",
+      "url": "https://clermont-ferrand.aquafix.top/fr/about",
       "locale": "fr_FR",
       "alternateLocale": [
         "en_GB"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=fr&l=royat&p=about",
+          "url": "https://aquafix.top/og?lang=fr&l=clermont-ferrand&p=about",
           "width": 1200,
           "height": 630
         }
@@ -443,34 +443,34 @@
       "card": "summary_large_image"
     }
   },
-  "royat-published/en/home": {
-    "title": "Aquafix — Plumber in Royat — fixed price, fixed today",
-    "description": "Plumbers in Royat. A written flat rate before we start, a 2-hour arrival window or the call-out is free, and a 12-month warranty. Published prices for nine jobs.",
+  "clermont-ferrand-published/en/home": {
+    "title": "Aquafix — Plumber in Clermont-Ferrand — fixed price, fixed today",
+    "description": "Plumbers in Clermont-Ferrand. A written flat rate before we start, a 2-hour arrival window or the call-out is free, and a 12-month warranty. Published prices for nine jobs.",
     "robots": {
       "index": true,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/en",
+      "canonical": "https://clermont-ferrand.aquafix.top/en",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr",
-        "en": "https://royat.aquafix.top/en",
-        "x-default": "https://royat.aquafix.top/fr"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr",
+        "en": "https://clermont-ferrand.aquafix.top/en",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
-      "title": "Aquafix — Plumber in Royat — fixed price, fixed today",
-      "description": "Plumbers in Royat. A written flat rate before we start, a 2-hour arrival window or the call-out is free, and a 12-month warranty. Published prices for nine jobs.",
-      "url": "https://royat.aquafix.top/en",
+      "title": "Aquafix — Plumber in Clermont-Ferrand — fixed price, fixed today",
+      "description": "Plumbers in Clermont-Ferrand. A written flat rate before we start, a 2-hour arrival window or the call-out is free, and a 12-month warranty. Published prices for nine jobs.",
+      "url": "https://clermont-ferrand.aquafix.top/en",
       "locale": "en_GB",
       "alternateLocale": [
         "fr_FR"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=en&l=royat&p=home",
+          "url": "https://aquafix.top/og?lang=en&l=clermont-ferrand&p=home",
           "width": 1200,
           "height": 630
         }
@@ -480,34 +480,34 @@
       "card": "summary_large_image"
     }
   },
-  "royat-published/en/prices": {
+  "clermont-ferrand-published/en/prices": {
     "title": "Every job, every number · Aquafix",
-    "description": "The full Aquafix price list in Royat: nine jobs, real flat rates including TVA, and the questions everybody asks before booking.",
+    "description": "The full Aquafix price list in Clermont-Ferrand: nine jobs, real flat rates including TVA, and the questions everybody asks before booking.",
     "robots": {
       "index": true,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/en/prices",
+      "canonical": "https://clermont-ferrand.aquafix.top/en/prices",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr/prices",
-        "en": "https://royat.aquafix.top/en/prices",
-        "x-default": "https://royat.aquafix.top/fr/prices"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr/prices",
+        "en": "https://clermont-ferrand.aquafix.top/en/prices",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr/prices"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
       "title": "Every job, every number · Aquafix",
-      "description": "The full Aquafix price list in Royat: nine jobs, real flat rates including TVA, and the questions everybody asks before booking.",
-      "url": "https://royat.aquafix.top/en/prices",
+      "description": "The full Aquafix price list in Clermont-Ferrand: nine jobs, real flat rates including TVA, and the questions everybody asks before booking.",
+      "url": "https://clermont-ferrand.aquafix.top/en/prices",
       "locale": "en_GB",
       "alternateLocale": [
         "fr_FR"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=en&l=royat&p=prices",
+          "url": "https://aquafix.top/og?lang=en&l=clermont-ferrand&p=prices",
           "width": 1200,
           "height": 630
         }
@@ -517,7 +517,7 @@
       "card": "summary_large_image"
     }
   },
-  "royat-published/en/guarantee": {
+  "clermont-ferrand-published/en/guarantee": {
     "title": "What we actually promise · Aquafix",
     "description": "The four things people fear about calling a plumber, the written terms that remove each one, and how an Aquafix job runs start to finish.",
     "robots": {
@@ -525,11 +525,11 @@
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/en/guarantee",
+      "canonical": "https://clermont-ferrand.aquafix.top/en/guarantee",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr/guarantee",
-        "en": "https://royat.aquafix.top/en/guarantee",
-        "x-default": "https://royat.aquafix.top/fr/guarantee"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr/guarantee",
+        "en": "https://clermont-ferrand.aquafix.top/en/guarantee",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr/guarantee"
       }
     },
     "openGraph": {
@@ -537,14 +537,14 @@
       "siteName": "Aquafix",
       "title": "What we actually promise · Aquafix",
       "description": "The four things people fear about calling a plumber, the written terms that remove each one, and how an Aquafix job runs start to finish.",
-      "url": "https://royat.aquafix.top/en/guarantee",
+      "url": "https://clermont-ferrand.aquafix.top/en/guarantee",
       "locale": "en_GB",
       "alternateLocale": [
         "fr_FR"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=en&l=royat&p=guarantee",
+          "url": "https://aquafix.top/og?lang=en&l=clermont-ferrand&p=guarantee",
           "width": 1200,
           "height": 630
         }
@@ -554,34 +554,34 @@
       "card": "summary_large_image"
     }
   },
-  "royat-published/en/about": {
+  "clermont-ferrand-published/en/about": {
     "title": "Four plumbers and a 30 km radius · Aquafix",
-    "description": "Who turns up, how they are insured, and exactly where around Royat we will and will not drive.",
+    "description": "Who turns up, how they are insured, and exactly where around Clermont-Ferrand we will and will not drive.",
     "robots": {
       "index": true,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/en/about",
+      "canonical": "https://clermont-ferrand.aquafix.top/en/about",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr/about",
-        "en": "https://royat.aquafix.top/en/about",
-        "x-default": "https://royat.aquafix.top/fr/about"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr/about",
+        "en": "https://clermont-ferrand.aquafix.top/en/about",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr/about"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
       "title": "Four plumbers and a 30 km radius · Aquafix",
-      "description": "Who turns up, how they are insured, and exactly where around Royat we will and will not drive.",
-      "url": "https://royat.aquafix.top/en/about",
+      "description": "Who turns up, how they are insured, and exactly where around Clermont-Ferrand we will and will not drive.",
+      "url": "https://clermont-ferrand.aquafix.top/en/about",
       "locale": "en_GB",
       "alternateLocale": [
         "fr_FR"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=en&l=royat&p=about",
+          "url": "https://aquafix.top/og?lang=en&l=clermont-ferrand&p=about",
           "width": 1200,
           "height": 630
         }
@@ -671,34 +671,34 @@
       "follow": false
     }
   },
-  "royat/fr/home (path mode)": {
-    "title": "Aquafix — Plombier à Royat — prix fixe, réparé aujourd’hui",
-    "description": "Plombiers à Royat. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
+  "clermont-ferrand/fr/home (path mode)": {
+    "title": "Aquafix — Plombier à Clermont-Ferrand — prix fixe, réparé aujourd’hui",
+    "description": "Plombiers à Clermont-Ferrand. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
     "robots": {
       "index": false,
       "follow": true
     },
     "alternates": {
-      "canonical": "https://royat.aquafix.top/fr",
+      "canonical": "https://clermont-ferrand.aquafix.top/fr",
       "languages": {
-        "fr-FR": "https://royat.aquafix.top/fr",
-        "en": "https://royat.aquafix.top/en",
-        "x-default": "https://royat.aquafix.top/fr"
+        "fr-FR": "https://clermont-ferrand.aquafix.top/fr",
+        "en": "https://clermont-ferrand.aquafix.top/en",
+        "x-default": "https://clermont-ferrand.aquafix.top/fr"
       }
     },
     "openGraph": {
       "type": "website",
       "siteName": "Aquafix",
-      "title": "Aquafix — Plombier à Royat — prix fixe, réparé aujourd’hui",
-      "description": "Plombiers à Royat. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
-      "url": "https://royat.aquafix.top/fr",
+      "title": "Aquafix — Plombier à Clermont-Ferrand — prix fixe, réparé aujourd’hui",
+      "description": "Plombiers à Clermont-Ferrand. Tarif fixe écrit avant de commencer, une fenêtre d’arrivée de 2 heures ou le déplacement est offert, et une garantie de 12 mois. Prix publiés pour neuf interventions.",
+      "url": "https://clermont-ferrand.aquafix.top/fr",
       "locale": "fr_FR",
       "alternateLocale": [
         "en_GB"
       ],
       "images": [
         {
-          "url": "https://aquafix.top/og?lang=fr&l=royat&p=home",
+          "url": "https://aquafix.top/og?lang=fr&l=clermont-ferrand&p=home",
           "width": 1200,
           "height": 630
         }

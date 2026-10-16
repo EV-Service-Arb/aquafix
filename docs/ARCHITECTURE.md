@@ -112,14 +112,14 @@ owner chose to keep on the page, not in the schema.
 ## Routing
 
 ```text
-royat.aquafix.top/                → 302 /fr or /en (cookie, then Accept-Language), Vary
-royat.aquafix.top/fr/prices       → rewritten to /fr/_royat/prices (host link mode)
-aquafix.top/fr                    → the brand page, listing the points
-aquafix.top/fr/royat/prices       → the same point page, through the apex (fallback)
-…?lang=en                         → cookie for a year, 303 to the clean URL
-royat.aquafix.top/fr/nope         → 404: royat's screen, from app/global-not-found
-aquafix.top/fr/nowhere            → 404: the brand's screen, the same way
-aquafix.top/wp-login.php          → 404 in the visitor's language (cookie, then Accept-Language)
+clermont-ferrand.aquafix.top/          → 302 /fr or /en (cookie, then Accept-Language), Vary
+clermont-ferrand.aquafix.top/fr/prices → rewritten to /fr/_clermont-ferrand/prices (host link mode)
+aquafix.top/fr                         → the brand page, listing the points
+aquafix.top/fr/clermont-ferrand/prices → the same point page, through the apex (fallback)
+…?lang=en                              → cookie for a year, 303 to the clean URL
+clermont-ferrand.aquafix.top/fr/nope   → 404: clermont-ferrand's screen, from app/global-not-found
+aquafix.top/fr/nowhere                 → 404: the brand's screen, the same way
+aquafix.top/wp-login.php               → 404 in the visitor's language (cookie, then Accept-Language)
 ```
 
 A dead path is answered by the proxy, not by a `notFound()`: Next 16 sends
@@ -147,7 +147,7 @@ static regeneration: rendered on its first request, served from cache after,
 re-rendered in the background when the live data's TTL
 (`PLACE_REVALIDATE_SECONDS`, 600 s) has passed. The proxy tells a page how to
 write its links through the path it rewrites to, not a header — the subdomain
-lands on `[location]` = `_royat`, the apex fallback on `royat` — so the two link
+lands on `[location]` = `_clermont-ferrand`, the apex fallback on `clermont-ferrand` — so the two link
 modes are two cache entries and no page calls `headers()`. The not-found and
 error boundaries follow the same rule (route params, not request data) and are
 loaded on demand, since Next ships a segment's boundaries with every page.
@@ -233,7 +233,7 @@ Every property name is on an allow-list (`brand_id`, `location_id`, `source`,
 be undone by deleting the project's history. `contact_intent_click` is an
 intent, not a lead, and is named apart from `lead_form_submit`. A/B tests on a
 point's home (`docs/EXPERIMENTS.md`) keep both rules: the variant rides in the
-path the proxy rewrites to (`/fr/_royat/ab/ba`), so pages stay cached and read
+path the proxy rewrites to (`/fr/_clermont-ferrand/ab/ba`), so pages stay cached and read
 no cookie, and their events (`experiment_*`) go through a sink with their own
 allow-list, which adds `experiment`, `variant` and `forced` to the brand and
 the point. Crawlers always get the control. The variants and their rendering

@@ -1,9 +1,9 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
-import { POSTHOG_HOST, ROYAT_TELEGRAM_BOT, ROYAT_WHATSAPP } from "./env";
+import { POSTHOG_HOST, CLERMONT_FERRAND_TELEGRAM_BOT, CLERMONT_FERRAND_WHATSAPP } from "./env";
 import { freshMobile } from "./support/mobile";
 
 // `lead_channel`'s arms (docs/EXPERIMENTS.md, MESSENGER-CHANNELS-SPEC §4) on
-// the `messenger` project's server, where Royat has its own WhatsApp number
+// the `messenger` project's server, where Clermont-Ferrand has its own WhatsApp number
 // and the brand's bot. Each arm is forced from the query, as the AbSwitcher
 // does; the config's control cookies keep the other tests at `a`. Figma's rule
 // is checked as the visitor would see it: every state of an arm, the card the
@@ -13,7 +13,7 @@ import { freshMobile } from "./support/mobile";
 const cardOf = (page: Page): Locator => page.locator("#quote");
 
 /** A WhatsApp link with the message prefilled, its last line the reference: `…%0AR%C3%A9f.%20AQ-7K3F`. */
-const WA_WITH_REF = new RegExp(`^https://wa\\.me/${ROYAT_WHATSAPP}\\?text=Bonjour%20Aquafix%20.*%0AR%C3%A9f\\.%20AQ-[0-9A-HJKMNP-TV-Z]{4}$`);
+const WA_WITH_REF = new RegExp(`^https://wa\\.me/${CLERMONT_FERRAND_WHATSAPP}\\?text=Bonjour%20Aquafix%20.*%0AR%C3%A9f\\.%20AQ-[0-9A-HJKMNP-TV-Z]{4}$`);
 
 async function open(page: Page, arm: string): Promise<Locator> {
   // PostHog never answers here; the card's events must not wait on it.
@@ -37,10 +37,10 @@ async function heightOf(card: Locator): Promise<number> {
   return box.height;
 }
 
-// Where the test runs (Royat here has its own WhatsApp), the control is the
+// Where the test runs (Clermont-Ferrand here has its own WhatsApp), the control is the
 // compact card under lead_channel's name, whatever lead_form says: the two
 // tests' effects never mix (docs/EXPERIMENTS.md).
-test("a, the control: the compact card under lead_channel, no messenger in it, though Royat has both", async ({ page }) => {
+test("a, the control: the compact card under lead_channel, no messenger in it, though Clermont-Ferrand has both", async ({ page }) => {
   await page.route(`${POSTHOG_HOST}/**`, route => route.fulfill({ status: 200, body: "{}" }));
   await page.goto("/fr?ab_lead_form=c&ab_lead_channel=a");
   const card = cardOf(page);
@@ -67,7 +67,7 @@ test("b, AQ-1: WhatsApp picked in the phone field, the number optional, the mess
 
   await card.getByRole("combobox", { name: "Canal de réponse" }).click();
   await page.getByRole("option", { name: /^Telegram/ }).click();
-  await expect(card.getByRole("link", { name: "Ouvrir Telegram" })).toHaveAttribute("href", `https://t.me/${ROYAT_TELEGRAM_BOT}?start=${ref}`);
+  await expect(card.getByRole("link", { name: "Ouvrir Telegram" })).toHaveAttribute("href", `https://t.me/${CLERMONT_FERRAND_TELEGRAM_BOT}?start=${ref}`);
   await expect(mobile).toBeDisabled();
 });
 
@@ -113,7 +113,7 @@ test("c, AQ-2: «WhatsApp | Appel», the message ready, the bot under the button
   const ref = await refOf(card);
   await expect(card.getByText(`Réf. ${ref}`, { exact: false })).toBeVisible();
   await expect(card.getByRole("link", { name: "Envoyer sur WhatsApp →" })).toHaveAttribute("href", WA_WITH_REF);
-  await expect(card.getByRole("link", { name: "ou via Telegram" })).toHaveAttribute("href", `https://t.me/${ROYAT_TELEGRAM_BOT}?start=${ref}`);
+  await expect(card.getByRole("link", { name: "ou via Telegram" })).toHaveAttribute("href", `https://t.me/${CLERMONT_FERRAND_TELEGRAM_BOT}?start=${ref}`);
 
   await channel.getByRole("button", { name: "Appel" }).click();
   await expect(card.getByRole("textbox", { name: "Votre mobile" })).toBeVisible();
@@ -148,7 +148,7 @@ test("d, AQ-3: the control's form, then a photo on WhatsApp once the lead is sen
   const photo = done.getByRole("link", { name: "Envoyer la photo sur WhatsApp" });
   await expect(photo).toHaveAttribute("href", WA_WITH_REF);
   const ref = /%20(AQ-[0-9A-HJKMNP-TV-Z]{4})$/.exec((await photo.getAttribute("href")) ?? "")?.[1];
-  await expect(done.getByRole("link", { name: "Telegram" })).toHaveAttribute("href", `https://t.me/${ROYAT_TELEGRAM_BOT}?start=${ref}`);
+  await expect(done.getByRole("link", { name: "Telegram" })).toHaveAttribute("href", `https://t.me/${CLERMONT_FERRAND_TELEGRAM_BOT}?start=${ref}`);
 });
 
 test("e, AQ-4: no phone, WhatsApp first; «Être rappelé» swaps the phone in and back", async ({ page }) => {
@@ -156,7 +156,7 @@ test("e, AQ-4: no phone, WhatsApp first; «Être rappelé» swaps the phone in a
   await expect(card.getByRole("textbox", { name: "Votre mobile" })).toHaveCount(0);
   const ref = await refOf(card);
   await expect(card.getByRole("link", { name: "Recevoir mon prix sur WhatsApp" })).toHaveAttribute("href", WA_WITH_REF);
-  await expect(card.getByRole("link", { name: "Telegram" })).toHaveAttribute("href", `https://t.me/${ROYAT_TELEGRAM_BOT}?start=${ref}`);
+  await expect(card.getByRole("link", { name: "Telegram" })).toHaveAttribute("href", `https://t.me/${CLERMONT_FERRAND_TELEGRAM_BOT}?start=${ref}`);
 
   await card.getByRole("button", { name: "Être rappelé" }).click();
   await expect(card.getByRole("textbox", { name: "Votre mobile" })).toBeVisible();
@@ -236,7 +236,7 @@ test("g, AQ-6: no answer yet, «je compare» and «aujourd’hui» keep the card
   await expect.poll(() => heightOf(card)).toBe(unanswered);
 });
 
-// Where the arm draws the card (Royat here offers both), lead_form's events say
+// Where the arm draws the card (Clermont-Ferrand here offers both), lead_form's events say
 // superseded: its arm is not what the visitor saw (docs/EXPERIMENTS.md).
 test("a drawn lead_channel arm marks lead_form's exposure superseded, and no other test's", async ({ page }) => {
   const exposed: Record<string, unknown>[] = [];
