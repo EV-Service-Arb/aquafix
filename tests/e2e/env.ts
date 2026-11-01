@@ -17,7 +17,7 @@ export const APEX_ORIGIN = `http://localhost:${PORT}`;
 export const LEADS_DB = join(tmpdir(), `aquafix-e2e-${PORT}`, "leads.db");
 
 /**
- * `messenger.spec.ts`'s own server: the same build, with `LOCATIONS_API_URL`
+ * `messenger.spec.ts`'s own server: the same build, with `SITES_PANEL_INTERNAL_URL`
  * on a stand-in places API (`support/places-api.ts`) that gives Clermont-Ferrand its own
  * WhatsApp number and the brand's Telegram bot. A server of its own, so the
  * other specs keep a Clermont-Ferrand without either — and the control in every

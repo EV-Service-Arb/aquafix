@@ -19,7 +19,7 @@ describe("the site composition root", () => {
   // the 404 (the site lists no `publicFiles`). A route added to `app/` and not
   // there would answer 404; so would a file in `public/`.
   it("lets through exactly the routes app/ has outside [locale], and serves no public files", () => {
-    const special: Record<string, string> = { "robots.ts": "/robots.txt", "sitemap.ts": "/sitemap.xml" };
+    const special: Record<string, string> = { "robots.ts": "/robots.txt", "sitemap.ts": "/sitemap.xml", ".well-known": "/.well-known/sa-site" };
     const routes = readdirSync(join(ROOT, "app"), { withFileTypes: true })
       .filter(e => (e.isDirectory() && !e.name.startsWith("[")) || special[e.name])
       .map(e => special[e.name] ?? `/${e.name}`);

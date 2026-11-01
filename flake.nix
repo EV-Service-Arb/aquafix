@@ -60,6 +60,8 @@
         landing = ev.lib.mkLanding {
           inherit pkgs v_flakes pname sitePort prodEnv;
           root = ./.;
+          # reads sites_panel and posts leads to the conductor; devops wires both addresses
+          connected = true;
           buildFiles = [
             "package.json"
             "package-lock.json"

@@ -1,16 +1,16 @@
 import "server-only";
 import { applyOverrides } from "@evinvest/experiments";
 import { createExperimentsSource } from "@evinvest/kitstart/server";
-import { serverEnv } from "@/shared/config/env";
+import { site } from "@/shared/config/site";
 import { EXPERIMENTS, type LiveExperiments } from "@/shared/config/experiments";
 
 /**
  * The panel's weights, kill switch and holdout for the brand's experiments
- * (`GET <LOCATIONS_API_URL>/experiments`), cached in memory: the proxy asks on
- * every request. No `LOCATIONS_API_URL`, or a panel that cannot answer, is the
+ * (sites_panel's `/brands/<brand>/experiments`), cached in memory: the proxy asks
+ * on every request. No `SITES_PANEL_INTERNAL_URL`, or a panel that cannot answer, is the
  * config in code — the last good answer once there was one.
  */
-const source = createExperimentsSource({ baseUrl: () => serverEnv().locationsApiUrl });
+const source = createExperimentsSource(site);
 
 /** Where the applied config comes from; injected by the tests. */
 export type LiveConfig = () => Promise<LiveExperiments>;
