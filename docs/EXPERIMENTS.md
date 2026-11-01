@@ -198,7 +198,7 @@ is applied by a person to what PostHog shows.
   key, variants, weights, `enabled`, summary); a test the build no longer has
   shows there as retired. The panel's operator overrides `weights`, `enabled`
   and `holdout` per test; the site reads them from
-  `<LOCATIONS_API_URL>/experiments` (`features/experiments/api/live.ts`,
+  sites_panel's `/brands/aquafix/experiments` (`features/experiments/api/live.ts`,
   cached 30 s in memory, the last good answer kept while the panel is down,
   the code's config when there was none) and lays them over the code's config
   with `applyOverrides` — never a variant the code does not render. The

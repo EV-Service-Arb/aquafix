@@ -1,13 +1,13 @@
 import { createServer } from "node:http";
 
 /**
- * The places API (`LOCATIONS_API_URL`) for the messenger spec's own server:
+ * sites_panel's internal API (`SITES_PANEL_INTERNAL_URL`) for the messenger spec's own server:
  * Clermont-Ferrand with its own WhatsApp number and the brand's Telegram bot, as the
  * panel will serve them once the owner sets them (MESSENGER-CHANNELS-SPEC §4,
  * the local stack's seed), every other point as baked (an empty answer), and
  * the code's experiments untouched (no overrides). Run by Playwright as a
  * `webServer` with Node's type stripping — so no imports of our own, and only
- * syntax Node can strip. The other specs' server has no `LOCATIONS_API_URL`
+ * syntax Node can strip. The other specs' server has no `SITES_PANEL_INTERNAL_URL`
  * and never reaches it: a point with no WhatsApp of its own draws the control
  * in every `lead_channel` arm, which they rely on.
  */
@@ -25,8 +25,8 @@ createServer((request, response) => {
     response.end(JSON.stringify(body));
   };
   if (path === "/health") return json(200, { ok: true });
-  if (path === "/experiments") return json(200, { experiments: {} });
-  const slug = /^\/locations\/([a-z0-9-]+)$/.exec(path)?.[1];
+  if (path === "/brands/aquafix/experiments") return json(200, { experiments: {} });
+  const slug = /^\/brands\/aquafix\/locations\/([a-z0-9-]+)$/.exec(path)?.[1];
   if (slug === "clermont-ferrand") return json(200, CLERMONT_FERRAND_LIVE);
   if (slug !== undefined) return json(200, {});
   return json(404, { error: "not_found" });

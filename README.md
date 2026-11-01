@@ -1,8 +1,8 @@
 # aquafix
 ![Lines Of Code](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/valeratrades/b48e6f02c61942200e7d1e3eeabf9bcb/raw/aquafix-loc.json)
 <br>
-[<img alt="ci errors" src="https://img.shields.io/github/actions/workflow/status/Service-Arb/aquafix/errors.yml?branch=main&style=for-the-badge&style=flat-square&label=errors&labelColor=420d09" height="20">](https://github.com/Service-Arb/aquafix/actions?query=branch%3Amain) <!--NB: Won't find it if repo is private-->
-[<img alt="ci warnings" src="https://img.shields.io/github/actions/workflow/status/Service-Arb/aquafix/warnings.yml?branch=main&style=for-the-badge&style=flat-square&label=warnings&labelColor=d16002" height="20">](https://github.com/Service-Arb/aquafix/actions?query=branch%3Amain) <!--NB: Won't find it if repo is private-->
+[<img alt="ci errors" src="https://img.shields.io/github/actions/workflow/status/EV-Service-Arb/aquafix/errors.yml?branch=main&style=for-the-badge&style=flat-square&label=errors&labelColor=420d09" height="20">](https://github.com/EV-Service-Arb/aquafix/actions?query=branch%3Amain) <!--NB: Won't find it if repo is private-->
+[<img alt="ci warnings" src="https://img.shields.io/github/actions/workflow/status/EV-Service-Arb/aquafix/warnings.yml?branch=main&style=for-the-badge&style=flat-square&label=warnings&labelColor=d16002" height="20">](https://github.com/EV-Service-Arb/aquafix/actions?query=branch%3Amain) <!--NB: Won't find it if repo is private-->
 
 A plumbing business, end to end: a Typst business card and a Next.js landing
 site for six points in Clermont-Ferrand and Lyon, both rendering the same brand
@@ -82,11 +82,11 @@ tag.
 The Service-Arb panel's `nix run .#local-stack` starts this site beside the
 panel. `nix run .#dev` and `npm run dev` read the same environment the image
 does. From inside this checkout (the dev app refuses another working tree),
-with the panel on 59120:
+with the conductor on 59120 and sites_panel on 59121:
 
 ```sh
 PORT=59081 \
-LOCATIONS_API_URL=http://127.0.0.1:59120/api/internal/brands/aquafix \
+SITES_PANEL_INTERNAL_URL=http://127.0.0.1:59121/api/internal \
 LEAD_WEBHOOK_URL=http://127.0.0.1:59120/api/ingest/v1/events \
 LEAD_WEBHOOK_KEY_ID=<the panel source's key id> LEAD_WEBHOOK_SECRET=<its secret> \
 LEADS_DB_PATH=/tmp/aquafix/leads.db \
@@ -95,12 +95,12 @@ nix run .#dev
 
 - `PORT` — unset, `nix run .#dev` and the dev shell use 59081; plain
   `npm run dev` outside the shell would take Next's 3000.
-- `LOCATIONS_API_URL` — the base the place source fetches
-  `<base>/locations/<slug>?locale=<fr|en>` from; the live phone, WhatsApp,
+- `SITES_PANEL_INTERNAL_URL` — sites_panel's internal API; the place source
+  fetches `<it>/brands/aquafix/locations/<slug>?locale=<fr|en>` from it; the live phone, WhatsApp,
   hours, address and rating override the baked point in the hero, the call
   bar, the footer, the JSON-LD and the quote card. Unset, the baked points
   are served. A fetched point is cached for 600 s (`PLACE_REVALIDATE_SECONDS`).
-  The same base answers `<base>/experiments`: the panel's weights and kill
+  The same API answers `<it>/brands/aquafix/experiments`: the panel's weights and kill
   switch for the A/B tests (docs/EXPERIMENTS.md), cached in memory for 30 s.
   Unset, the config in code runs.
 - `LEAD_WEBHOOK_*` — all three or none; `http:` only to `localhost`,

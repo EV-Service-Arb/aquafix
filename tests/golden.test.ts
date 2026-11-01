@@ -91,7 +91,7 @@ describe("golden: sitemap and robots", () => {
     for (const h of ["aquafix.top", "clermont-ferrand.aquafix.top", "evil.aquafix.top", "clermont-ferrand.localhost:3000"]) {
       out[`baked ${h}`] = await render(h);
     }
-    vi.stubEnv("LOCATIONS_API_URL", "https://live.example");
+    vi.stubEnv("SITES_PANEL_INTERNAL_URL", "https://live.example/api/internal");
     // The source's wire shape: communes as a list of names.
     const live = {
       storefrontPhoto: "https://cdn.example/clermont-ferrand.jpg",

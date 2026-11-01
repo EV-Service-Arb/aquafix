@@ -23,7 +23,7 @@ export function generateStaticParams(): LocationParams[] {
 
 /**
  * The ceiling, in seconds, for a page whose render made no live fetch (no
- * `LOCATIONS_API_URL`): without it Next would keep such a page for a year.
+ * `SITES_PANEL_INTERNAL_URL`): without it Next would keep such a page for a year.
  * `PLACE_REVALIDATE_SECONDS`, spelled out because Next reads this export
  * statically.
  */

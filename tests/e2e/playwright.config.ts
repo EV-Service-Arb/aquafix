@@ -111,7 +111,7 @@ export default defineConfig({
       url: `http://localhost:${MESSENGER_PORT}/health`,
       reuseExistingServer: false,
       timeout: 60_000,
-      env: { ...serverEnv(MESSENGER_PORT, MESSENGER_LEADS_DB), LOCATIONS_API_URL: `http://127.0.0.1:${PLACES_API_PORT}` },
+      env: { ...serverEnv(MESSENGER_PORT, MESSENGER_LEADS_DB), SITES_PANEL_INTERNAL_URL: `http://127.0.0.1:${PLACES_API_PORT}` },
     },
   ],
 });
