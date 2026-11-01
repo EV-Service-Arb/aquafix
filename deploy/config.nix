@@ -33,11 +33,11 @@
   # funnel and the A/B tests (docs/EXPERIMENTS.md) record nothing.
   POSTHOG_KEY = "phc_sBwWEgdgockVmfyucBRkTTo6iZ4Y2eApSGorD22WLzj3";
   POSTHOG_HOST = "https://us.i.posthog.com";
-  # The live places: the Service-Arb panel's internal read, inside the cluster
-  # (the NetworkPolicy admits aquafix → panel :59120). The kit asks
+  # The live places: sites_panel's internal read, inside the cluster
+  # (the NetworkPolicy admits aquafix → sites-panel :59121). The kit asks
   # `<this>/locations/<slug>`; the panel answers `{}` for a place nobody has
   # edited, so the baked phones and hours stay until someone changes them
   # there, and 404 only for a place it withdrew. Unreachable or failing, a page
   # serves the baked place; only the sitemap, the one strict reader, fails.
-  LOCATIONS_API_URL = "http://panel.service-arb.svc.cluster.local:59120/api/internal/brands/aquafix";
+  LOCATIONS_API_URL = "http://sites-panel.service-arb.svc.cluster.local:59121/api/internal/brands/aquafix";
 }
