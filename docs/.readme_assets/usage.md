@@ -1,11 +1,11 @@
-Start the site:
+Start the site, inside the dev shell (`nix develop`), which sets its `PORT`:
 
 ```sh
 nix run .#dev
 ```
 
-A point is at `http://clermont-ferrand.localhost:59081/fr` (every `*.localhost` resolves
-to your machine), the brand page at `http://localhost:59081/fr`.
+A point is at `http://clermont-ferrand.localhost:$PORT/fr` (every `*.localhost` resolves
+to your machine), the brand page at `http://localhost:$PORT/fr`.
 
 Run the checks:
 
@@ -26,7 +26,7 @@ nix build                # the standalone server
 nix build .#container    # OCI image, on Linux
 ```
 
-The image listens on 59081 and keeps its leads in `/data/leads.db`; `/data` is
+The image listens on the flake's `sitePort` and keeps its leads in `/data/leads.db`; `/data` is
 the mount. Its non-secret settings come from `deploy/config.nix`. Secrets —
 `SMTP_URL`, `SMS_TOKEN`, and the lead webhook's `LEAD_WEBHOOK_URL`,
 `LEAD_WEBHOOK_KEY_ID`, `LEAD_WEBHOOK_SECRET` (all three or none) — come only
@@ -39,19 +39,17 @@ tag.
 The Service-Arb panel's `nix run .#local-stack` starts this site beside the
 panel. `nix run .#dev` and `npm run dev` read the same environment the image
 does. From inside this checkout (the dev app refuses another working tree),
-with the conductor on 59120 and sites_panel on 59121:
+with the conductor and sites_panel at the origins the stack prints:
 
 ```sh
-PORT=59081 \
-SITES_PANEL_INTERNAL_URL=http://127.0.0.1:59121/api/internal \
-LEAD_WEBHOOK_URL=http://127.0.0.1:59120/api/ingest/v1/events \
+SITES_PANEL_INTERNAL_URL=<sites_panel>/api/internal \
+LEAD_WEBHOOK_URL=<the conductor>/api/ingest/v1/events \
 LEAD_WEBHOOK_KEY_ID=<the panel source's key id> LEAD_WEBHOOK_SECRET=<its secret> \
 LEADS_DB_PATH=/tmp/aquafix/leads.db \
 nix run .#dev
 ```
 
-- `PORT` — unset, `nix run .#dev` and the dev shell use 59081; plain
-  `npm run dev` outside the shell would take Next's 3000.
+- `PORT` — the dev shell's; `nix run .#dev` refuses to start without it.
 - `SITES_PANEL_INTERNAL_URL` — sites_panel's internal API; the place source
   fetches `<it>/brands/aquafix/locations/<slug>?locale=<fr|en>` from it; the live phone, WhatsApp,
   hours, address and rating override the baked point in the hero, the call

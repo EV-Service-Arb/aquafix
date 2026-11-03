@@ -18,6 +18,8 @@
   # release tag.
   outputs = { self, v_flakes, ev }:
     let
+      # aquafix's port in sites' ten of SA_PORT_RANGE: site_conductor's docs/port_range.md
+      SA_PORT = 52821;
       inherit (v_flakes) flake-utils pre-commit-hooks;
       manifest = builtins.fromJSON (builtins.readFile ./package.json);
       pname = manifest.name;
@@ -49,10 +51,16 @@
         pkgs = import v_flakes.default_nixpkgs { inherit system; };
         lib = pkgs.lib;
 
-        # Single source for the dev server, the container's exposed port and the
-        # prod env. The Rust server listened here too; the cluster's Service did
-        # not have to change. (vifnet is on 59082.)
+        # Single source for the container's exposed port and the prod env. The Rust
+        # server listened here too; the cluster's Service did not have to change.
         sitePort = "59081";
+        # the e2e build under test, so a `nix run .#dev` is never mistaken for it
+        e2ePort = toString (SA_PORT + 5);
+        # landing's e2e app, on e2ePort
+        onE2ePort = name: pkgs.writeShellScript "${pname}-${name}" ''
+          export E2E_PORT=${e2ePort}
+          exec ${landing.apps.${name}.program} "$@"
+        '';
         # Secret-free prod env, authored in nix and baked into the image.
         # Without it the server would take its dev defaults — see deploy/config.nix.
         prodEnv = import ./deploy/config.nix { port = sitePort; };
@@ -179,9 +187,9 @@
           '';
         };
 
-        # mkLanding's dev app with the port overridable: the panel's local stack
-        # starts this site next to its own services and picks the port. `PORT`
-        # because `next dev` reads it too, so `npm run dev` and this agree.
+        # mkLanding's dev app on PORT, the dev shell's or the conductor's local
+        # stack's, rather than the container's `sitePort`. `PORT` because `next dev`
+        # reads it too, so `npm run dev` and this agree.
         # The checkout is the caller's working tree (`git rev-parse`), so a
         # script elsewhere must `cd` into it first — refused loudly otherwise,
         # rather than running some other repo's `npm run dev`.
@@ -200,7 +208,7 @@
               npm ci
               echo "$want" > "$stamp"
             fi
-            exec npm run dev -- --port "''${PORT:-${sitePort}}"
+            exec npm run dev -- --port "''${PORT:?the dev shell sets it, or the caller}"
           '';
         };
 
@@ -208,7 +216,7 @@
           name = "help";
           text = ''
             cat <<'EOF'
-              nix run .#dev              next dev on ${sitePort}, or $PORT (clermont-ferrand.localhost:${sitePort}/fr for a point)
+              nix run .#dev              next dev on $PORT, the dev shell's (clermont-ferrand.localhost:$PORT/fr for a point)
               nix run .#test             tsc, eslint, vitest, build, size, playwright   [pre-push hook]
               nix run .#accept-test      accept screenshot baselines (Linux only); `-- <name>` for a subset
               nix run .#size             build, then the first-load JS budget          [the one hard gate]
@@ -298,7 +306,7 @@
             test = {
               enable = true;
               name = "nix run .#test";
-              entry = landing.apps.test.program;
+              entry = "${onE2ePort "test"}";
               pass_filenames = false;
               stages = [ "pre-push" ];
             };
@@ -307,6 +315,8 @@
       in
       {
         apps = landing.apps // rec {
+          test = { type = "app"; program = "${onE2ePort "test"}"; };
+          accept-test = { type = "app"; program = "${onE2ePort "accept-test"}"; };
           dev = { type = "app"; program = "${runDev}/bin/${pname}-dev"; };
           default = dev;
           help = { type = "app"; program = "${runHelp}/bin/help"; };
@@ -337,6 +347,7 @@
             pkgs.treefmt
             pkgs.nixpkgs-fmt
           ] ++ pre-commit-check.enabledPackages ++ readme.enabledPackages;
+          env = old.env // { PORT = toString SA_PORT; E2E_PORT = e2ePort; };
           # Where CI links the flake's `@playwright/test` for the e2e specs' tsc.
           E2E_PLAYWRIGHT_MODULES = "${pkgs.playwright-test}/lib/node_modules";
         });
