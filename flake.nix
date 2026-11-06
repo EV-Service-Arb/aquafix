@@ -8,7 +8,7 @@
     v_flakes.url = "github:valeratrades/v_flakes?ref=v1.6";
     # The lib flake at the tag of the @evinvest/kitstart version in
     # package-lock.json — mkLanding refuses a mismatch.
-    ev.url = "github:EV-Main/lib?ref=@evinvest/kitstart-v0.23.0";
+    ev.url = "github:EV-Main/lib?ref=@evinvest/kitstart-v0.24.1";
     ev.inputs.v_flakes.follows = "v_flakes";
   };
 
@@ -70,6 +70,8 @@
           root = ./.;
           # reads sites_panel and posts leads to the conductor; devops wires both addresses
           connected = true;
+          # `nix run .#figma` renders into it (the figma-render skill)
+          figmaFile = "pJsZ5LBU3VuhRHqI8IVADy";
           buildFiles = [
             "package.json"
             "package-lock.json"
@@ -219,6 +221,7 @@
               nix run .#dev              next dev on $PORT, the dev shell's (clermont-ferrand.localhost:$PORT/fr for a point)
               nix run .#test             tsc, eslint, vitest, build, size, playwright   [pre-push hook]
               nix run .#accept-test      accept screenshot baselines (Linux only); `-- <name>` for a subset
+              nix run .#figma            build, then the pages FIGMA_CAPTURES asks for into Figma; `-- frames` lists them
               nix run .#size             build, then the first-load JS budget          [the one hard gate]
               nix run .#container-smoke  boot the image and hold it to its contract    (Linux + docker)
               nix run .#figma-parity     blur-diff against the Figma export            [advisory]
@@ -317,6 +320,7 @@
         apps = landing.apps // rec {
           test = { type = "app"; program = "${onE2ePort "test"}"; };
           accept-test = { type = "app"; program = "${onE2ePort "accept-test"}"; };
+          figma = { type = "app"; program = "${onE2ePort "figma"}"; };
           dev = { type = "app"; program = "${runDev}/bin/${pname}-dev"; };
           default = dev;
           help = { type = "app"; program = "${runHelp}/bin/help"; };

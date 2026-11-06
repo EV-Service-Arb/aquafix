@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { defineFigmaSuite } from "@evinvest/kitstart/testing/e2e";
 import { APEX_ORIGIN } from "./env";
 
 // One visual baseline per section, at both designed breakpoints. Adding a
@@ -125,3 +126,6 @@ test("section: hero job list", async ({ page }, testInfo) => {
   };
   await expect(page).toHaveScreenshot(`hero-job-list-${testInfo.project.name}.png`, { clip });
 });
+
+// The pages above, into Figma on request: `nix run .#figma`.
+defineFigmaSuite({ test }, SECTIONS);
