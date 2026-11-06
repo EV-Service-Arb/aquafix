@@ -24,7 +24,7 @@ export function BandHead({
     <div className="flex flex-col gap-3 md:gap-4">
       <div className="flex flex-col gap-2.5 md:gap-3.5">
         {eyebrow && <p className={EYEBROW}>{eyebrow}</p>}
-        <h2 className="font-display text-[26px] font-bold leading-[1.12] tracking-[-0.01em] text-ink md:text-[38px]">
+        <h2 className="font-serif text-[26px] font-bold leading-[1.12] tracking-[-0.01em] text-ink md:text-[38px]">
           {title}
         </h2>
       </div>

@@ -67,7 +67,7 @@ export function OverlayHeader({ copy, point }: { copy: Copy; point: PlaceView })
         <p className="hidden whitespace-nowrap text-[14px] font-medium text-ink-mid xl:block">{t.home.headerRating(copy.f)}</p>
         <a href={telHref(phone)} aria-label={`${t.headerPhoneLabel}, ${phone}`} className="hidden flex-col leading-[normal] xl:flex">
           <span className="text-[10.5px] font-medium tracking-[0.08em] text-ink-soft">{t.headerPhoneLabel}</span>
-          <span className="whitespace-nowrap font-display text-[18px] font-bold text-ink">{phone}</span>
+          <span className="whitespace-nowrap font-serif text-[18px] font-bold text-ink">{phone}</span>
         </a>
         <Button
           href={point.href("#quote")}

@@ -142,7 +142,7 @@ export function QuoteForm({
     channelIcons: { callback: q.callbackAsk },
     head: (
       <div className="flex flex-col gap-[7px]">
-        <p className="font-display text-[24px] font-bold leading-[1.1] text-ink md:text-[30px]">{q.title}</p>
+        <p className="font-serif text-[24px] font-bold leading-[1.1] text-ink md:text-[30px]">{q.title}</p>
         <p className="text-[15px] leading-[18px] text-ink-soft">{q.lede}</p>
       </div>
     ),

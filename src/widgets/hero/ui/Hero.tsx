@@ -68,7 +68,7 @@ export function Hero({
       <div className="flex w-full flex-col gap-8 px-[var(--page-px)] pb-10 pt-28 md:pb-[72px] md:pt-32 lg:flex-row lg:items-center lg:gap-16">
         <div className="flex min-w-0 flex-1 flex-col">
           <p className={EYEBROW}>{h.eyebrow(f)}</p>
-          <h1 className="mt-4 font-display text-[clamp(2.6rem,4.4vw+0.5rem,4rem)] font-bold uppercase leading-[0.99] tracking-[-0.02em] text-ink md:mt-5">
+          <h1 className="mt-4 font-serif text-[clamp(2.6rem,4.4vw+0.5rem,4rem)] font-bold uppercase leading-[0.99] tracking-[-0.02em] text-ink md:mt-5">
             {h.display[0]}
             <br />
             <span className="text-primary">{h.display[1]}</span>
@@ -80,7 +80,7 @@ export function Hero({
           <ul className="mt-9 flex flex-wrap gap-2 md:mt-11">
             {[...t.statusStrip, h.decennaleBadge].map(label => (
               <li key={label}>
-                <Badge variant="outline" className="rounded-sm bg-card text-[12px] text-ink">
+                <Badge variant="neutral" className="h-auto rounded-sm border-border bg-card px-2 py-0.5 text-[12px] text-ink">
                   {label}
                 </Badge>
               </li>

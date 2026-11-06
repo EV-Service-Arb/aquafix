@@ -30,7 +30,7 @@ export function AfterPhone({ line, callLine }: { line: string; callLine?: string
 export function CallbackHeading({ title, lede }: { title: string; lede: string }) {
   return (
     <div className="order-first hidden flex-col gap-1.5 [[data-lead-step]:has(>input[name=channel][value=callback])>&]:flex">
-      <p className="font-display text-[20px] font-bold leading-[22px] text-ink">{title}</p>
+      <p className="font-serif text-[20px] font-bold leading-[22px] text-ink">{title}</p>
       <p className="text-[14px] leading-[normal] text-ink-soft">{lede}</p>
     </div>
   );

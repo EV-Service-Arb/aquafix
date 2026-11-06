@@ -266,7 +266,7 @@ experiment events `forced: true`, and also kitstart's `location_page_view` and
 `contact_intent_click`, so a tester's reloads stay out of a place's traffic;
 the PostHog funnel leaves them out. kitstart's lead-form events (`lead_form_*`,
 `lead_booking_*`, the server's `lead_form_submit`) are not tagged yet
-(EV-invest/lib#219): a QA lead still counts there. A disabled experiment
+(EV-Main/web_std#219): a QA lead still counts there. A disabled experiment
 cannot be forced.
 
 **Moving around keeps QA.** Inside the site the forced variants stay: the

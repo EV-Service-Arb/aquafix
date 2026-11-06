@@ -31,8 +31,8 @@ export function GuaranteeBand({ copy, point }: { copy: Copy; point: PlaceView })
           {t.pillars.map(pillar => (
             <li key={pillar.n} className="group flex flex-1 flex-col gap-1.5 md:gap-3">
               <div className="flex items-baseline gap-4 border-b border-border py-5 group-last:border-b-0 md:border-b-0 md:py-0">
-                <span className="font-display font-num text-[22px] font-bold leading-[1.1] text-primary-ink md:text-[26px]">{pillar.n}</span>
-                <p className="font-display text-[17px] font-bold leading-[1.3] text-ink md:text-[21px]">{pillar.title}</p>
+                <span className="font-serif font-num text-[22px] font-bold leading-[1.1] text-primary-ink md:text-[26px]">{pillar.n}</span>
+                <p className="font-serif text-[17px] font-bold leading-[1.3] text-ink md:text-[21px]">{pillar.title}</p>
               </div>
               <p className="text-[14.5px] leading-[1.5] text-ink-mid md:text-[15px] md:leading-[1.55]">{pillar.body(f)}</p>
             </li>

@@ -37,7 +37,7 @@ export function PriceTable({ copy }: { copy: Copy }) {
                 <TableCell className="whitespace-normal px-4 py-3.5 text-[14.5px] font-semibold text-ink md:pl-7 md:pr-0 md:text-[16px]">
                   {t.prices[row.id].job}
                 </TableCell>
-                <TableCell className="px-4 py-3.5 text-right font-display font-num text-[17px] font-bold text-primary-ink md:pl-7 md:pr-0 md:text-[19px]">
+                <TableCell className="px-4 py-3.5 text-right font-serif font-num text-[17px] font-bold text-primary-ink md:pl-7 md:pr-0 md:text-[19px]">
                   {formatEur(row.fromEur, locale)}
                 </TableCell>
                 <TableCell className="hidden px-7 py-3.5 text-right text-[15px] text-ink-soft md:table-cell">

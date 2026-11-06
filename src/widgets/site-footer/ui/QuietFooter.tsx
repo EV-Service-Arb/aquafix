@@ -20,7 +20,7 @@ export function QuietFooter({ copy, point }: { copy: Copy; point: PlaceView }) {
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div className="flex flex-col gap-3">
             <Lockup mark="h-7 w-[24px] text-primary" word="text-[23px] text-brand" />
-            <a href={telHref(phone)} className="font-display text-[22px] font-bold text-primary-ink">
+            <a href={telHref(phone)} className="font-serif text-[22px] font-bold text-primary-ink">
               {phone}
             </a>
             {/* Only the point's real hours: no line is better than a promise the phone may not keep. */}

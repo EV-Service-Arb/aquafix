@@ -17,7 +17,7 @@ export function Objections({ copy }: { copy: Copy }) {
             >
               <p className="text-[15px] font-medium leading-[1.5] text-ink-soft">{o.quote(f)}</p>
               <div className="h-0.5 w-10 bg-primary" />
-              <p className="font-display text-[19px] font-bold leading-[1.3] text-ink md:text-[21px]">{o.title}</p>
+              <p className="font-serif text-[19px] font-bold leading-[1.3] text-ink md:text-[21px]">{o.title}</p>
               <p className="text-[14.5px] leading-[1.6] text-ink-mid">{o.body(f)}</p>
             </div>
           ))}

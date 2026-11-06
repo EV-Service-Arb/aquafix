@@ -8,10 +8,10 @@ const MARK_PATH = process.env.SITE_MARK_PATH ?? "";
 
 /**
  * The display face on a call to action. `cn` merges `font-*` as one group, so a
- * `font-display font-semibold` override loses the family to the weight — the
+ * `font-serif font-semibold` override loses the family to the weight — the
  * weight goes on as a property instead.
  */
-export const CTA_FACE = "font-display [font-weight:600]";
+export const CTA_FACE = "font-serif [font-weight:600]";
 
 /** The hexagon. Colour from the nearest `text-*`, size from `className`. */
 export function Mark({ className }: { className: string }) {
@@ -25,7 +25,7 @@ export function Mark({ className }: { className: string }) {
 /** AQUA in the surrounding colour, FIX in the primary role. */
 export function Wordmark({ className }: { className: string }) {
   return (
-    <span className={`font-display font-bold tracking-[0.015em] ${className}`}>
+    <span className={`font-serif font-bold tracking-[0.015em] ${className}`}>
       AQUA<span className="text-primary">FIX</span>
     </span>
   );

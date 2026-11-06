@@ -38,7 +38,7 @@ export function MenuExtras({
         {phone && (
           <a href={telHref(phone)} aria-label={`${t.headerPhoneLabel}, ${phone}`} className="ml-auto flex flex-col items-end leading-[normal]">
             <span className="text-[10px] font-medium tracking-[0.08em] text-ink-soft">{t.headerPhoneLabel}</span>
-            <span className="whitespace-nowrap font-display text-[18px] font-bold text-ink">{phone}</span>
+            <span className="whitespace-nowrap font-serif text-[18px] font-bold text-ink">{phone}</span>
           </a>
         )}
       </div>

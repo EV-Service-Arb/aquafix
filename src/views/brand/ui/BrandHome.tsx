@@ -31,7 +31,7 @@ export function BrandHome({ copy, locations }: { copy: Copy; locations: readonly
         <Section polarity="dark" className="flex items-center gap-16">
           <div className="flex min-w-0 flex-1 flex-col gap-5">
             <p className="text-[11px] font-semibold tracking-[0.16em] text-primary-ink md:text-[12px]">{t.promise}</p>
-            <h1 className="font-display text-[clamp(2.2rem,7vw,3.75rem)] font-bold leading-[1.02] tracking-[-0.02em] text-ink">
+            <h1 className="font-serif text-[clamp(2.2rem,7vw,3.75rem)] font-bold leading-[1.02] tracking-[-0.02em] text-ink">
               {t.brandPage.h1}
             </h1>
             <p className="text-[15.5px] leading-[1.6] text-ink-soft md:text-[18px]">{t.brandPage.lede}</p>

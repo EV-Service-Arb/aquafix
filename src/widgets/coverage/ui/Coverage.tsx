@@ -43,7 +43,7 @@ export function Coverage({ copy, point }: { copy: Copy; point: PlaceView }) {
             {line && <p className="text-ink md:hidden">{line}</p>}
             {address && <address className="hidden font-medium not-italic text-ink md:block">{address}</address>}
             {hours && <p className="hidden text-ink-soft md:block">{hours}</p>}
-            <a href={telHref(phone)} className="hidden font-display text-[22px] font-bold text-primary-ink md:block">
+            <a href={telHref(phone)} className="hidden font-serif text-[22px] font-bold text-primary-ink md:block">
               {phone}
             </a>
           </div>

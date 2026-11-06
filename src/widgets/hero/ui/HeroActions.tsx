@@ -27,7 +27,7 @@ export function HeroActions({ copy, point, callFirst }: { copy: HeroActionsCopy;
         {whatsappButton("")}
         <a
           href={telHref(phone)}
-          className="font-display text-[19px] font-bold leading-[normal] text-ink hover:text-primary-ink md:text-[21px]"
+          className="font-serif text-[19px] font-bold leading-[normal] text-ink hover:text-primary-ink md:text-[21px]"
         >
           {phone}
         </a>

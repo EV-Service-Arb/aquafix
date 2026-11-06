@@ -20,7 +20,7 @@ export function ThanksCapture({ doneTitle, doneBody, ...props }: LeadCaptureProp
           >
             ✓
           </span>
-          <p className="font-display text-[24px] font-bold leading-[1.1] text-ink">{doneTitle}</p>
+          <p className="font-serif text-[24px] font-bold leading-[1.1] text-ink">{doneTitle}</p>
           <p className="text-[15px] leading-[normal] text-ink-soft">{doneBody.replace("{phone}", sent.phone.trim())}</p>
         </div>
       )}

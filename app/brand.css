@@ -32,6 +32,7 @@
   --chart-3: #e08a3c;
   --chart-4: #d8362a;
   --chart-5: #0a2540;
+  --chart-6: #5a6b7c;
   --hover: #edf1f5;
   --ink-mid: #33475b;
   --ink-soft: #5a6b7c;
@@ -71,6 +72,7 @@
   --chart-3: #e08a3c;
   --chart-4: #d8362a;
   --chart-5: #a9bdd1;
+  --chart-6: #d4dee8;
   --hover: #12395c;
   --ink-mid: #d4dee8;
   --ink-soft: #a9bdd1;
@@ -81,5 +83,5 @@
 
 [data-brand="aquafix"] {
   --brand-font-sans: "Inter";
-  --brand-font-display: "Archivo";
+  --brand-font-serif: "Archivo";
 }

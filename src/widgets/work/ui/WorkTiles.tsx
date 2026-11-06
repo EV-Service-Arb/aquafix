@@ -64,7 +64,7 @@ export function WorkTiles({ h }: { h: Pick<HomeCopy, "work" | "workMore" | "work
               className="work-pop rounded-[var(--corner-card)] border border-border bg-background text-ink shadow-overlay"
             >
               <Photo id={id} alt="" sizes="(width < 48rem) 100vw, 36rem" className="h-40 w-full rounded-[var(--corner-tile)] object-cover md:h-48" />
-              <h3 className="mt-5 font-display text-[21px] font-bold text-ink md:text-[26px]">{caption}</h3>
+              <h3 className="mt-5 font-serif text-[21px] font-bold text-ink md:text-[26px]">{caption}</h3>
               <p className="mt-3 text-[14.5px] leading-[1.65] text-ink-mid md:text-[16px]">{body}</p>
               <button
                 type="button"

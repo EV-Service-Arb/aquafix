@@ -44,7 +44,7 @@
 )
 
 #let _display(size, tracking: 0, fill: none, body) = text(
-  font: brand.fonts.display,
+  font: brand.fonts.serif,
   weight: "bold",
   size: size * px,
   tracking: tracking * px,

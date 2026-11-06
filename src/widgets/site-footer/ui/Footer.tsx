@@ -54,7 +54,7 @@ export function Footer({ copy, point }: { copy: Copy; point: PlaceView }) {
           </Column>
           <Column heading={cols.contact}>
             {/* 17px below `md`: at 22px the number overflowed its half of a 390 screen. */}
-            <a href={telHref(phone)} className="whitespace-nowrap font-display text-[17px] font-bold text-primary-ink md:text-[22px]">
+            <a href={telHref(phone)} className="whitespace-nowrap font-serif text-[17px] font-bold text-primary-ink md:text-[22px]">
               {phone}
             </a>
             {/* The point's own hours once the live source has them. */}

@@ -48,7 +48,7 @@ export function PageHeader({ copy, point, suffix }: { copy: Copy; point: PlaceVi
           />
           <a href={telHref(phone)} aria-label={`${t.headerPhoneLabel}, ${phone}`} className="flex flex-col">
             <span className="hidden text-[10px] font-medium tracking-[0.12em] text-ink-soft xl:block">{t.headerPhoneLabel}</span>
-            <span className="whitespace-nowrap font-display text-[16px] font-bold text-ink max-[359px]:text-[13px] md:text-[20px] xl:text-[22px]">{phone}</span>
+            <span className="whitespace-nowrap font-serif text-[16px] font-bold text-ink max-[359px]:text-[13px] md:text-[20px] xl:text-[22px]">{phone}</span>
           </a>
           <Button
             href={point.href("#quote")}

@@ -8,7 +8,6 @@
 @source "../node_modules/@evinvest/uikit/dist/components/badge.js";
 @source "../node_modules/@evinvest/uikit/dist/components/band.js";
 @source "../node_modules/@evinvest/uikit/dist/components/button.js";
-@source "../node_modules/@evinvest/uikit/dist/components/checkbox.js";
 @source "../node_modules/@evinvest/uikit/dist/components/drawer.js";
 @source "../node_modules/@evinvest/uikit/dist/components/field-context.js";
 @source "../node_modules/@evinvest/uikit/dist/components/field.js";
@@ -21,7 +20,6 @@
 @source "../node_modules/@evinvest/uikit/dist/components/select-chevron.js";
 @source "../node_modules/@evinvest/uikit/dist/components/select-listbox.js";
 @source "../node_modules/@evinvest/uikit/dist/components/select.js";
-@source "../node_modules/@evinvest/uikit/dist/components/switch.js";
 @source "../node_modules/@evinvest/uikit/dist/components/table.js";
 @source "../node_modules/@evinvest/uikit/dist/components/textarea.js";
 @source "../node_modules/@evinvest/uikit/dist/components/toggle-group.js";
@@ -30,7 +28,6 @@
 @source "../node_modules/@evinvest/uikit/dist/generated/badge.js";
 @source "../node_modules/@evinvest/uikit/dist/generated/band.js";
 @source "../node_modules/@evinvest/uikit/dist/generated/button.js";
-@source "../node_modules/@evinvest/uikit/dist/generated/checkbox.js";
 @source "../node_modules/@evinvest/uikit/dist/generated/drawer.js";
 @source "../node_modules/@evinvest/uikit/dist/generated/field.js";
 @source "../node_modules/@evinvest/uikit/dist/generated/input-group.js";
@@ -39,13 +36,13 @@
 @source "../node_modules/@evinvest/uikit/dist/generated/popover.js";
 @source "../node_modules/@evinvest/uikit/dist/generated/progress.js";
 @source "../node_modules/@evinvest/uikit/dist/generated/select.js";
-@source "../node_modules/@evinvest/uikit/dist/generated/switch.js";
 @source "../node_modules/@evinvest/uikit/dist/generated/table.js";
 @source "../node_modules/@evinvest/uikit/dist/generated/textarea.js";
 @source "../node_modules/@evinvest/uikit/dist/generated/toggle.js";
 @source "../node_modules/@evinvest/uikit/dist/lib/cn.js";
 @source "../node_modules/@evinvest/uikit/dist/primitives/dismissable-layer.js";
 @source "../node_modules/@evinvest/uikit/dist/primitives/focus-scope.js";
+@source "../node_modules/@evinvest/uikit/dist/primitives/labelable.js";
 @source "../node_modules/@evinvest/uikit/dist/primitives/merge-refs.js";
 @source "../node_modules/@evinvest/uikit/dist/primitives/portal.js";
 @source "../node_modules/@evinvest/uikit/dist/primitives/presence.js";

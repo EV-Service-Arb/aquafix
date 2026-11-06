@@ -68,7 +68,7 @@ export const STEPS: PartClassNames<LeadCapturePart> = {
   ...CARD,
   // The head is the first screen's only: once a screen is answered its chips lead.
   root: `${CARD.root ?? ""} [&:has(ul[data-lead-chrome])>:first-child]:hidden`,
-  label: "font-display text-[20px] font-bold leading-[22px] text-ink",
+  label: "font-serif text-[20px] font-bold leading-[22px] text-ink",
   control: `${FIELD} rounded-[var(--corner-control)] bg-card`,
   step: "gap-3",
   progress: "gap-3 [&_[data-slot=progress-indicator]]:rounded-full [&_[data-slot=progress-indicator]]:bg-primary [&_[data-slot=progress]]:bg-muted",

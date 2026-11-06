@@ -8,7 +8,7 @@ export function InlineCta({ copy, point }: { copy: Copy; point: PlaceView }) {
   const { line, button } = copy.t.inlineCta;
   return (
     <Section surface="primary" tight className="flex flex-col gap-4 md:flex-row md:items-center md:gap-5">
-      <p className="flex-1 font-display text-[20px] font-bold text-on-primary md:text-[24px]">{line}</p>
+      <p className="flex-1 font-serif text-[20px] font-bold text-on-primary md:text-[24px]">{line}</p>
       <Button
         href={point.href("#quote")}
         size="xl"

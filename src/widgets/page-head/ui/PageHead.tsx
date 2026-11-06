@@ -14,7 +14,7 @@ export function PageHead({ copy, page, aside }: { copy: Copy; page: Exclude<Page
     <Section polarity="dark" tight className="flex items-center gap-16">
       <div className="flex min-w-0 flex-1 flex-col gap-3 md:gap-3.5">
         <Eyebrow className="text-[10px] tracking-[0.16em] md:text-[11px]">{p.eyebrow}</Eyebrow>
-        <h1 className="max-w-[54rem] font-display text-[30px] font-bold leading-[1.14] tracking-[-0.01em] text-ink md:text-[44px]">
+        <h1 className="max-w-[54rem] font-serif text-[30px] font-bold leading-[1.14] tracking-[-0.01em] text-ink md:text-[44px]">
           {p.h1(copy.f)}
         </h1>
         <p className="max-w-[48rem] text-[15px] leading-[1.58] text-ink-soft md:text-[17px]">{p.lede}</p>
