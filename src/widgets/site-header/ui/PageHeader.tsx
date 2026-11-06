@@ -1,4 +1,4 @@
-import { telHref } from "@evinvest/marketing";
+import { telHref } from "@/shared/lib/sites-tools";
 import { Button } from "@evinvest/uikit";
 import { NAV_IDS, NAV_SUFFIX, type Copy } from "@/entities/content";
 import { contactOf, type PlaceView } from "@/entities/place";

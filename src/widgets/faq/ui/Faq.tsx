@@ -1,4 +1,4 @@
-import { telHref } from "@evinvest/marketing";
+import { telHref } from "@/shared/lib/sites-tools";
 import { Faq as KitFaq, type FaqPart } from "@/shared/lib/sites-tools/react";
 import { Display, Eyebrow, Section } from "@evinvest/uikit";
 import { faqItems, type Copy } from "@/entities/content";

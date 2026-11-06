@@ -1,4 +1,4 @@
-import { telHref } from "@evinvest/marketing";
+import { telHref } from "@/shared/lib/sites-tools";
 import { NAV_IDS, NAV_SUFFIX, type Copy } from "@/entities/content";
 import { contactOf, hoursText, storefrontOf, type PlaceView } from "@/entities/place";
 import { perLocale } from "@/shared/config/i18n";

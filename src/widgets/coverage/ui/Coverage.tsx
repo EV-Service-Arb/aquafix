@@ -1,4 +1,4 @@
-import { telHref } from "@evinvest/marketing";
+import { telHref } from "@/shared/lib/sites-tools";
 import { AreaChips } from "@/shared/lib/sites-tools/react";
 import { Section } from "@evinvest/uikit";
 import type { Copy } from "@/entities/content";

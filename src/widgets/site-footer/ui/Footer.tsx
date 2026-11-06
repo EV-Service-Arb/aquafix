@@ -1,4 +1,4 @@
-import { telHref } from "@evinvest/marketing";
+import { telHref } from "@/shared/lib/sites-tools";
 import { SERVICE_LIST, type Copy } from "@/entities/content";
 import { contactOf, hoursText, servedLocalities, storefrontOf, type PlaceView } from "@/entities/place";
 import { CARD, site } from "@/shared/config/site";

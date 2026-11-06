@@ -1,4 +1,4 @@
-import { telHref, whatsappHref } from "@evinvest/marketing";
+import { telHref, whatsappHref } from "@/shared/lib/sites-tools";
 import { Button } from "@evinvest/uikit";
 import type { CopyOf, Text } from "@/entities/content";
 import { contactOf, type PlaceView } from "@/entities/place";
