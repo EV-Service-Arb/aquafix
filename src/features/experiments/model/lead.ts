@@ -1,6 +1,6 @@
 import { AsyncLocalStorage } from "node:async_hooks";
 import { after } from "next/server";
-import { CHANNEL_FIELD, CHANNELS_FIELD, EXPERIMENT_FIELD, LEAD_CHANNELS, LOCATION_FIELD, type AnalyticsTarget } from "@/shared/lib/sites-tools";
+import { CHANNEL_FIELD, CHANNELS_FIELD, EXPERIMENT_FIELD, SITE_CHANNELS, LOCATION_FIELD, type AnalyticsTarget } from "@/shared/lib/sites-tools";
 import { EXPERIMENT_IDS } from "@/shared/config/experiments";
 import { site } from "@/shared/config/site";
 import { assignedVariants, cookieReader, isForced, isSuperseded } from "@/shared/lib/experiments";
@@ -60,7 +60,7 @@ export function experimentLeads(deps: ExperimentLeadDeps) {
           const channels = text(CHANNELS_FIELD);
           // The lead's channel — form, callback, whatsapp, telegram: a messenger lead is an intent until its message arrives.
           const posted = text(CHANNEL_FIELD);
-          const channel = LEAD_CHANNELS.find(c => c === posted) ?? "form";
+          const channel = SITE_CHANNELS.find(c => c === posted) ?? "form";
           const place = typeof slug === "string" && site.placeSlugs.includes(slug) ? slug : null;
           const sink = experimentSink(deps.target(), place);
           const forced = isForced(read);

@@ -3,7 +3,6 @@ import {
   contactOf as contactOn,
   createPlaceView,
   isPublished as isPublishedBy,
-  parsePlaceLive,
   placeOrigin as placeOriginOn,
   placeUrl as placeUrlOn,
   publicationGaps as gapsBy,
@@ -12,9 +11,9 @@ import {
   type LinkMode,
   type PublicationField,
 } from "@/shared/lib/sites-tools";
-import { LOCALES, type Locale } from "@/shared/config/i18n";
+import type { Locale } from "@/shared/config/i18n";
 import { site } from "@/shared/config/site";
-import type { Place, PlaceLive, PlaceView } from "./types";
+import type { Place, PlaceView } from "./types";
 
 /**
  * The place machinery bound to this site: its domain, its gate, its locales.
@@ -55,8 +54,6 @@ export function addressOf(place: Place): string | null {
   const { street, postalCode, locality } = front.address;
   return `${street}, ${postalCode} ${locality}`;
 }
-
-export const parseLive = (body: unknown): PlaceLive => parsePlaceLive(body, LOCALES);
 
 /**
  * The numbers a point answers on: its own, or the brand's until it has one

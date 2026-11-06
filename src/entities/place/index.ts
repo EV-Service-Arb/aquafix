@@ -1,11 +1,10 @@
-export type { DayOfWeek, Geo, OpeningHours, Place, PlaceLive, PlaceView, PostalAddress, Rating, ServiceArea } from "./model/types";
+export type { DayOfWeek, Geo, OpeningHours, Place, PlaceView, PostalAddress, Rating, ServiceArea } from "./model/types";
 export {
   addressOf,
   bakedPlace,
   brandOrigin,
   contactOf,
   isPublished,
-  parseLive,
   PLACE_SLUGS,
   PLACES,
   placeOrigin,
@@ -16,7 +15,6 @@ export {
 export { hoursText } from "./model/hours";
 export {
   freshRating,
-  mergeLive,
   RATING_MAX_AGE_DAYS,
   servedLocalities,
   storefrontOf,

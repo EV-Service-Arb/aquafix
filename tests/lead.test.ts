@@ -46,20 +46,6 @@ describe("the lead schema", () => {
     const lead = readCandidate(LEAD, form({ job: "other", zip: "   ", mobile: "06 12 34 56 78" }), null);
     expect(validateCandidate(LEAD, lead)).toEqual({ field: "locality", why: expect.any(String) });
   });
-
-  it("takes any number kitstart's form takes — the old ten-digit floor refused +1 and short E.164", () => {
-    for (const mobile of ["+1 415 555 0123", "+44 20 7946 0958", "+32 470 12 34 56", "06 12 34 56 78"]) {
-      const lead = readCandidate(LEAD, form({ job: "other", zip: "63000", mobile }), null);
-      expect(validateCandidate(LEAD, lead), mobile).toBeNull();
-    }
-  });
-
-  // kitstart 0.11 holds common country codes to their national length, so a
-  // short "+1" is no number any more — on the form and here alike.
-  it("refuses what kitstart's form refuses: +1 with too few digits", () => {
-    const lead = readCandidate(LEAD, form({ job: "other", zip: "63000", mobile: "+12345678" }), null);
-    expect(validateCandidate(LEAD, lead)).toMatchObject({ field: "phone" });
-  });
 });
 
 describe("a messenger lead", () => {

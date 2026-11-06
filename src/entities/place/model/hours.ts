@@ -1,7 +1,6 @@
 import type { Locale } from "@/shared/config/i18n";
+import { DAYS } from "@/shared/lib/sites-tools";
 import type { DayOfWeek, OpeningHours } from "./types";
-
-const WEEK: readonly DayOfWeek[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 /** `08:00` → `8 h` in French, `8:00` in English; `12:30` → `12 h 30` / `12:30` — as kitstart's opening line writes it. */
 function clock(hhmm: string, locale: Locale): string {
@@ -14,18 +13,18 @@ function clock(hhmm: string, locale: Locale): string {
 /** The short weekday in the page's language: a Monday-anchored date read back through `Intl`. */
 function weekday(day: DayOfWeek, locale: Locale): string {
   // 2024-01-01 was a Monday; noon UTC is that day everywhere.
-  const date = new Date(Date.UTC(2024, 0, 1 + WEEK.indexOf(day), 12));
+  const date = new Date(Date.UTC(2024, 0, 1 + DAYS.indexOf(day), 12));
   return new Intl.DateTimeFormat(locale, { weekday: "short", timeZone: "UTC" }).format(date);
 }
 
 /** Consecutive days as one range (`lun.–ven.`), the rest one by one. */
 function daysText(days: readonly DayOfWeek[], locale: Locale): string {
-  const sorted = [...new Set(days)].sort((a, b) => WEEK.indexOf(a) - WEEK.indexOf(b));
+  const sorted = [...new Set(days)].sort((a, b) => DAYS.indexOf(a) - DAYS.indexOf(b));
   const runs: DayOfWeek[][] = [];
   for (const day of sorted) {
     const run = runs.at(-1);
     const last = run?.at(-1);
-    if (run && last !== undefined && WEEK.indexOf(day) === WEEK.indexOf(last) + 1) run.push(day);
+    if (run && last !== undefined && DAYS.indexOf(day) === DAYS.indexOf(last) + 1) run.push(day);
     else runs.push([day]);
   }
   return runs

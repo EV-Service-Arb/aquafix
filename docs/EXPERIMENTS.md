@@ -131,7 +131,7 @@ is inert everywhere.
 - **The lead.** A messenger lead is posted in the background before the app
   opens (`channel=whatsapp|telegram`, `message_ref`), needs no phone and no
   postcode, is mailed with «Canal» and «Réf.», and goes to the panel as its own
-  channel with `properties.message_ref` (`PANEL_MESSENGER`).
+  channel with `properties.message_ref`.
 
 ### Ended
 

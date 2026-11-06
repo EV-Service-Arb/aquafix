@@ -37,10 +37,7 @@ export type ExperimentId = keyof typeof EXPERIMENTS;
 /** {@link EXPERIMENTS} with the panel's overrides laid over it: what every reader of a variant goes by. */
 export type LiveExperiments = OverriddenConfig<typeof EXPERIMENTS>;
 
-/**
- * Each test's hypothesis in one line (at most 200 characters), declared to the
- * panel at start (`experiments.declared`); the full text is docs/EXPERIMENTS.md.
- */
+/** Each test's hypothesis in one line, declared to the panel at start; the full text is docs/EXPERIMENTS.md. */
 export const EXPERIMENT_SUMMARIES: { readonly [K in ExperimentId]: string } = {
   hero_call_first: "On a phone, a full-width call button first, the form behind a link, turns more visits into contacts.",
   lead_form:

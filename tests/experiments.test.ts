@@ -1,5 +1,6 @@
 import { HONEYPOT_FIELD, RENDERED_AT_FIELD, type LeadStore } from "@/shared/lib/sites-tools";
 import { quoteRoute } from "@/shared/lib/sites-tools/next";
+import { experimentsDeclaredBody } from "@/shared/lib/sites-tools/server";
 import { NextRequest } from "next/server";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { applyOverrides, type ExperimentOverrides } from "@evinvest/experiments";
@@ -448,9 +449,10 @@ describe("the panel's overrides", () => {
     expect((await visit(`https://${CLERMONT_FERRAND}/fr`, { cookie: "ab_hero_call_first=b; ab_lead_form=c; ab_lead_channel=f" }, ALL_A)).rewrite).toBe("/fr/_clermont-ferrand/ab/bcf");
   });
 
-  it("declare one summary per experiment, within the panel's 200 characters", () => {
+  it("declare one summary per experiment, none of which the panel would refuse", () => {
     expect(Object.keys(EXPERIMENT_SUMMARIES).sort()).toEqual(Object.keys(EXPERIMENTS).sort());
-    for (const summary of Object.values(EXPERIMENT_SUMMARIES)) expect(summary.length).toBeLessThanOrEqual(200);
+    const declared = experimentsDeclaredBody(EXPERIMENTS, { brandId: site.brand.id, sourceId: "aquafix-site", at: new Date(), summaries: EXPERIMENT_SUMMARIES });
+    expect(declared.skipped).toEqual([]);
   });
 });
 
