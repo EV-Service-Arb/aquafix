@@ -32,12 +32,12 @@ const LANDING: Record<string, string> = {
   "instrumentation.ts": "export {};\n",
   "src/shared/config.ts": "export const site = 'fixture';\n",
   "app/page.tsx": [
-    'import { Hero } from "@evinvest/kitstart";',
+    'import { Hero } from "@evinvest/sites-tools";',
     "export default function Page() { return Hero(); }",
     "",
   ].join("\n"),
-  "node_modules/@evinvest/kitstart/package.json": JSON.stringify({ exports: { ".": { import: "./dist/index.js" } } }),
-  "node_modules/@evinvest/kitstart/dist/index.js": [
+  "node_modules/@evinvest/sites-tools/package.json": JSON.stringify({ exports: { ".": { import: "./dist/index.js" } } }),
+  "node_modules/@evinvest/sites-tools/dist/index.js": [
     'import { Button } from "@evinvest/uikit";',
     'export function Hero() { return Button("hero"); }',
     "",
@@ -123,7 +123,7 @@ describe("a committed sources list that was not regenerated", () => {
   it("fails, naming the command, when a kitstart bump makes its widget reach another uikit component", () => {
     write(
       fixture,
-      "node_modules/@evinvest/kitstart/dist/index.js",
+      "node_modules/@evinvest/sites-tools/dist/index.js",
       [
         'import { Button, Dialog } from "@evinvest/uikit";',
         'export function Hero() { return Button("hero") + Dialog(); }',

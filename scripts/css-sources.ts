@@ -26,7 +26,7 @@ import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from "
 import { dirname, join, relative, resolve } from "node:path";
 
 /** The packages whose builds carry class literals (the uikit, the marketing layer, kitstart's widgets). */
-export const PACKAGES = ["@evinvest/uikit", "@evinvest/marketing", "@evinvest/kitstart"] as const;
+export const PACKAGES = ["@evinvest/uikit", "@evinvest/marketing", "@evinvest/sites-tools"] as const;
 
 /**
  * The ones listed file by file. kitstart is walked — its widgets are how most

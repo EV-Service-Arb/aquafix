@@ -15,7 +15,7 @@
 @source "../app";
 @source "../src";
 /* kitstart's widgets, whole: its landing contract asks for this line. */
-@source "../node_modules/@evinvest/kitstart/dist";
+@source "../node_modules/@evinvest/sites-tools/dist";
 
 /* The brand's two families, self-hosted through next/font (shared/ui/fonts.ts).
  * The kit's display face is a serif; this brand's is Archivo. */

@@ -20,7 +20,7 @@ export default defineConfig({
     // `server-only` imports (its `./next` and `./server` entries).
     // `@evinvest/experiments/next` imports `next/headers` bare, which plain
     // Node ESM cannot resolve (next has no `exports` map); Vite can.
-    server: { deps: { inline: [/@evinvest\/kitstart/, /@evinvest\/experiments/] } },
+    server: { deps: { inline: [/@evinvest\/sites-tools/, /@evinvest\/experiments/] } },
     // The same facts `next.config.ts` inlines, so content reads the card here too.
     env: buildEnv(root),
   },
