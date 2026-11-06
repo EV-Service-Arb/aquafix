@@ -1,5 +1,5 @@
 import "server-only";
-import { leadWebhook, type LeadWebhook, type LeadWebhookOptions } from "@evinvest/kitstart/server";
+import { leadWebhook, type LeadWebhook, type LeadWebhookOptions } from "@/shared/lib/sites-tools/server";
 import { serverEnv } from "@/shared/config/env";
 import { site } from "@/shared/config/site";
 import { leadCreatedBody, SA_INGEST_SIGNING } from "@/shared/lib/funnel-event";

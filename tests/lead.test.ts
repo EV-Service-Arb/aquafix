@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { LEAD } from "@/shared/config/lead";
-import { readCandidate, validateCandidate } from "@evinvest/kitstart";
-import { messengerRuleDisagreements } from "@evinvest/kitstart/testing";
+import { readCandidate, validateCandidate } from "@/shared/lib/sites-tools";
+import { messengerRuleDisagreements } from "@/shared/lib/sites-tools/testing";
 
 const form = (fields: Record<string, string>): FormData => {
   const data = new FormData();

@@ -1,6 +1,6 @@
 import "server-only";
 import { createHash } from "node:crypto";
-import { channelOf, type Lead, type LeadSuspect } from "@evinvest/kitstart";
+import { channelOf, type Lead, type LeadSuspect } from "@/shared/lib/sites-tools";
 import {
   panelChannel,
   panelFlowProperties,
@@ -10,7 +10,7 @@ import {
   type PanelFlowProperties,
   type PanelLocale,
   type WebhookSigning,
-} from "@evinvest/kitstart/server";
+} from "@/shared/lib/sites-tools/server";
 
 /**
  * The panel's ingest scheme (Service-Arb/panel README, "Sending events"): the

@@ -1,6 +1,6 @@
 import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { NON_PAGE_ROUTES, pointSuffixes } from "@evinvest/kitstart";
+import { NON_PAGE_ROUTES, pointSuffixes } from "@/shared/lib/sites-tools";
 import { describe, expect, it } from "vitest";
 import { site } from "@/shared/config/site";
 

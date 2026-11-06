@@ -1,6 +1,6 @@
 import "server-only";
-import { channelOf, type Lead } from "@evinvest/kitstart";
-import { leadNotifier, type LeadMail, type LeadMailShown, type LeadNotifier } from "@evinvest/kitstart/server";
+import { channelOf, type Lead } from "@/shared/lib/sites-tools";
+import { leadNotifier, type LeadMail, type LeadMailShown, type LeadNotifier } from "@/shared/lib/sites-tools/server";
 import { text } from "@/entities/content";
 import { serverEnv } from "@/shared/config/env";
 import { URGENCIES, URGENCY_FIELD, URGENCY_LATER } from "@/shared/config/lead";

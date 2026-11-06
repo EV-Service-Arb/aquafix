@@ -1,5 +1,5 @@
 import { createBeaconSink, type AnalyticsSink } from "@evinvest/analytics";
-import type { AnalyticsTarget } from "@evinvest/kitstart";
+import type { AnalyticsTarget } from "@/shared/lib/sites-tools";
 
 /**
  * The A/B events. kitstart's own (`location_page_view`, `contact_intent_click`,

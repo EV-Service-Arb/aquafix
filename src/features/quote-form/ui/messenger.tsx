@@ -1,5 +1,5 @@
-import type { LeadCaptureText, MessengerFacts, MessengerKind, MessengerVariant } from "@evinvest/kitstart";
-import type { LeadCaptureProps } from "@evinvest/kitstart/react";
+import type { LeadCaptureText, MessengerFacts, MessengerKind, MessengerVariant } from "@/shared/lib/sites-tools";
+import type { LeadCaptureProps } from "@/shared/lib/sites-tools/react";
 import type { CopyOf, Text } from "@/entities/content";
 import type { Assignment } from "@/shared/config/experiments";
 import { URGENCY_FIELD } from "@/shared/config/lead";

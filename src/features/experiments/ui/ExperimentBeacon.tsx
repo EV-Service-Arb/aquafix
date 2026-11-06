@@ -1,6 +1,6 @@
 "use client";
 
-import { countsAsPageView, type AnalyticsTarget } from "@evinvest/kitstart";
+import { countsAsPageView, type AnalyticsTarget } from "@/shared/lib/sites-tools";
 import { contactChannel } from "@evinvest/marketing";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo } from "react";

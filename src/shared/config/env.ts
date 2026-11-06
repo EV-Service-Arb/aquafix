@@ -1,5 +1,5 @@
 import "server-only";
-import { createServerEnv, type ServerEnv } from "@evinvest/kitstart/server";
+import { createServerEnv, type ServerEnv } from "@/shared/lib/sites-tools/server";
 import { site } from "./site";
 
 export type { ServerEnv };

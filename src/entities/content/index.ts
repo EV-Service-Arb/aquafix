@@ -1,4 +1,4 @@
-import type { CopySlice, QuestionAnswer } from "@evinvest/kitstart";
+import type { CopySlice, QuestionAnswer } from "@/shared/lib/sites-tools";
 import type { Locale } from "@/shared/config/i18n";
 import { TRADE } from "@/shared/config/site";
 import { formatEur } from "@/shared/lib/money";

@@ -1,4 +1,4 @@
-import type { Place, PostalAddress } from "@evinvest/kitstart";
+import type { Place, PostalAddress } from "@/shared/lib/sites-tools";
 import type { Locale } from "./i18n";
 
 /**

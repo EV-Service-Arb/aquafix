@@ -1,4 +1,4 @@
-import { withLanding } from "@evinvest/kitstart/next/config";
+import { withLanding } from "./src/shared/lib/sites-tools/next-config";
 
 /**
  * kitstart's landing config — standalone output, the card's facts, the mark

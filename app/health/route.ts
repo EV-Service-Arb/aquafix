@@ -1,4 +1,4 @@
-import { healthRoute } from "@evinvest/kitstart/next";
+import { healthRoute } from "@/shared/lib/sites-tools/next";
 
 /** The container's readiness probe: the process answers. */
 export const dynamic = "force-dynamic";

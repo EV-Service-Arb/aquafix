@@ -1,4 +1,4 @@
-import { LangSwitch } from "@evinvest/kitstart/react";
+import { LangSwitch } from "@/shared/lib/sites-tools/react";
 import { i18n, LOCALES, type Locale } from "@/shared/config/i18n";
 
 /**

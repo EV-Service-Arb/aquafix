@@ -1,6 +1,6 @@
 "use client";
 
-import { LeadCapture, type LeadCaptureProps } from "@evinvest/kitstart/react";
+import { LeadCapture, type LeadCaptureProps } from "@/shared/lib/sites-tools/react";
 
 /**
  * `lead_channel` `d` (AQ-3): the card stays after the lead and says whom we

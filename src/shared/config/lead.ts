@@ -1,4 +1,4 @@
-import { isMessengerChannel, validateLead, type LeadCandidate, type LeadRejection, type LeadSchema } from "@evinvest/kitstart";
+import { isMessengerChannel, validateLead, type LeadCandidate, type LeadRejection, type LeadSchema } from "@/shared/lib/sites-tools";
 
 /** Values the quote form's `<select>` posts and the lead store keeps. */
 export const JOB_IDS = [

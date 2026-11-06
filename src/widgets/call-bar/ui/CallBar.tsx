@@ -1,5 +1,5 @@
-import { LEAD_CAPTURE_TEXT } from "@evinvest/kitstart";
-import { CallBar as KitCallBar, type CallBarPart, type PartClassNames } from "@evinvest/kitstart/react";
+import { LEAD_CAPTURE_TEXT } from "@/shared/lib/sites-tools";
+import { CallBar as KitCallBar, type CallBarPart, type PartClassNames } from "@/shared/lib/sites-tools/react";
 import type { CopyOf, Text } from "@/entities/content";
 import { contactOf, type PlaceView } from "@/entities/place";
 import { CTA_FACE } from "@/shared/ui/brand";

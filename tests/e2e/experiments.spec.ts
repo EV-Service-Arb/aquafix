@@ -1,5 +1,5 @@
 import { DatabaseSync } from "node:sqlite";
-import { MIN_FILL_MS, normalizePhone } from "@evinvest/kitstart";
+import { MIN_FILL_MS, normalizePhone } from "../../src/shared/lib/sites-tools/index";
 import { expect, test, type Page, type TestInfo } from "@playwright/test";
 import { JOB_IDS } from "../../src/shared/config/lead";
 import { LEADS_DB, POSTHOG_HOST } from "./env";

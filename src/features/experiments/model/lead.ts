@@ -1,6 +1,6 @@
 import { AsyncLocalStorage } from "node:async_hooks";
 import { after } from "next/server";
-import { CHANNEL_FIELD, CHANNELS_FIELD, EXPERIMENT_FIELD, LEAD_CHANNELS, LOCATION_FIELD, type AnalyticsTarget } from "@evinvest/kitstart";
+import { CHANNEL_FIELD, CHANNELS_FIELD, EXPERIMENT_FIELD, LEAD_CHANNELS, LOCATION_FIELD, type AnalyticsTarget } from "@/shared/lib/sites-tools";
 import { EXPERIMENT_IDS } from "@/shared/config/experiments";
 import { site } from "@/shared/config/site";
 import { assignedVariants, cookieReader, isForced, isSuperseded } from "@/shared/lib/experiments";

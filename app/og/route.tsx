@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { ogPalette, ogRoute } from "@evinvest/kitstart/next";
+import { ogPalette, ogRoute } from "@/shared/lib/sites-tools/next";
 import { copyFor } from "@/entities/content";
 import { contactOf } from "@/entities/place";
 import { CARD, site } from "@/shared/config/site";

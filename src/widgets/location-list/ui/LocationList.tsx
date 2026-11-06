@@ -1,4 +1,4 @@
-import { PlaceDirectory, type PlaceDirectoryPart } from "@evinvest/kitstart/react";
+import { PlaceDirectory, type PlaceDirectoryPart } from "@/shared/lib/sites-tools/react";
 import { Section } from "@evinvest/uikit";
 import type { BrandPageCopy, CopyOf } from "@/entities/content";
 import { contactOf, placeUrl, type Place } from "@/entities/place";

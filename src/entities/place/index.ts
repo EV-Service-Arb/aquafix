@@ -21,4 +21,4 @@ export {
   servedLocalities,
   storefrontOf,
   type PublicationField,
-} from "@evinvest/kitstart";
+} from "@/shared/lib/sites-tools";

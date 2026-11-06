@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { defineFigmaSuite } from "@evinvest/kitstart/testing/e2e";
+import { defineFigmaSuite } from "../../src/shared/lib/sites-tools/testing-e2e";
 import { APEX_ORIGIN } from "./env";
 
 // One visual baseline per section, at both designed breakpoints. Adding a

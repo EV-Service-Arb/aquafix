@@ -1,4 +1,4 @@
-import { StatusScreen as KitStatusScreen, type StatusScreenPart } from "@evinvest/kitstart/react";
+import { StatusScreen as KitStatusScreen, type StatusScreenPart } from "@/shared/lib/sites-tools/react";
 import type { CopyOf, StatusCopy, Text } from "@/entities/content";
 import { i18n, LOCALES, type Locale } from "@/shared/config/i18n";
 import { site } from "@/shared/config/site";

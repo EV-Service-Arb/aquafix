@@ -1,5 +1,5 @@
 import "server-only";
-import { createPlaceLoader, type PlaceParams } from "@evinvest/kitstart/next";
+import { createPlaceLoader, type PlaceParams } from "@/shared/lib/sites-tools/next";
 import { copyFor, type Copy } from "@/entities/content";
 import { contactOf, type PlaceView } from "@/entities/place";
 import { placeSource } from "@/entities/place/server";

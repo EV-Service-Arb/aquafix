@@ -1,4 +1,4 @@
-import { createRouting, GONE_HEADER, type RequestFacts } from "@evinvest/kitstart";
+import { createRouting, GONE_HEADER, type RequestFacts } from "@/shared/lib/sites-tools";
 import { NextRequest } from "next/server";
 import { describe, expect, it } from "vitest";
 import { site } from "@/shared/config/site";

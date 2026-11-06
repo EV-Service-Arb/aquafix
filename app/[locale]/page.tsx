@@ -1,4 +1,4 @@
-import { loadLocale } from "@evinvest/kitstart/next";
+import { loadLocale } from "@/shared/lib/sites-tools/next";
 import type { Metadata } from "next";
 import { copyFor } from "@/entities/content";
 import { placeSource } from "@/entities/place/server";

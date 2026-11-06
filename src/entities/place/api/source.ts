@@ -1,5 +1,5 @@
 import "server-only";
-import { createPlaceSource } from "@evinvest/kitstart/server";
+import { createPlaceSource } from "@/shared/lib/sites-tools/server";
 import { site } from "@/shared/config/site";
 
 /**

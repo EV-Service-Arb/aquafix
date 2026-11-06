@@ -1,4 +1,4 @@
-import { placeGraph, type JsonLdNode, type OfferInput, type PageGraphCopy } from "@evinvest/kitstart";
+import { placeGraph, type JsonLdNode, type OfferInput, type PageGraphCopy } from "@/shared/lib/sites-tools";
 import { faqItems, PRICE_LIST, type Copy } from "@/entities/content";
 import type { PlaceView } from "@/entities/place";
 import { site, type PageKey } from "@/shared/config/site";

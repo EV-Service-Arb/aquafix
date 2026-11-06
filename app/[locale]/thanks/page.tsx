@@ -1,5 +1,5 @@
-import { statusTarget, thanksChannel } from "@evinvest/kitstart";
-import { loadLocale } from "@evinvest/kitstart/next";
+import { statusTarget, thanksChannel } from "@/shared/lib/sites-tools";
+import { loadLocale } from "@/shared/lib/sites-tools/next";
 import type { Metadata } from "next";
 import { copyFor, type Copy } from "@/entities/content";
 import { statusMetadata } from "@/features/seo";

@@ -1,6 +1,6 @@
 import "server-only";
 import { applyOverrides } from "@evinvest/experiments";
-import { createExperimentsSource } from "@evinvest/kitstart/server";
+import { createExperimentsSource } from "@/shared/lib/sites-tools/server";
 import { site } from "@/shared/config/site";
 import { EXPERIMENTS, type LiveExperiments } from "@/shared/config/experiments";
 

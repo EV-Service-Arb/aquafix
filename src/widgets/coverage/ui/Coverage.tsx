@@ -1,5 +1,5 @@
 import { telHref } from "@evinvest/marketing";
-import { AreaChips } from "@evinvest/kitstart/react";
+import { AreaChips } from "@/shared/lib/sites-tools/react";
 import { Section } from "@evinvest/uikit";
 import type { Copy } from "@/entities/content";
 import { addressOf, contactOf, hoursText, servedLocalities, storefrontOf, type PlaceView } from "@/entities/place";

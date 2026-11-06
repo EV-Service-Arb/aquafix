@@ -11,7 +11,7 @@ import {
   storefrontOf,
   type LinkMode,
   type PublicationField,
-} from "@evinvest/kitstart";
+} from "@/shared/lib/sites-tools";
 import { LOCALES, type Locale } from "@/shared/config/i18n";
 import { site } from "@/shared/config/site";
 import type { Place, PlaceLive, PlaceView } from "./types";

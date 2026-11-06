@@ -1,4 +1,4 @@
-import { AreaChips } from "@evinvest/kitstart/react";
+import { AreaChips } from "@/shared/lib/sites-tools/react";
 import { Display, Eyebrow, Section } from "@evinvest/uikit";
 import type { Copy } from "@/entities/content";
 import { servedLocalities, type PlaceView } from "@/entities/place";

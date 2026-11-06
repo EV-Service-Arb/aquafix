@@ -1,6 +1,6 @@
 import { DatabaseSync } from "node:sqlite";
 import { LIBRARY_PROPS } from "@evinvest/analytics";
-import { LEAD_CAPTURE_TEXT, MIN_FILL_MS, normalizePhone } from "@evinvest/kitstart";
+import { LEAD_CAPTURE_TEXT, MIN_FILL_MS, normalizePhone } from "../../src/shared/lib/sites-tools/index";
 import { expect, test, type Page, type TestInfo } from "@playwright/test";
 import { JOB_IDS } from "../../src/shared/config/lead";
 import { CONTROL_COOKIES, LEADS_DB, POINT_ORIGIN, POSTHOG_HOST } from "./env";

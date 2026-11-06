@@ -1,5 +1,5 @@
-import { LEAD_CAPTURE_TEXT, messengerFacts, type LeadCaptureText } from "@evinvest/kitstart";
-import { LeadCapture, type LeadCaptureProps, type LeadIntro } from "@evinvest/kitstart/react";
+import { LEAD_CAPTURE_TEXT, messengerFacts, type LeadCaptureText } from "@/shared/lib/sites-tools";
+import { LeadCapture, type LeadCaptureProps, type LeadIntro } from "@/shared/lib/sites-tools/react";
 import { cn } from "@evinvest/uikit";
 import type { CopyOf, Text } from "@/entities/content";
 import type { PlaceView } from "@/entities/place";

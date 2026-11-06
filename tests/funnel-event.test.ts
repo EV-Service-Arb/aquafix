@@ -12,8 +12,8 @@ import {
   SUBMISSION_FIELD,
   type Lead,
   type SpamVerdict,
-} from "@evinvest/kitstart";
-import { leadWebhook, parseServerEnv, type LeadWebhookContext, type ServerEnv } from "@evinvest/kitstart/server";
+} from "@/shared/lib/sites-tools";
+import { leadWebhook, parseServerEnv, type LeadWebhookContext, type ServerEnv } from "@/shared/lib/sites-tools/server";
 import { afterEach, describe, expect, it } from "vitest";
 import { site } from "@/shared/config/site";
 import { needLabel, PANEL_ANALYTICS_ID, PANEL_FLOW, PANEL_LOCALE, PANEL_MESSENGER, PANEL_SUSPECT, webhookOptions, type PanelSwitches } from "@/features/quote-form/server";

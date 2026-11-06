@@ -1,5 +1,5 @@
-import { HONEYPOT_FIELD, RENDERED_AT_FIELD, type LeadStore } from "@evinvest/kitstart";
-import { quoteRoute } from "@evinvest/kitstart/next";
+import { HONEYPOT_FIELD, RENDERED_AT_FIELD, type LeadStore } from "@/shared/lib/sites-tools";
+import { quoteRoute } from "@/shared/lib/sites-tools/next";
 import { NextRequest } from "next/server";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { applyOverrides, type ExperimentOverrides } from "@evinvest/experiments";

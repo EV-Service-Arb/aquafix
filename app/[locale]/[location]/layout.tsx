@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { AnalyticsBoundary } from "@evinvest/kitstart/react";
+import { AnalyticsBoundary } from "@/shared/lib/sites-tools/react";
 import { ExperimentBeacon } from "@/features/experiments";
 import { serverEnv } from "@/shared/config/env";
 import { QA_COOKIE } from "@/shared/config/experiments";

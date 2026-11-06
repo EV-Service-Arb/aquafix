@@ -7,7 +7,7 @@ import type {
   QuoteFormCopy as CoreQuoteFormCopy,
   Said as CoreSaid,
   StatusCopy as CoreStatusCopy,
-} from "@evinvest/kitstart";
+} from "@/shared/lib/sites-tools";
 import type { Locale } from "@/shared/config/i18n";
 import type { Urgency } from "@/shared/config/lead";
 import type { PageKey } from "@/shared/config/site";
@@ -86,7 +86,7 @@ export interface Crew {
   credential: string;
 }
 
-export type { StatusAction } from "@evinvest/kitstart";
+export type { StatusAction } from "@/shared/lib/sites-tools";
 
 export type StatusCopy = CoreStatusCopy<Facts>;
 

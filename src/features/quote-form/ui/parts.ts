@@ -1,5 +1,5 @@
-import type { MessengerKind } from "@evinvest/kitstart";
-import type { LeadCapturePart, PartClassNames } from "@evinvest/kitstart/react";
+import type { MessengerKind } from "@/shared/lib/sites-tools";
+import type { LeadCapturePart, PartClassNames } from "@/shared/lib/sites-tools/react";
 import { CTA_FACE } from "@/shared/ui/brand";
 
 /**

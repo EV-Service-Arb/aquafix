@@ -1,4 +1,4 @@
-import { AbSwitcher } from "@evinvest/kitstart/react";
+import { AbSwitcher } from "@/shared/lib/sites-tools/react";
 import { JsonLd } from "@evinvest/marketing";
 import { withLiveRating, type Copy } from "@/entities/content";
 import { freshRating, type PlaceView } from "@/entities/place";

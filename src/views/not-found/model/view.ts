@@ -1,4 +1,4 @@
-import { statusTarget } from "@evinvest/kitstart";
+import { statusTarget } from "@/shared/lib/sites-tools";
 import { copyFor, type Copy } from "@/entities/content";
 import { contactOf } from "@/entities/place";
 import { CARD, site } from "@/shared/config/site";

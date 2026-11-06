@@ -1,4 +1,4 @@
-import { brandMetadata as kitBrandMetadata, placeMetadata, statusMetadata as kitStatusMetadata } from "@evinvest/kitstart/next";
+import { brandMetadata as kitBrandMetadata, placeMetadata, statusMetadata as kitStatusMetadata } from "@/shared/lib/sites-tools/next";
 import type { Metadata } from "next";
 import type { BrandPageCopy, CopyOf, PageMetaCopy } from "@/entities/content";
 import type { PlaceView } from "@/entities/place";

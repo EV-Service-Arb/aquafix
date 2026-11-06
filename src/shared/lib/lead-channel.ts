@@ -1,4 +1,4 @@
-import { channelsAvailable, messengerFacts } from "@evinvest/kitstart";
+import { channelsAvailable, messengerFacts } from "@/shared/lib/sites-tools";
 import { site } from "@/shared/config/site";
 import { leadChannelRuns } from "./experiments";
 

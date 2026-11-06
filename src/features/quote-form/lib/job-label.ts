@@ -1,4 +1,4 @@
-import type { NeedLabel } from "@evinvest/kitstart/server";
+import type { NeedLabel } from "@/shared/lib/sites-tools/server";
 import { text } from "@/entities/content";
 
 // French whatever the visitor's language: the business reads its mail and its panel in it.

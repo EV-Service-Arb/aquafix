@@ -1,6 +1,6 @@
 import { createServer, type Server } from "node:net";
-import type { Lead } from "@evinvest/kitstart";
-import { leadNotifier, parseServerEnv } from "@evinvest/kitstart/server";
+import type { Lead } from "@/shared/lib/sites-tools";
+import { leadNotifier, parseServerEnv } from "@/shared/lib/sites-tools/server";
 import { afterEach, describe, expect, it } from "vitest";
 import { JOB_IDS } from "@/shared/config/lead";
 import { site } from "@/shared/config/site";
