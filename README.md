@@ -37,6 +37,7 @@ Plain npm works for the app itself:
 npm ci && npm run typecheck && npx eslint . && npx vitest run && npm run build && npm start
 ```
 
+
 </details>
 <!-- markdownlint-restore -->
 
@@ -146,9 +147,11 @@ nix/             the generated CI workflows' source
 
 <br>
 
-<sup>
-	This repository follows <a href="https://github.com/valeratrades/.github/tree/master/best_practices">my best practices</a> and <a href="https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md">Tiger Style</a> (except "proper capitalization for acronyms": (VsrState, not VSRState) and formatting). For project's architecture, see <a href="./docs/ARCHITECTURE.md">ARCHITECTURE.md</a>.
-</sup>
+<sup>Links for devs:</sup>
+- <sup><a href="./docs/ARCHITECTURE.md">architecture</a></sup>
+- <sup><a href="https://github.com/EV-Main/.github/blob/main/code/STYLE.md">style</a></sup>
+- <sup><a href="https://github.com/EV-Main/.github/tree/main/code/conventions">conventions</a></sup>
+- <sup><a href="https://github.com/EV-Main/.github/blob/main/code/conventions/git">contributing</a></sup>
 
 #### License
 

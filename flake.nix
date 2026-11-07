@@ -8,7 +8,7 @@
     v_flakes.url = "github:valeratrades/v_flakes?ref=v1.6";
     # sites_tools at the tag of the @evinvest/sites-tools version in
     # package-lock.json — mkLanding refuses a mismatch.
-    sites_tools.url = "github:EV-Service-Arb/sites_tools?ref=@evinvest/sites-tools-v0.30.0";
+    sites_tools.url = "github:EV-Service-Arb/sites_tools?ref=@evinvest/sites-tools-v0.31.0";
     sites_tools.inputs.v_flakes.follows = "v_flakes";
   };
 
@@ -240,7 +240,7 @@
         # written by the devShell from here; edit this file, not them.
         workflows = import ./nix/workflows.nix { inherit pkgs; };
         # v_flakes' own generators for what is not language-specific: the
-        # container release on a `v*` tag, the LoC badge and the Claude review.
+        # container release and the Figma render on a `v*` tag, the LoC badge and the Claude review.
         # Its `github` module would add Rust jobs and require a Rust toolchain.
         sharedWorkflows = v_flakes.workflows {
           inherit pkgs pname;
@@ -248,6 +248,7 @@
           jobsWarnings = [ ];
           jobsOther = [ "loc-badge" ];
           containerRelease = { registry = "ghcr.io/ev-service-arb"; };
+          figma = { };
           claude = true;
         };
         gitignore = v_flakes.files.gitignore {
