@@ -51,9 +51,7 @@ function urgencyIntro(copy: QuoteFormWidgetCopy): LeadIntro {
     options: URGENCIES.map(value => ({
       value,
       label: u.options[value].label,
-      // The line under the answer's title, in the tile's icon slot — the kit's
-      // answer has a label only; the tile stacks it under (`introOption`).
-      icon: <span className="text-[13px] font-normal leading-4 text-ink-soft">{u.options[value].hint}</span>,
+      hint: u.options[value].hint,
       channel: value === "today" ? "callback" : "form",
     })),
   };

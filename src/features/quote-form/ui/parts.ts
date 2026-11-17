@@ -54,14 +54,10 @@ export const COMPACT: PartClassNames<LeadCapturePart> = {
   control: `${FIELD} rounded-[var(--control-radius)] bg-background px-3`,
 };
 
-/** A chip of an answered screen: a pill with a tick; one "Modifier" after the last. */
-const ANSWER = [
-  "h-auto min-h-0 gap-1.5 border-0 bg-transparent p-0 text-[12.5px] leading-[normal] shadow-none hover:bg-transparent",
-  "[&>span:nth-child(2)]:rounded-full [&>span:nth-child(2)]:border [&>span:nth-child(2)]:border-border [&>span:nth-child(2)]:bg-muted",
-  "[&>span:nth-child(2)]:px-[11px] [&>span:nth-child(2)]:py-[5px] [&>span:nth-child(2)]:text-ink-mid",
-  "[&>span:nth-child(2)]:before:me-1.5 [&>span:nth-child(2)]:before:font-semibold [&>span:nth-child(2)]:before:text-positive [&>span:nth-child(2)]:before:content-['✓']",
-  "[&>span:nth-child(3)]:font-medium",
-].join(" ");
+/** A chip of an answered screen: a pill with a tick; the kit's one "Modifier" after the last. */
+const ANSWER = "h-auto min-h-0 gap-1.5 border-0 bg-transparent p-0 text-[12.5px] leading-[normal] shadow-none hover:bg-transparent";
+const ANSWER_VALUE =
+  "rounded-full border border-border bg-muted px-[11px] py-[5px] text-ink-mid before:me-1.5 before:font-semibold before:text-positive before:content-['✓']";
 
 /** `b` and `c`: one question per screen, the question its heading, the fields on the card plane. */
 export const STEPS: PartClassNames<LeadCapturePart> = {
@@ -73,8 +69,10 @@ export const STEPS: PartClassNames<LeadCapturePart> = {
   step: "gap-3",
   progress: "gap-3 [&_[data-slot=progress-indicator]]:rounded-full [&_[data-slot=progress-indicator]]:bg-primary [&_[data-slot=progress]]:bg-muted",
   stepBack: "h-auto min-h-0 py-0 text-[14px] font-semibold leading-[17px] text-ink-mid",
-  answers: "gap-1.5 [&>li:not(:last-child)_span:nth-child(3)]:hidden",
+  answers: "gap-1.5",
   answer: ANSWER,
+  answerValue: ANSWER_VALUE,
+  answerChange: "font-medium",
   stepNext: CTA,
   needs: "grid-cols-2",
   need: "min-h-14 justify-center rounded-[var(--corner-control)] bg-card p-2.5 text-center text-[14px] font-medium leading-[17px]",
@@ -86,7 +84,8 @@ export const STEPS: PartClassNames<LeadCapturePart> = {
  */
 export const URGENT_FIRST: PartClassNames<LeadCapturePart> = {
   ...STEPS,
-  introOption: "min-h-16 flex-col-reverse items-start justify-center gap-0.5 rounded-[var(--corner-control)] bg-card px-4 py-2.5 text-[15px] font-medium leading-[18px]",
+  introOption: "min-h-16 rounded-[var(--corner-control)] bg-card px-4 py-2.5 text-[15px] font-medium leading-[18px]",
+  optionHint: "mt-0.5 text-[13px] font-normal leading-4 text-ink-soft",
   needs: "grid-cols-3 sm:grid-cols-3",
   need: "min-h-[92px] gap-2 rounded-[var(--corner-tile)] bg-card px-1.5 py-3 text-[13px] font-medium leading-4",
   icon: "text-primary-ink",
