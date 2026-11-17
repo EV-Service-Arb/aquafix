@@ -10,10 +10,9 @@ to your machine), the brand page at `http://localhost:$PORT/fr`.
 Run the checks:
 
 ```sh
-nix run .#test           # tsc, eslint, vitest, build, bundle budget, Playwright
+nix run .#test           # every check (tsc, eslint, vitest, Playwright, the hermetic build + budget, the image's smoke, npm audit, figma-parity); `-- --help` lists them
 nix run .#size           # first-load JS of a point page against tests/bundle_budget.txt
 nix run .#figma-parity   # compares the card with the Figma export
-nix flake check          # the hermetic Nix build, and the budget against it
 ```
 
 The bundle budget is the one hard gate. Raising `tests/bundle_budget.txt` is a
@@ -76,9 +75,7 @@ differently, so locally the pixel comparison is skipped (`AQUAFIX_SNAPSHOTS=1`
 shoots anyway, to look). To refresh them after changing a section:
 
 1. Run the **Visual baselines** workflow on the branch
-   (`gh workflow run visual-baselines.yml --ref <branch>`). Before that workflow
-   exists on `main`, a CI run of **Errors** on the branch writes any missing
-   baseline and publishes the same artifact.
+   (`gh workflow run visual-baselines.yml --ref <branch>`).
 2. `gh run download <run-id> -n visual-snapshots -D tests/e2e/__screenshots__`
 3. Look at the images, then commit them alone:
    `test: refresh visual baselines (run <run-id>)`.

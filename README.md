@@ -1,8 +1,8 @@
 # aquafix
 ![Lines Of Code](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/valeratrades/b48e6f02c61942200e7d1e3eeabf9bcb/raw/aquafix-loc.json)
 <br>
-[<img alt="ci errors" src="https://img.shields.io/github/actions/workflow/status/EV-Service-Arb/aquafix/errors.yml?branch=main&style=for-the-badge&style=flat-square&label=errors&labelColor=420d09" height="20">](https://github.com/EV-Service-Arb/aquafix/actions?query=branch%3Amain) <!--NB: Won't find it if repo is private-->
-[<img alt="ci warnings" src="https://img.shields.io/github/actions/workflow/status/EV-Service-Arb/aquafix/warnings.yml?branch=main&style=for-the-badge&style=flat-square&label=warnings&labelColor=d16002" height="20">](https://github.com/EV-Service-Arb/aquafix/actions?query=branch%3Amain) <!--NB: Won't find it if repo is private-->
+[![errors](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/valeratrades/b48e6f02c61942200e7d1e3eeabf9bcb/raw/aquafix-errors.json)](https://github.com/EV-Service-Arb/aquafix/actions/workflows/errors.yml?query=branch%3Amain)
+[![warnings](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/valeratrades/b48e6f02c61942200e7d1e3eeabf9bcb/raw/aquafix-warnings.json)](https://github.com/EV-Service-Arb/aquafix/actions/workflows/warnings.yml?query=branch%3Amain)
 
 A plumbing business, end to end: a Typst business card and a Next.js landing
 site for six points in Clermont-Ferrand and Lyon, both rendering the same brand
@@ -54,10 +54,9 @@ to your machine), the brand page at `http://localhost:$PORT/fr`.
 Run the checks:
 
 ```sh
-nix run .#test           # tsc, eslint, vitest, build, bundle budget, Playwright
+nix run .#test           # every check (tsc, eslint, vitest, Playwright, the hermetic build + budget, the image's smoke, npm audit, figma-parity); `-- --help` lists them
 nix run .#size           # first-load JS of a point page against tests/bundle_budget.txt
 nix run .#figma-parity   # compares the card with the Figma export
-nix flake check          # the hermetic Nix build, and the budget against it
 ```
 
 The bundle budget is the one hard gate. Raising `tests/bundle_budget.txt` is a
@@ -120,9 +119,7 @@ differently, so locally the pixel comparison is skipped (`AQUAFIX_SNAPSHOTS=1`
 shoots anyway, to look). To refresh them after changing a section:
 
 1. Run the **Visual baselines** workflow on the branch
-   (`gh workflow run visual-baselines.yml --ref <branch>`). Before that workflow
-   exists on `main`, a CI run of **Errors** on the branch writes any missing
-   baseline and publishes the same artifact.
+   (`gh workflow run visual-baselines.yml --ref <branch>`).
 2. `gh run download <run-id> -n visual-snapshots -D tests/e2e/__screenshots__`
 3. Look at the images, then commit them alone:
    `test: refresh visual baselines (run <run-id>)`.

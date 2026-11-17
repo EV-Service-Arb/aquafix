@@ -6,14 +6,14 @@
 
   inputs = {
     v_flakes.url = "github:valeratrades/v_flakes?ref=v1.6";
-    # sites_tools at the tag of the @evinvest/sites-tools version in
-    # package-lock.json — mkLanding refuses a mismatch.
-    sites_tools.url = "github:EV-Service-Arb/sites_tools?ref=@evinvest/sites-tools-v0.32.0";
+    # sites_tools at the @evinvest/sites-tools version in package-lock.json — mkLanding
+    # refuses a mismatch; main until a release carries mkLanding's particles.
+    sites_tools.url = "github:EV-Service-Arb/sites_tools";
     sites_tools.inputs.v_flakes.follows = "v_flakes";
   };
 
   # The landing machinery (hermetic build, image, bundle budget, container
-  # smoke, dev and test apps) is sites_tools' `mkLanding`; what stays here is
+  # smoke, the checks as particles, apps) is sites_tools' `mkLanding`; what stays here is
   # Aquafix's config, the print materials, the generated repo files and the
   # release tag.
   outputs = { self, v_flakes, sites_tools }:
@@ -54,13 +54,8 @@
         # Single source for the container's exposed port and the prod env. The Rust
         # server listened here too; the cluster's Service did not have to change.
         sitePort = "59081";
-        # the e2e build under test, so a `nix run .#dev` is never mistaken for it
-        e2ePort = toString (SA_PORT + 5);
-        # landing's e2e app, on e2ePort
-        onE2ePort = name: pkgs.writeShellScript "${pname}-${name}" ''
-          export E2E_PORT=${e2ePort}
-          exec ${landing.apps.${name}.program} "$@"
-        '';
+        # v_flakes' own hook scripts run on cargo, which `combine` puts on PATH
+        rust = v_flakes.rs.default_nightly system;
         # Secret-free prod env, authored in nix and baked into the image.
         # Without it the server would take its dev defaults — see deploy/config.nix.
         prodEnv = import ./deploy/config.nix { port = sitePort; };
@@ -68,6 +63,8 @@
         landing = sites_tools.lib.mkLanding {
           inherit pkgs v_flakes pname sitePort prodEnv;
           root = ./.;
+          # the e2e build under test, so a `nix run .#dev` is never mistaken for it
+          e2ePort = toString (SA_PORT + 5);
           # reads sites_panel and posts leads to the conductor; devops wires both addresses
           connected = true;
           # `nix run .#figma` renders into it (the figma-render skill)
@@ -219,7 +216,7 @@
           text = ''
             cat <<'EOF'
               nix run .#dev              next dev on $PORT, the dev shell's (clermont-ferrand.localhost:$PORT/fr for a point)
-              nix run .#test             tsc, eslint, vitest, build, size, playwright   [pre-push hook]
+              nix run .#test             the checks: tsc, eslint, vitest, playwright, the hermetic build + budget, the image's smoke, npm audit, figma-parity; `-- --help` lists them   [pre-push hook]
               nix run .#accept-test      accept screenshot baselines (Linux only); `-- <name>` for a subset
               nix run .#figma            build, then the pages FIGMA_CAPTURES asks for into Figma; `-- frames` lists them
               nix run .#size             build, then the first-load JS budget          [the one hard gate]
@@ -229,32 +226,31 @@
               nix build                  the standalone server (.next/standalone)
               nix build .#container      OCI image (Linux)
               nix build .#brand-materials  print -> result/<lang>-{card,sheet.{light,dark}[.explicit]}.pdf + <lang>.vcf
-              nix run .#generate         rewrite workflows, .gitignore, .treefmt.toml, README (the devShell does too)
-              nix flake check            the hermetic build + the bundle budget against it
             EOF
           '';
         };
 
-        # ── generated repo files ────────────────────────────────────────────
-        # `.github/workflows/*`, `.gitignore`, `.treefmt.toml` and README.md are
-        # written by the devShell from here; edit this file, not them.
-        workflows = import ./nix/workflows.nix { inherit pkgs; };
-        # v_flakes' own generators for what is not language-specific: the
-        # container release and the Figma render on a `v*` tag, the LoC badge and the Claude review.
-        # Its `github` module would add Rust jobs and require a Rust toolchain.
-        sharedWorkflows = v_flakes.workflows {
+        # ── generated repo files and the checks ─────────────────────────────
+        # `.github/workflows/*`, `.gitignore`, `.envrc`, `.treefmt.toml` and README.md
+        # are written by the devShell from here; edit this file, not them.
+        github = v_flakes.github {
           inherit pkgs pname;
-          jobsErrors = [ ];
-          jobsWarnings = [ ];
-          jobsOther = [ "loc-badge" ];
+          enable = true;
+          # not `inherit js`: a language module without `rs` makes the pre-commit install throw for want of a toolchain
+          jobs = {
+            errors.augment = landing.js.particles.errors ++ (with landing.particles; [ e2e-typecheck e2e checks container-smoke ]);
+            warnings.augment = landing.js.particles.warnings ++ [
+              landing.particles.npm-audit
+              { name = "figma-parity"; program = runFigmaParity; }
+            ];
+            other.augment = [ "loc-badge" ];
+          };
           containerRelease = { registry = "ghcr.io/ev-service-arb"; };
           figma = { };
-          claude = true;
-        };
-        gitignore = v_flakes.files.gitignore {
-          inherit pkgs;
-          langs = [ "js" ];
-          extra = ''
+          publishCachix = "valeratrades";
+          # e2e compares every PR's render to these by its tolerance; this holds a refresh to CI's render
+          visualBaselines = { dir = "tests/e2e/__screenshots__"; render = "accept-test"; paths = [ "tests/e2e/__screenshots__/**" ]; };
+          gitignore.extra = builtins.readFile "${v_flakes}/files/gitignore/js.gitignore" + ''
             next-env.d.ts
             /data/
             # A symlink to the flake-pinned @playwright/test, so no trailing slash.
@@ -278,24 +274,7 @@
           rootDir = ./.;
           badges = [ "loc" "ci" ];
         };
-        generateRepoFiles = ''
-          mkdir -p .github/workflows
-          ${v_flakes.utils.unwrapShellHook sharedWorkflows.shellHook}
-          ${workflows.shellHook}
-          cp -f ${gitignore} ./.gitignore
-          cp -f ${treefmt} ./.treefmt.toml
-          ${v_flakes.utils.unwrapShellHook readme.shellHook}
-        '';
-
-        # The same writes without entering the shell (and without its hook installs).
-        runGenerate = pkgs.writeShellApplication {
-          name = "generate";
-          runtimeInputs = with pkgs; [ git coreutils gnused gnugrep ];
-          text = ''
-            cd "$(git rev-parse --show-toplevel)"
-            ${generateRepoFiles}
-          '';
-        };
+        combined = v_flakes.utils.combine { inherit rust; modules = [ github readme landing.js ]; };
 
         # `.#test` on pre-push, not pre-commit: a full run per commit is too slow
         # to survive contact with actual work.
@@ -310,7 +289,7 @@
             test = {
               enable = true;
               name = "nix run .#test";
-              entry = "${onE2ePort "test"}";
+              entry = lib.getExe github.test;
               pass_filenames = false;
               stages = [ "pre-push" ];
             };
@@ -319,15 +298,11 @@
       in
       {
         apps = landing.apps // rec {
-          test = { type = "app"; program = "${onE2ePort "test"}"; };
-          accept-test = { type = "app"; program = "${onE2ePort "accept-test"}"; };
-          figma = { type = "app"; program = "${onE2ePort "figma"}"; };
           dev = { type = "app"; program = "${runDev}/bin/${pname}-dev"; };
           default = dev;
           help = { type = "app"; program = "${runHelp}/bin/help"; };
           figma-parity = { type = "app"; program = "${runFigmaParity}/bin/figma-parity"; };
           publish = { type = "app"; program = "${runPublish}/bin/publish"; };
-          generate = { type = "app"; program = "${runGenerate}/bin/generate"; };
         };
 
         packages = landing.packages // {
@@ -337,24 +312,17 @@
         inherit (landing) containers checks;
 
         devShells.default = landing.devShell.overrideAttrs (old: {
-          shellHook = (old.shellHook or "") + pre-commit-check.shellHook + ''
-            # Generated files are written only from the repo root, and never in
-            # CI, where the checkout is the thing under test.
-            if [ -z "''${CI:-}" ] && [ "$PWD" = "$(git rev-parse --show-toplevel 2>/dev/null)" ]; then
-              ${generateRepoFiles}
-            fi
+          shellHook = (old.shellHook or "") + pre-commit-check.shellHook + combined.shellHook + ''
+            cp -f ${treefmt} ./.treefmt.toml
           '';
           nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
             # brand_materials/
             pkgs.typst
             pkgs.typstyle
             pkgs.imagemagick
-            pkgs.treefmt
             pkgs.nixpkgs-fmt
-          ] ++ pre-commit-check.enabledPackages ++ readme.enabledPackages;
-          env = old.env // { PORT = toString SA_PORT; E2E_PORT = e2ePort; };
-          # Where CI links the flake's `@playwright/test` for the e2e specs' tsc.
-          E2E_PLAYWRIGHT_MODULES = "${pkgs.playwright-test}/lib/node_modules";
+          ] ++ pre-commit-check.enabledPackages ++ combined.enabledPackages;
+          env = old.env // { PORT = toString SA_PORT; };
         });
       }
     );
