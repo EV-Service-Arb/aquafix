@@ -21,7 +21,7 @@ function expectSourcesCurrent(dir: string): void {
 describe("the Tailwind package sources", () => {
   it("are the generator's output for the app's imports, byte for byte", () => {
     expectSourcesCurrent(root);
-  });
+  }, 60_000); // it walks the app's whole import graph through node_modules: seconds of IO, more on a loaded machine
 });
 
 // A landing in miniature, with stand-ins for the three packages the walk
